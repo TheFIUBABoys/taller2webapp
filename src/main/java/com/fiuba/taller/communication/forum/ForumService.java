@@ -1,4 +1,4 @@
-package com.fiuba.taller.communication;
+package com.fiuba.taller.communication.forum;
 
 import java.io.IOException;
 import java.io.StringReader;
@@ -23,12 +23,14 @@ import org.w3c.dom.Node;
 import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 
+import com.fiuba.taller.communication.CommunicationResponse;
+
 import wtp.LoginAPIHelperStub;
 
 
-@Path("/communicationservice")
+@Path("/")
 @Produces(MediaType.APPLICATION_JSON)
-public class CommunicationService {
+public class ForumService {
 	
 	private Document getDoc(String xml) throws ParserConfigurationException, SAXException, IOException{
 		DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
@@ -206,7 +208,44 @@ public class CommunicationService {
 		return Response.ok().entity(response).build();
 	}
 	
+	@GET
+	@Path("threadindex")
+	@Consumes(MediaType.APPLICATION_JSON)
+	public Response getThreadIndex(@CookieParam("authToken") String authToken) throws ParserConfigurationException, SAXException, IOException {
+		CommunicationResponse response = new CommunicationResponse();
+		response.setSuccess(true);
+		response.setReason("Implementación de prueba, esto se debe implementar");
+		return Response.ok().entity(response).build();
+	}
 	
+	@GET
+	@Path("message")
+	@Consumes(MediaType.APPLICATION_JSON)
+	public Response getMessage(@CookieParam("authToken") String authToken) throws ParserConfigurationException, SAXException, IOException {
+		CommunicationResponse response = new CommunicationResponse();
+		response.setSuccess(true);
+		response.setReason("Implementación de prueba, esto se debe implementar");
+		return Response.ok().entity(response).build();
+	}
 	
+	@GET
+	@Path("searchmessagebyword")
+	@Consumes(MediaType.APPLICATION_JSON)
+	public Response searchMessageByWords(@CookieParam("authToken") String authToken) throws ParserConfigurationException, SAXException, IOException {
+		CommunicationResponse response = new CommunicationResponse();
+		response.setSuccess(true);
+		response.setReason("Implementación de prueba, esto se debe implementar");
+		return Response.ok().entity(response).build();
+	}
+	
+	@GET
+	@Path("searchmessagebyuser")
+	@Consumes(MediaType.APPLICATION_JSON)
+	public Response searchMessageByUser(@CookieParam("authToken") String authToken) throws ParserConfigurationException, SAXException, IOException {
+		CommunicationResponse response = new CommunicationResponse();
+		response.setSuccess(true);
+		response.setReason("Implementación de prueba, esto se debe implementar");
+		return Response.ok().entity(response).build();
+	}
 	
 }
