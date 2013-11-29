@@ -37,14 +37,4 @@
     <servlet-name>AxisServlet</servlet-name>
     <url-pattern>/services/*</url-pattern>
   </servlet-mapping>
-  <servlet>
-    <description></description>
-    <display-name>CommunicationService</display-name>
-    <servlet-name>CommunicationService</servlet-name>
-    <servlet-class>com.fiuba.taller.communication.CommunicationService</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>CommunicationService</servlet-name>
-    <url-pattern>/CommunicationService</url-pattern>
-  </servlet-mapping>
 </web-app>
