@@ -24,6 +24,13 @@ import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 
 import com.fiuba.taller.communication.CommunicationResponse;
+import com.fiuba.taller.communication.news.requests.NewsDelete;
+import com.fiuba.taller.communication.news.requests.NewsEdit;
+import com.fiuba.taller.communication.news.requests.NewsCreate;
+import com.fiuba.taller.communication.news.requests.NewsSearchByUser;
+import com.fiuba.taller.communication.news.requests.NewsSearchByWords;
+import com.fiuba.taller.communication.news.requests.NewsShow;
+import com.fiuba.taller.communication.wall.requests.EventsSearchByWords;
 
 import wtp.LoginAPIHelperStub;
 
@@ -57,7 +64,7 @@ public class NewsService {
 	@GET
 	@Path("searchnewsbywords")
 	@Consumes(MediaType.APPLICATION_JSON)
-	public Response searchNewsByWords(@CookieParam("authToken") String authToken) throws ParserConfigurationException, SAXException, IOException {
+	public Response searchNewsByWords(@CookieParam("authToken") String authToken, NewsSearchByWords request) throws ParserConfigurationException, SAXException, IOException {
 		CommunicationResponse response = new CommunicationResponse();
 		response.setSuccess(true);
 		response.setReason("Implementación de prueba, esto se debe implementar");
@@ -69,7 +76,7 @@ public class NewsService {
 	@GET
 	@Path("searchnewsbyuser")
 	@Consumes(MediaType.APPLICATION_JSON)
-	public Response searchNewsByUser(@CookieParam("authToken") String authToken) throws ParserConfigurationException, SAXException, IOException {
+	public Response searchNewsByUser(@CookieParam("authToken") String authToken, NewsSearchByUser request) throws ParserConfigurationException, SAXException, IOException {
 		CommunicationResponse response = new CommunicationResponse();
 		response.setSuccess(true);
 		response.setReason("Implementación de prueba, esto se debe implementar");
@@ -80,7 +87,7 @@ public class NewsService {
 	@GET
 	@Path("news")
 	@Consumes(MediaType.APPLICATION_JSON)
-	public Response getNews(@CookieParam("authToken") String authToken) throws ParserConfigurationException, SAXException, IOException {
+	public Response getNews(@CookieParam("authToken") String authToken, NewsShow request) throws ParserConfigurationException, SAXException, IOException {
 		CommunicationResponse response = new CommunicationResponse();
 		response.setSuccess(true);
 		response.setReason("Implementación de prueba, esto se debe implementar");
@@ -90,7 +97,7 @@ public class NewsService {
 	@POST
 	@Path("createnew")
 	@Consumes(MediaType.APPLICATION_JSON)
-	public Response createNew(@CookieParam("authToken") String authToken) throws ParserConfigurationException, SAXException, IOException {
+	public Response createNew(@CookieParam("authToken") String authToken, NewsCreate request) throws ParserConfigurationException, SAXException, IOException {
 		CommunicationResponse response = new CommunicationResponse();
 		response.setSuccess(true);
 		response.setReason("Implementación de prueba, esto se debe implementar");
@@ -100,7 +107,7 @@ public class NewsService {
 	@POST
 	@Path("editnew")
 	@Consumes(MediaType.APPLICATION_JSON)
-	public Response editNew(@CookieParam("authToken") String authToken) throws ParserConfigurationException, SAXException, IOException {
+	public Response editNew(@CookieParam("authToken") String authToken, NewsEdit request) throws ParserConfigurationException, SAXException, IOException {
 		CommunicationResponse response = new CommunicationResponse();
 		response.setSuccess(true);
 		response.setReason("Implementación de prueba, esto se debe implementar");
@@ -110,7 +117,7 @@ public class NewsService {
 	@POST
 	@Path("deletenew")
 	@Consumes(MediaType.APPLICATION_JSON)
-	public Response deleteNew(@CookieParam("authToken") String authToken) throws ParserConfigurationException, SAXException, IOException {
+	public Response deleteNew(@CookieParam("authToken") String authToken, NewsDelete request) throws ParserConfigurationException, SAXException, IOException {
 		CommunicationResponse response = new CommunicationResponse();
 		response.setSuccess(true);
 		response.setReason("Implementación de prueba, esto se debe implementar");

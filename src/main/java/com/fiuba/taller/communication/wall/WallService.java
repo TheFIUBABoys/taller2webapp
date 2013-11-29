@@ -24,6 +24,11 @@ import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 
 import com.fiuba.taller.communication.CommunicationResponse;
+import com.fiuba.taller.communication.wall.requests.EventCreate;
+import com.fiuba.taller.communication.wall.requests.EventDelete;
+import com.fiuba.taller.communication.wall.requests.EventEdit;
+import com.fiuba.taller.communication.wall.requests.EventsSearchByWords;
+import com.fiuba.taller.communication.wall.requests.WallShow;
 
 import wtp.LoginAPIHelperStub;
 
@@ -57,7 +62,7 @@ public class WallService {
 	@GET
 	@Path("searcheventsbywords")
 	@Consumes(MediaType.APPLICATION_JSON)
-	public Response searchEventsByWords(@CookieParam("authToken") String authToken) throws ParserConfigurationException, SAXException, IOException {
+	public Response searchEventsByWords(@CookieParam("authToken") String authToken, EventsSearchByWords request) throws ParserConfigurationException, SAXException, IOException {
 		CommunicationResponse response = new CommunicationResponse();
 		response.setSuccess(true);
 		response.setReason("Implementación de prueba, esto se debe implementar");
@@ -68,7 +73,7 @@ public class WallService {
 	@GET
 	@Path("showwall")
 	@Consumes(MediaType.APPLICATION_JSON)
-	public Response getWall(@CookieParam("authToken") String authToken) throws ParserConfigurationException, SAXException, IOException {
+	public Response getWall(@CookieParam("authToken") String authToken, WallShow request) throws ParserConfigurationException, SAXException, IOException {
 		CommunicationResponse response = new CommunicationResponse();
 		response.setSuccess(true);
 		response.setReason("Implementación de prueba, esto se debe implementar");
@@ -78,7 +83,7 @@ public class WallService {
 	@POST
 	@Path("createevent")
 	@Consumes(MediaType.APPLICATION_JSON)
-	public Response createEvent(@CookieParam("authToken") String authToken) throws ParserConfigurationException, SAXException, IOException {
+	public Response createEvent(@CookieParam("authToken") String authToken, EventCreate request) throws ParserConfigurationException, SAXException, IOException {
 		CommunicationResponse response = new CommunicationResponse();
 		response.setSuccess(true);
 		response.setReason("Implementación de prueba, esto se debe implementar");
@@ -88,7 +93,7 @@ public class WallService {
 	@POST
 	@Path("editevent")
 	@Consumes(MediaType.APPLICATION_JSON)
-	public Response editEvent(@CookieParam("authToken") String authToken) throws ParserConfigurationException, SAXException, IOException {
+	public Response editEvent(@CookieParam("authToken") String authToken, EventEdit request) throws ParserConfigurationException, SAXException, IOException {
 		CommunicationResponse response = new CommunicationResponse();
 		response.setSuccess(true);
 		response.setReason("Implementación de prueba, esto se debe implementar");
@@ -98,7 +103,7 @@ public class WallService {
 	@POST
 	@Path("deleteevent")
 	@Consumes(MediaType.APPLICATION_JSON)
-	public Response deleteEvent(@CookieParam("authToken") String authToken) throws ParserConfigurationException, SAXException, IOException {
+	public Response deleteEvent(@CookieParam("authToken") String authToken, EventDelete request) throws ParserConfigurationException, SAXException, IOException {
 		CommunicationResponse response = new CommunicationResponse();
 		response.setSuccess(true);
 		response.setReason("Implementación de prueba, esto se debe implementar");
@@ -108,7 +113,7 @@ public class WallService {
 	@POST
 	@Path("hideevent")
 	@Consumes(MediaType.APPLICATION_JSON)
-	public Response hideEvent(@CookieParam("authToken") String authToken) throws ParserConfigurationException, SAXException, IOException {
+	public Response hideEvent(@CookieParam("authToken") String authToken, EventDelete request) throws ParserConfigurationException, SAXException, IOException {
 		CommunicationResponse response = new CommunicationResponse();
 		response.setSuccess(true);
 		response.setReason("Implementación de prueba, esto se debe implementar");
@@ -118,7 +123,7 @@ public class WallService {
 	@POST
 	@Path("showevent")
 	@Consumes(MediaType.APPLICATION_JSON)
-	public Response showEvent(@CookieParam("authToken") String authToken) throws ParserConfigurationException, SAXException, IOException {
+	public Response showEvent(@CookieParam("authToken") String authToken, EventDelete request) throws ParserConfigurationException, SAXException, IOException {
 		CommunicationResponse response = new CommunicationResponse();
 		response.setSuccess(true);
 		response.setReason("Implementación de prueba, esto se debe implementar");

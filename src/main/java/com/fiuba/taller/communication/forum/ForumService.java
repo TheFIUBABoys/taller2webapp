@@ -24,6 +24,25 @@ import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 
 import com.fiuba.taller.communication.CommunicationResponse;
+import com.fiuba.taller.communication.forum.requests.ForumCreateRequest;
+import com.fiuba.taller.communication.forum.requests.ForumDeleteRequest;
+import com.fiuba.taller.communication.forum.requests.ForumEditRequest;
+import com.fiuba.taller.communication.forum.requests.MessageSearchByWordRequest;
+import com.fiuba.taller.communication.forum.requests.MessageSearchByUserRequest;
+import com.fiuba.taller.communication.forum.requests.MessageShowRequest;
+import com.fiuba.taller.communication.forum.requests.SubForumShowIndexRequest;
+import com.fiuba.taller.communication.forum.requests.MessageCreateRequest;
+import com.fiuba.taller.communication.forum.requests.MessageDeleteRequest;
+import com.fiuba.taller.communication.forum.requests.MessageEditRequest;
+import com.fiuba.taller.communication.forum.requests.SubForumCreateRequest;
+import com.fiuba.taller.communication.forum.requests.SubForumDeleteRequest;
+import com.fiuba.taller.communication.forum.requests.SubForumEditRequest;
+import com.fiuba.taller.communication.forum.requests.SubForumMoveRequest;
+import com.fiuba.taller.communication.forum.requests.ForumShowIndexRequest;
+import com.fiuba.taller.communication.forum.requests.ThreadCreateRequest;
+import com.fiuba.taller.communication.forum.requests.ThreadDeleteRequest;
+import com.fiuba.taller.communication.forum.requests.ThreadEditRequest;
+import com.fiuba.taller.communication.forum.requests.ThreadShowIndexRequest;
 
 import wtp.LoginAPIHelperStub;
 
@@ -58,7 +77,7 @@ public class ForumService {
 	@POST
 	@Path("createsection")
 	@Consumes(MediaType.APPLICATION_JSON)
-	public Response createSection(@CookieParam("authToken") String authToken) throws ParserConfigurationException, SAXException, IOException {
+	public Response createSection(@CookieParam("authToken") String authToken, ForumCreateRequest request) throws ParserConfigurationException, SAXException, IOException {
 		CommunicationResponse response = new CommunicationResponse();
 		response.setSuccess(true);
 		response.setReason("Implementación de prueba, esto se debe implementar");
@@ -70,7 +89,7 @@ public class ForumService {
 	@POST
 	@Path("editsection")
 	@Consumes(MediaType.APPLICATION_JSON)
-	public Response editSection(@CookieParam("authToken") String authToken) throws ParserConfigurationException, SAXException, IOException {
+	public Response editSection(@CookieParam("authToken") String authToken, ForumEditRequest request) throws ParserConfigurationException, SAXException, IOException {
 		CommunicationResponse response = new CommunicationResponse();
 		response.setSuccess(true);
 		response.setReason("Implementación de prueba, esto se debe implementar");
@@ -80,7 +99,7 @@ public class ForumService {
 	@POST
 	@Path("deletesection")
 	@Consumes(MediaType.APPLICATION_JSON)
-	public Response deleteSection(@CookieParam("authToken") String authToken) throws ParserConfigurationException, SAXException, IOException {
+	public Response deleteSection(@CookieParam("authToken") String authToken, ForumDeleteRequest request) throws ParserConfigurationException, SAXException, IOException {
 		CommunicationResponse response = new CommunicationResponse();
 		response.setSuccess(true);
 		response.setReason("Implementación de prueba, esto se debe implementar");
@@ -91,7 +110,7 @@ public class ForumService {
 	@POST
 	@Path("createsubforum")
 	@Consumes(MediaType.APPLICATION_JSON)
-	public Response createSubforum(@CookieParam("authToken") String authToken) throws ParserConfigurationException, SAXException, IOException {
+	public Response createSubforum(@CookieParam("authToken") String authToken, SubForumCreateRequest request) throws ParserConfigurationException, SAXException, IOException {
 		CommunicationResponse response = new CommunicationResponse();
 		response.setSuccess(true);
 		response.setReason("Implementación de prueba, esto se debe implementar");
@@ -101,7 +120,7 @@ public class ForumService {
 	@POST
 	@Path("editsubforum")
 	@Consumes(MediaType.APPLICATION_JSON)
-	public Response editSubforum(@CookieParam("authToken") String authToken) throws ParserConfigurationException, SAXException, IOException {
+	public Response editSubforum(@CookieParam("authToken") String authToken, SubForumEditRequest request) throws ParserConfigurationException, SAXException, IOException {
 		CommunicationResponse response = new CommunicationResponse();
 		response.setSuccess(true);
 		response.setReason("Implementación de prueba, esto se debe implementar");
@@ -111,7 +130,7 @@ public class ForumService {
 	@POST
 	@Path("movesubforum")
 	@Consumes(MediaType.APPLICATION_JSON)
-	public Response moveSubforum(@CookieParam("authToken") String authToken) throws ParserConfigurationException, SAXException, IOException {
+	public Response moveSubforum(@CookieParam("authToken") String authToken, SubForumMoveRequest request) throws ParserConfigurationException, SAXException, IOException {
 		CommunicationResponse response = new CommunicationResponse();
 		response.setSuccess(true);
 		response.setReason("Implementación de prueba, esto se debe implementar");
@@ -121,7 +140,7 @@ public class ForumService {
 	@POST
 	@Path("deletesubforum")
 	@Consumes(MediaType.APPLICATION_JSON)
-	public Response deleteSubforum(@CookieParam("authToken") String authToken) throws ParserConfigurationException, SAXException, IOException {
+	public Response deleteSubforum(@CookieParam("authToken") String authToken, SubForumDeleteRequest request) throws ParserConfigurationException, SAXException, IOException {
 		CommunicationResponse response = new CommunicationResponse();
 		response.setSuccess(true);
 		response.setReason("Implementación de prueba, esto se debe implementar");
@@ -131,7 +150,7 @@ public class ForumService {
 	@POST
 	@Path("createthread")
 	@Consumes(MediaType.APPLICATION_JSON)
-	public Response createThread(@CookieParam("authToken") String authToken) throws ParserConfigurationException, SAXException, IOException {
+	public Response createThread(@CookieParam("authToken") String authToken, ThreadCreateRequest request) throws ParserConfigurationException, SAXException, IOException {
 		CommunicationResponse response = new CommunicationResponse();
 		response.setSuccess(true);
 		response.setReason("Implementación de prueba, esto se debe implementar");
@@ -141,7 +160,7 @@ public class ForumService {
 	@POST
 	@Path("editthread")
 	@Consumes(MediaType.APPLICATION_JSON)
-	public Response editThread(@CookieParam("authToken") String authToken) throws ParserConfigurationException, SAXException, IOException {
+	public Response editThread(@CookieParam("authToken") String authToken,ThreadEditRequest request) throws ParserConfigurationException, SAXException, IOException {
 		CommunicationResponse response = new CommunicationResponse();
 		response.setSuccess(true);
 		response.setReason("Implementación de prueba, esto se debe implementar");
@@ -151,7 +170,7 @@ public class ForumService {
 	@POST
 	@Path("deletethread")
 	@Consumes(MediaType.APPLICATION_JSON)
-	public Response deleteThread(@CookieParam("authToken") String authToken) throws ParserConfigurationException, SAXException, IOException {
+	public Response deleteThread(@CookieParam("authToken") String authToken, ThreadDeleteRequest request) throws ParserConfigurationException, SAXException, IOException {
 		CommunicationResponse response = new CommunicationResponse();
 		response.setSuccess(true);
 		response.setReason("Implementación de prueba, esto se debe implementar");
@@ -161,7 +180,7 @@ public class ForumService {
 	@POST
 	@Path("stickthread")
 	@Consumes(MediaType.APPLICATION_JSON)
-	public Response stickThread(@CookieParam("authToken") String authToken) throws ParserConfigurationException, SAXException, IOException {
+	public Response stickThread(@CookieParam("authToken") String authToken, ThreadDeleteRequest request) throws ParserConfigurationException, SAXException, IOException {
 		CommunicationResponse response = new CommunicationResponse();
 		response.setSuccess(true);
 		response.setReason("Implementación de prueba, esto se debe implementar");
@@ -171,7 +190,7 @@ public class ForumService {
 	@POST
 	@Path("unstickthread")
 	@Consumes(MediaType.APPLICATION_JSON)
-	public Response unstickThread(@CookieParam("authToken") String authToken) throws ParserConfigurationException, SAXException, IOException {
+	public Response unstickThread(@CookieParam("authToken") String authToken, ThreadDeleteRequest request) throws ParserConfigurationException, SAXException, IOException {
 		CommunicationResponse response = new CommunicationResponse();
 		response.setSuccess(true);
 		response.setReason("Implementación de prueba, esto se debe implementar");
@@ -181,7 +200,7 @@ public class ForumService {
 	@POST
 	@Path("createmessage")
 	@Consumes(MediaType.APPLICATION_JSON)
-	public Response createMessage(@CookieParam("authToken") String authToken) throws ParserConfigurationException, SAXException, IOException {
+	public Response createMessage(@CookieParam("authToken") String authToken, MessageCreateRequest request) throws ParserConfigurationException, SAXException, IOException {
 		CommunicationResponse response = new CommunicationResponse();
 		response.setSuccess(true);
 		response.setReason("Implementación de prueba, esto se debe implementar");
@@ -191,7 +210,7 @@ public class ForumService {
 	@POST
 	@Path("editmessage")
 	@Consumes(MediaType.APPLICATION_JSON)
-	public Response editMessage(@CookieParam("authToken") String authToken) throws ParserConfigurationException, SAXException, IOException {
+	public Response editMessage(@CookieParam("authToken") String authToken, MessageEditRequest request) throws ParserConfigurationException, SAXException, IOException {
 		CommunicationResponse response = new CommunicationResponse();
 		response.setSuccess(true);
 		response.setReason("Implementación de prueba, esto se debe implementar");
@@ -201,7 +220,7 @@ public class ForumService {
 	@POST
 	@Path("deletemessage")
 	@Consumes(MediaType.APPLICATION_JSON)
-	public Response deleteMessage(@CookieParam("authToken") String authToken) throws ParserConfigurationException, SAXException, IOException {
+	public Response deleteMessage(@CookieParam("authToken") String authToken, MessageDeleteRequest request) throws ParserConfigurationException, SAXException, IOException {
 		CommunicationResponse response = new CommunicationResponse();
 		response.setSuccess(true);
 		response.setReason("Implementación de prueba, esto se debe implementar");
@@ -211,7 +230,7 @@ public class ForumService {
 	@GET
 	@Path("forumindex")
 	@Consumes(MediaType.APPLICATION_JSON)
-	public Response getForumIndex(@CookieParam("authToken") String authToken) throws ParserConfigurationException, SAXException, IOException {
+	public Response getForumIndex(@CookieParam("authToken") String authToken, ForumShowIndexRequest request) throws ParserConfigurationException, SAXException, IOException {
 		CommunicationResponse response = new CommunicationResponse();
 		response.setSuccess(true);
 		response.setReason("Implementación de prueba, esto se debe implementar");
@@ -221,7 +240,7 @@ public class ForumService {
 	@GET
 	@Path("subforumindex")
 	@Consumes(MediaType.APPLICATION_JSON)
-	public Response getSubforumIndex(@CookieParam("authToken") String authToken) throws ParserConfigurationException, SAXException, IOException {
+	public Response getSubforumIndex(@CookieParam("authToken") String authToken, SubForumShowIndexRequest request) throws ParserConfigurationException, SAXException, IOException {
 		CommunicationResponse response = new CommunicationResponse();
 		response.setSuccess(true);
 		response.setReason("Implementación de prueba, esto se debe implementar");
@@ -231,7 +250,7 @@ public class ForumService {
 	@GET
 	@Path("threadindex")
 	@Consumes(MediaType.APPLICATION_JSON)
-	public Response getThreadIndex(@CookieParam("authToken") String authToken) throws ParserConfigurationException, SAXException, IOException {
+	public Response getThreadIndex(@CookieParam("authToken") String authToken, ThreadShowIndexRequest request) throws ParserConfigurationException, SAXException, IOException {
 		CommunicationResponse response = new CommunicationResponse();
 		response.setSuccess(true);
 		response.setReason("Implementación de prueba, esto se debe implementar");
@@ -241,7 +260,7 @@ public class ForumService {
 	@GET
 	@Path("message")
 	@Consumes(MediaType.APPLICATION_JSON)
-	public Response getMessage(@CookieParam("authToken") String authToken) throws ParserConfigurationException, SAXException, IOException {
+	public Response getMessage(@CookieParam("authToken") String authToken, MessageShowRequest request) throws ParserConfigurationException, SAXException, IOException {
 		CommunicationResponse response = new CommunicationResponse();
 		response.setSuccess(true);
 		response.setReason("Implementación de prueba, esto se debe implementar");
@@ -251,7 +270,7 @@ public class ForumService {
 	@GET
 	@Path("searchmessagebyword")
 	@Consumes(MediaType.APPLICATION_JSON)
-	public Response searchMessageByWords(@CookieParam("authToken") String authToken) throws ParserConfigurationException, SAXException, IOException {
+	public Response searchMessageByWords(@CookieParam("authToken") String authToken, MessageSearchByWordRequest request) throws ParserConfigurationException, SAXException, IOException {
 		CommunicationResponse response = new CommunicationResponse();
 		response.setSuccess(true);
 		response.setReason("Implementación de prueba, esto se debe implementar");
@@ -261,7 +280,7 @@ public class ForumService {
 	@GET
 	@Path("searchmessagebyuser")
 	@Consumes(MediaType.APPLICATION_JSON)
-	public Response searchMessageByUser(@CookieParam("authToken") String authToken) throws ParserConfigurationException, SAXException, IOException {
+	public Response searchMessageByUser(@CookieParam("authToken") String authToken, MessageSearchByUserRequest request) throws ParserConfigurationException, SAXException, IOException {
 		CommunicationResponse response = new CommunicationResponse();
 		response.setSuccess(true);
 		response.setReason("Implementación de prueba, esto se debe implementar");
