@@ -1,6 +1,6 @@
-package com.fiuba.taller.comunication;
+package com.fiuba.taller.communication;
 
-public class ComunicationResponse {
+public class CommunicationResponse {
     private boolean success;
     private String reason;
     private String authToken;
