@@ -78,7 +78,7 @@ public class NewsService {
 	
 	
 	@GET
-	@Path("shownews")
+	@Path("news")
 	@Consumes(MediaType.APPLICATION_JSON)
 	public Response getNews(@CookieParam("authToken") String authToken) throws ParserConfigurationException, SAXException, IOException {
 		CommunicationResponse response = new CommunicationResponse();
