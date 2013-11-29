@@ -77,6 +77,16 @@ public class ForumService {
 		return Response.ok().entity(response).build();
 	}
 	
+	@POST
+	@Path("deletesection")
+	@Consumes(MediaType.APPLICATION_JSON)
+	public Response deleteSection(@CookieParam("authToken") String authToken) throws ParserConfigurationException, SAXException, IOException {
+		CommunicationResponse response = new CommunicationResponse();
+		response.setSuccess(true);
+		response.setReason("Implementación de prueba, esto se debe implementar");
+		return Response.ok().entity(response).build();
+	}
+	
 	
 	@POST
 	@Path("createsubforum")
@@ -112,6 +122,16 @@ public class ForumService {
 	@Path("deletesubforum")
 	@Consumes(MediaType.APPLICATION_JSON)
 	public Response deleteSubforum(@CookieParam("authToken") String authToken) throws ParserConfigurationException, SAXException, IOException {
+		CommunicationResponse response = new CommunicationResponse();
+		response.setSuccess(true);
+		response.setReason("Implementación de prueba, esto se debe implementar");
+		return Response.ok().entity(response).build();
+	}
+	
+	@POST
+	@Path("createthread")
+	@Consumes(MediaType.APPLICATION_JSON)
+	public Response createThread(@CookieParam("authToken") String authToken) throws ParserConfigurationException, SAXException, IOException {
 		CommunicationResponse response = new CommunicationResponse();
 		response.setSuccess(true);
 		response.setReason("Implementación de prueba, esto se debe implementar");
