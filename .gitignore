@@ -1,6 +1,16 @@
+.classpath
+.project
+.settings/
 *.class
-
-# Package Files #
 *.jar
-*.war
-*.ear
+target
+node_modules
+
+# Idea stuff
+.idea
+*.iml
+
+# Build script feo
+build.sh
+deployAssets.sh
+noTest.sh
