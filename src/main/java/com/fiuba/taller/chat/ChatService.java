@@ -23,12 +23,16 @@ import org.w3c.dom.Node;
 import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 
+import com.fiuba.taller.chat.requests.ChatRequest;
 import com.fiuba.taller.chat.requests.CreateChatRequest;
+import com.fiuba.taller.chat.requests.SendMessageRequest;
+import com.fiuba.taller.chat.requests.UpdateChatRequest;
 import com.fiuba.taller.communication.CommunicationResponse;
 import com.fiuba.taller.security.SecurityResponse;
 
 import wtp.LoginAPIHelperStub;
 import wtp.MessagerStub;
+import wtp.MessagerStub.GetHistoryChatResponse;
 
 
 @Path("/")
@@ -99,7 +103,7 @@ public class ChatService {
 	@GET
 	@Path("updatechat")
 	@Consumes(MediaType.APPLICATION_JSON)
-	public Response updateChat(@CookieParam("authToken") String authToken) throws ParserConfigurationException, SAXException, IOException {
+	public Response updateChat(@CookieParam("authToken") String authToken, UpdateChatRequest request) throws ParserConfigurationException, SAXException, IOException {
 		UpdateChatResponse response = new UpdateChatResponse();
 		response.setSuccess(true);
 		response.setReason("Implementación de prueba, esto se debe implementar");
@@ -109,7 +113,7 @@ public class ChatService {
 	@GET
 	@Path("gethistorychat")
 	@Consumes(MediaType.APPLICATION_JSON)
-	public Response getHistoryChat(@CookieParam("authToken") String authToken) throws ParserConfigurationException, SAXException, IOException {
+	public Response getHistoryChat(@CookieParam("authToken") String authToken, ChatRequest request) throws ParserConfigurationException, SAXException, IOException {
 		GetHistoryResponse response = new GetHistoryResponse();
 		response.setSuccess(true);
 		response.setReason("Implementación de prueba, esto se debe implementar");
@@ -120,7 +124,7 @@ public class ChatService {
 	@GET
 	@Path("getmembers")
 	@Consumes(MediaType.APPLICATION_JSON)
-	public Response getMembers(@CookieParam("authToken") String authToken) throws ParserConfigurationException, SAXException, IOException {
+	public Response getMembers(@CookieParam("authToken") String authToken, ChatRequest request) throws ParserConfigurationException, SAXException, IOException {
 		GetMembersResponse response = new GetMembersResponse();
 		response.setSuccess(true);
 		response.setReason("Implementación de prueba, esto se debe implementar");
@@ -130,7 +134,7 @@ public class ChatService {
 	@POST
 	@Path("sendmessage")
 	@Consumes(MediaType.APPLICATION_JSON)
-	public Response sendMessage(@CookieParam("authToken") String authToken) throws ParserConfigurationException, SAXException, IOException {
+	public Response sendMessage(@CookieParam("authToken") String authToken, SendMessageRequest request) throws ParserConfigurationException, SAXException, IOException {
 		SendMessageResponse response = new SendMessageResponse();
 		response.setSuccess(true);
 		response.setReason("Implementación de prueba, esto se debe implementar");
