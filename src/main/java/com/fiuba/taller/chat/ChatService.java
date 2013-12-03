@@ -1,4 +1,4 @@
-package com.fiuba.taller.communication.chat;
+package com.fiuba.taller.chat;
 
 import java.io.IOException;
 import java.io.StringReader;
