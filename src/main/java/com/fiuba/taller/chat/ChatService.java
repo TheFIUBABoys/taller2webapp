@@ -23,8 +23,12 @@ import org.w3c.dom.Node;
 import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 
+import com.fiuba.taller.chat.requests.CreateChatRequest;
 import com.fiuba.taller.communication.CommunicationResponse;
+import com.fiuba.taller.security.SecurityResponse;
+
 import wtp.LoginAPIHelperStub;
+import wtp.MessagerStub;
 
 
 @Path("/")
@@ -53,12 +57,38 @@ public class ChatService {
 		return elem.getElementsByTagName("success").item(0).getTextContent();
 	}
 	
+	private Response buildError(String service) {
+        SecurityResponse response = new SecurityResponse();
+
+        response.setSuccess(false);
+        response.setReason("El servicio de " + service + " no está disponible.");
+
+        return Response.status(509).entity(response).build();
+	}
 	
 	@POST
 	@Path("createchat")
 	@Consumes(MediaType.APPLICATION_JSON)
-	public Response createChat(@CookieParam("authToken") String authToken) throws ParserConfigurationException, SAXException, IOException {
+	public Response createChat(@CookieParam("authToken") String authToken, CreateChatRequest request) throws ParserConfigurationException, SAXException, IOException {
+		//Init 
 		CreateChatResponse response = new CreateChatResponse();
+		
+		MessagerStub api = new MessagerStub();
+		MessagerStub.CreateChat chatRequest = new MessagerStub.CreateChat();
+		MessagerStub.CreateChatResponse wsResponse = new MessagerStub.CreateChatResponse();
+		
+		// Armo la WSRequest
+		chatRequest.setScopeId(request.getId_ambito());
+		chatRequest.setIdMiembro(0); // TODO: CHANGE ME!! DEFINIR SI VA INT O USERNAME(STRING)
+		
+		// Hacer el request
+        try {
+		    wsResponse = api.createChat(chatRequest);
+        } catch (AxisFault error) {
+            System.out.println(error.getReason());
+            return buildError("crear chat");
+        }
+		
 		response.setSuccess(true);
 		response.setReason("Implementación de prueba, esto se debe implementar");
 		return Response.ok().entity(response).build();
