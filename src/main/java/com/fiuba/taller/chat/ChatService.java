@@ -24,26 +24,6 @@ import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 
 import com.fiuba.taller.communication.CommunicationResponse;
-import com.fiuba.taller.communication.forum.requests.ForumCreateRequest;
-import com.fiuba.taller.communication.forum.requests.ForumDeleteRequest;
-import com.fiuba.taller.communication.forum.requests.ForumEditRequest;
-import com.fiuba.taller.communication.forum.requests.MessageSearchByWordRequest;
-import com.fiuba.taller.communication.forum.requests.MessageSearchByUserRequest;
-import com.fiuba.taller.communication.forum.requests.MessageShowRequest;
-import com.fiuba.taller.communication.forum.requests.SubForumShowIndexRequest;
-import com.fiuba.taller.communication.forum.requests.MessageCreateRequest;
-import com.fiuba.taller.communication.forum.requests.MessageDeleteRequest;
-import com.fiuba.taller.communication.forum.requests.MessageEditRequest;
-import com.fiuba.taller.communication.forum.requests.SubForumCreateRequest;
-import com.fiuba.taller.communication.forum.requests.SubForumDeleteRequest;
-import com.fiuba.taller.communication.forum.requests.SubForumEditRequest;
-import com.fiuba.taller.communication.forum.requests.SubForumMoveRequest;
-import com.fiuba.taller.communication.forum.requests.ForumShowIndexRequest;
-import com.fiuba.taller.communication.forum.requests.ThreadCreateRequest;
-import com.fiuba.taller.communication.forum.requests.ThreadDeleteRequest;
-import com.fiuba.taller.communication.forum.requests.ThreadEditRequest;
-import com.fiuba.taller.communication.forum.requests.ThreadShowIndexRequest;
-
 import wtp.LoginAPIHelperStub;
 
 

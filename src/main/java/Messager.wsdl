@@ -1,0 +1,334 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:ns1="http://org.apache.axis2/xsd" xmlns:ns="http://chat.team2.fiuba.com.ar" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:ax21="http://model.team2.fiuba.com.ar/xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://chat.team2.fiuba.com.ar">
+    <wsdl:documentation>
+		Please Type your service description here
+	</wsdl:documentation>
+    <wsdl:types>
+        <xs:schema attributeFormDefault="qualified" elementFormDefault="qualified" targetNamespace="http://model.team2.fiuba.com.ar/xsd">
+            <xs:complexType name="Chat">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="data" nillable="true" type="ax21:Data"/>
+                    <xs:element minOccurs="0" name="lastCallTimestamp" nillable="true" type="xs:long"/>
+                    <xs:element minOccurs="0" name="meessage" nillable="true" type="ax21:Result"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="Data">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="idAmbito" nillable="true" type="xs:long"/>
+                    <xs:element minOccurs="0" name="idChat" nillable="true" type="xs:long"/>
+                    <xs:element maxOccurs="unbounded" minOccurs="0" name="messages" nillable="true" type="ax21:MensajeChat"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="MensajeChat">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="contenidoMensaje" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="fechaMensaje" nillable="true" type="xs:long"/>
+                    <xs:element minOccurs="0" name="miembro" nillable="true" type="ax21:MiembroChat"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="MiembroChat">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="idMiembro" nillable="true" type="xs:long"/>
+                    <xs:element minOccurs="0" name="nombre" nillable="true" type="xs:string"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="Result">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="code" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="description" nillable="true" type="xs:string"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="Miembros">
+                <xs:sequence>
+                    <xs:element maxOccurs="unbounded" minOccurs="0" name="messages" nillable="true" type="ax21:MiembroChat"/>
+                </xs:sequence>
+            </xs:complexType>
+        </xs:schema>
+        <xs:schema xmlns:ax22="http://model.team2.fiuba.com.ar/xsd" attributeFormDefault="qualified" elementFormDefault="qualified" targetNamespace="http://chat.team2.fiuba.com.ar">
+            <xs:import namespace="http://model.team2.fiuba.com.ar/xsd"/>
+            <xs:element name="updateChat">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="chatId" type="xs:long"/>
+                        <xs:element minOccurs="0" name="idMiembro" type="xs:long"/>
+                        <xs:element minOccurs="0" name="lastCallTimestamp" type="xs:long"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="updateChatResponse">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="return" nillable="true" type="ax21:Chat"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="sendMessage">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="chatId" type="xs:long"/>
+                        <xs:element minOccurs="0" name="idMiembro" type="xs:long"/>
+                        <xs:element minOccurs="0" name="message" nillable="true" type="xs:string"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="sendMessageResponse">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="return" nillable="true" type="ax21:Chat"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="getMembers">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="chatId" type="xs:long"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="getMembersResponse">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="return" nillable="true" type="ax21:Miembros"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="getHistoryChat">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="chatId" type="xs:long"/>
+                        <xs:element minOccurs="0" name="idMiembro" type="xs:long"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="getHistoryChatResponse">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="return" nillable="true" type="ax21:Chat"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="createChat">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="scopeId" type="xs:long"/>
+                        <xs:element minOccurs="0" name="idMiembro" type="xs:long"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="createChatResponse">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="return" nillable="true" type="ax21:Chat"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+        </xs:schema>
+    </wsdl:types>
+    <wsdl:message name="sendMessageRequest">
+        <wsdl:part name="parameters" element="ns:sendMessage"/>
+    </wsdl:message>
+    <wsdl:message name="sendMessageResponse">
+        <wsdl:part name="parameters" element="ns:sendMessageResponse"/>
+    </wsdl:message>
+    <wsdl:message name="getMembersRequest">
+        <wsdl:part name="parameters" element="ns:getMembers"/>
+    </wsdl:message>
+    <wsdl:message name="getMembersResponse">
+        <wsdl:part name="parameters" element="ns:getMembersResponse"/>
+    </wsdl:message>
+    <wsdl:message name="updateChatRequest">
+        <wsdl:part name="parameters" element="ns:updateChat"/>
+    </wsdl:message>
+    <wsdl:message name="updateChatResponse">
+        <wsdl:part name="parameters" element="ns:updateChatResponse"/>
+    </wsdl:message>
+    <wsdl:message name="createChatRequest">
+        <wsdl:part name="parameters" element="ns:createChat"/>
+    </wsdl:message>
+    <wsdl:message name="createChatResponse">
+        <wsdl:part name="parameters" element="ns:createChatResponse"/>
+    </wsdl:message>
+    <wsdl:message name="getHistoryChatRequest">
+        <wsdl:part name="parameters" element="ns:getHistoryChat"/>
+    </wsdl:message>
+    <wsdl:message name="getHistoryChatResponse">
+        <wsdl:part name="parameters" element="ns:getHistoryChatResponse"/>
+    </wsdl:message>
+    <wsdl:portType name="MessagerPortType">
+        <wsdl:operation name="sendMessage">
+            <wsdl:input message="ns:sendMessageRequest" wsaw:Action="urn:sendMessage"/>
+            <wsdl:output message="ns:sendMessageResponse" wsaw:Action="urn:sendMessageResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="getMembers">
+            <wsdl:input message="ns:getMembersRequest" wsaw:Action="urn:getMembers"/>
+            <wsdl:output message="ns:getMembersResponse" wsaw:Action="urn:getMembersResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="updateChat">
+            <wsdl:input message="ns:updateChatRequest" wsaw:Action="urn:updateChat"/>
+            <wsdl:output message="ns:updateChatResponse" wsaw:Action="urn:updateChatResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="createChat">
+            <wsdl:input message="ns:createChatRequest" wsaw:Action="urn:createChat"/>
+            <wsdl:output message="ns:createChatResponse" wsaw:Action="urn:createChatResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="getHistoryChat">
+            <wsdl:input message="ns:getHistoryChatRequest" wsaw:Action="urn:getHistoryChat"/>
+            <wsdl:output message="ns:getHistoryChatResponse" wsaw:Action="urn:getHistoryChatResponse"/>
+        </wsdl:operation>
+    </wsdl:portType>
+    <wsdl:binding name="MessagerSoap11Binding" type="ns:MessagerPortType">
+        <soap:binding transport="http://schemas.xmlsoap.org/soap/http" style="document"/>
+        <wsdl:operation name="sendMessage">
+            <soap:operation soapAction="urn:sendMessage" style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="getMembers">
+            <soap:operation soapAction="urn:getMembers" style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="updateChat">
+            <soap:operation soapAction="urn:updateChat" style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="createChat">
+            <soap:operation soapAction="urn:createChat" style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="getHistoryChat">
+            <soap:operation soapAction="urn:getHistoryChat" style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+    </wsdl:binding>
+    <wsdl:binding name="MessagerSoap12Binding" type="ns:MessagerPortType">
+        <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" style="document"/>
+        <wsdl:operation name="sendMessage">
+            <soap12:operation soapAction="urn:sendMessage" style="document"/>
+            <wsdl:input>
+                <soap12:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap12:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="getMembers">
+            <soap12:operation soapAction="urn:getMembers" style="document"/>
+            <wsdl:input>
+                <soap12:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap12:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="updateChat">
+            <soap12:operation soapAction="urn:updateChat" style="document"/>
+            <wsdl:input>
+                <soap12:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap12:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="createChat">
+            <soap12:operation soapAction="urn:createChat" style="document"/>
+            <wsdl:input>
+                <soap12:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap12:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="getHistoryChat">
+            <soap12:operation soapAction="urn:getHistoryChat" style="document"/>
+            <wsdl:input>
+                <soap12:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap12:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+    </wsdl:binding>
+    <wsdl:binding name="MessagerHttpBinding" type="ns:MessagerPortType">
+        <http:binding verb="POST"/>
+        <wsdl:operation name="sendMessage">
+            <http:operation location="sendMessage"/>
+            <wsdl:input>
+                <mime:content type="application/xml" part="parameters"/>
+            </wsdl:input>
+            <wsdl:output>
+                <mime:content type="application/xml" part="parameters"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="getMembers">
+            <http:operation location="getMembers"/>
+            <wsdl:input>
+                <mime:content type="application/xml" part="parameters"/>
+            </wsdl:input>
+            <wsdl:output>
+                <mime:content type="application/xml" part="parameters"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="updateChat">
+            <http:operation location="updateChat"/>
+            <wsdl:input>
+                <mime:content type="application/xml" part="parameters"/>
+            </wsdl:input>
+            <wsdl:output>
+                <mime:content type="application/xml" part="parameters"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="createChat">
+            <http:operation location="createChat"/>
+            <wsdl:input>
+                <mime:content type="application/xml" part="parameters"/>
+            </wsdl:input>
+            <wsdl:output>
+                <mime:content type="application/xml" part="parameters"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="getHistoryChat">
+            <http:operation location="getHistoryChat"/>
+            <wsdl:input>
+                <mime:content type="application/xml" part="parameters"/>
+            </wsdl:input>
+            <wsdl:output>
+                <mime:content type="application/xml" part="parameters"/>
+            </wsdl:output>
+        </wsdl:operation>
+    </wsdl:binding>
+    <wsdl:service name="Messager">
+        <wsdl:port name="MessagerHttpSoap11Endpoint" binding="ns:MessagerSoap11Binding">
+            <soap:address location="http://localhost:8080/Chat3/services/Messager.MessagerHttpSoap11Endpoint/"/>
+        </wsdl:port>
+        <wsdl:port name="MessagerHttpSoap12Endpoint" binding="ns:MessagerSoap12Binding">
+            <soap12:address location="http://localhost:8080/Chat3/services/Messager.MessagerHttpSoap12Endpoint/"/>
+        </wsdl:port>
+        <wsdl:port name="MessagerHttpEndpoint" binding="ns:MessagerHttpBinding">
+            <http:address location="http://localhost:8080/Chat3/services/Messager.MessagerHttpEndpoint/"/>
+        </wsdl:port>
+    </wsdl:service>
+</wsdl:definitions>
