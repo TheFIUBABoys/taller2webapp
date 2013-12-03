@@ -58,7 +58,7 @@ public class ChatService {
 	@Path("createchat")
 	@Consumes(MediaType.APPLICATION_JSON)
 	public Response createChat(@CookieParam("authToken") String authToken) throws ParserConfigurationException, SAXException, IOException {
-		CommunicationResponse response = new CommunicationResponse();
+		CreateChatResponse response = new CreateChatResponse();
 		response.setSuccess(true);
 		response.setReason("Implementación de prueba, esto se debe implementar");
 		return Response.ok().entity(response).build();
@@ -70,7 +70,7 @@ public class ChatService {
 	@Path("updatechat")
 	@Consumes(MediaType.APPLICATION_JSON)
 	public Response updateChat(@CookieParam("authToken") String authToken) throws ParserConfigurationException, SAXException, IOException {
-		CommunicationResponse response = new CommunicationResponse();
+		UpdateChatResponse response = new UpdateChatResponse();
 		response.setSuccess(true);
 		response.setReason("Implementación de prueba, esto se debe implementar");
 		return Response.ok().entity(response).build();
@@ -80,7 +80,7 @@ public class ChatService {
 	@Path("gethistorychat")
 	@Consumes(MediaType.APPLICATION_JSON)
 	public Response getHistoryChat(@CookieParam("authToken") String authToken) throws ParserConfigurationException, SAXException, IOException {
-		CommunicationResponse response = new CommunicationResponse();
+		GetHistoryResponse response = new GetHistoryResponse();
 		response.setSuccess(true);
 		response.setReason("Implementación de prueba, esto se debe implementar");
 		return Response.ok().entity(response).build();
@@ -91,7 +91,7 @@ public class ChatService {
 	@Path("getmembers")
 	@Consumes(MediaType.APPLICATION_JSON)
 	public Response getMembers(@CookieParam("authToken") String authToken) throws ParserConfigurationException, SAXException, IOException {
-		CommunicationResponse response = new CommunicationResponse();
+		GetMembersResponse response = new GetMembersResponse();
 		response.setSuccess(true);
 		response.setReason("Implementación de prueba, esto se debe implementar");
 		return Response.ok().entity(response).build();
@@ -101,7 +101,7 @@ public class ChatService {
 	@Path("sendmessage")
 	@Consumes(MediaType.APPLICATION_JSON)
 	public Response sendMessage(@CookieParam("authToken") String authToken) throws ParserConfigurationException, SAXException, IOException {
-		CommunicationResponse response = new CommunicationResponse();
+		SendMessageResponse response = new SendMessageResponse();
 		response.setSuccess(true);
 		response.setReason("Implementación de prueba, esto se debe implementar");
 		return Response.ok().entity(response).build();
