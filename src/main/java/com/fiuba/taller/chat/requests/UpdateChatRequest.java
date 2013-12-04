@@ -27,7 +27,8 @@ public class UpdateChatRequest {
         String p = propSeparator;
 
         result += "id_chat" + k + id_chat + p;
-
+        result += "lastCallTimestamp" + k + lastCallTimestamp + p;
+        
         return result;
     }
 
@@ -43,7 +44,8 @@ public class UpdateChatRequest {
     public Form toForm(){
         Form dataAsForm = new Form();
 
-        dataAsForm.param("id_ambito", Integer.toString(id_chat));
+        dataAsForm.param("id_chat", Integer.toString(id_chat));
+        dataAsForm.param("lastCallTimestamp", Integer.toString(lastCallTimestamp));
 
         return dataAsForm;
     }
@@ -51,7 +53,8 @@ public class UpdateChatRequest {
     public Map<String, String> toMap(){
         Map<String, String> dataAsMap = new HashMap<String, String>();
 
-        dataAsMap.put("id_ambito", Integer.toString(id_chat));
+        dataAsMap.put("id_chat", Integer.toString(id_chat));
+        dataAsMap.put("lastCallTimestamp", Integer.toString(lastCallTimestamp));
 
         return dataAsMap;
     }

@@ -42,7 +42,7 @@ public class ChatRequest {
     public Form toForm(){
         Form dataAsForm = new Form();
 
-        dataAsForm.param("id_ambito", Integer.toString(id_chat));
+        dataAsForm.param("id_chat", Integer.toString(id_chat));
 
         return dataAsForm;
     }
@@ -50,7 +50,7 @@ public class ChatRequest {
     public Map<String, String> toMap(){
         Map<String, String> dataAsMap = new HashMap<String, String>();
 
-        dataAsMap.put("id_ambito", Integer.toString(id_chat));
+        dataAsMap.put("id_chat", Integer.toString(id_chat));
 
         return dataAsMap;
     }

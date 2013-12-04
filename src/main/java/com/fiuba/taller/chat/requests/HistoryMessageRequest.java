@@ -8,15 +8,14 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement(name = "forum-request")
-public class SendMessageRequest {
+public class HistoryMessageRequest {
 
 	private Integer id_chat;
 	private Integer id_member;
-	private String message;
 	
-    public SendMessageRequest(){}
+    public HistoryMessageRequest(){}
 	
-    public SendMessageRequest(Integer id_chat)
+    public HistoryMessageRequest(Integer id_chat)
     {
         super();
         this.setId_chat(id_chat);
@@ -29,7 +28,6 @@ public class SendMessageRequest {
 
         result += "id_chat" + k + id_chat + p;
         result += "id_member" + k + id_member + p;
-        result += "message" + k + message + p;
         
         return result;
     }
@@ -46,9 +44,8 @@ public class SendMessageRequest {
     public Form toForm(){
         Form dataAsForm = new Form();
 
-        dataAsForm.param("id_chat", Integer.toString(id_chat));
+        dataAsForm.param("id_ambito", Integer.toString(id_chat));
         dataAsForm.param("id_member", Integer.toString(id_member));
-        dataAsForm.param("message", message);
         
         return dataAsForm;
     }
@@ -56,10 +53,9 @@ public class SendMessageRequest {
     public Map<String, String> toMap(){
         Map<String, String> dataAsMap = new HashMap<String, String>();
 
-        dataAsMap.put("id_chat", Integer.toString(id_chat));
+        dataAsMap.put("id_ambito", Integer.toString(id_chat));
         dataAsMap.put("id_member", Integer.toString(id_member));
-        dataAsMap.put("message", message);
-
+        
         return dataAsMap;
     }
 
@@ -71,7 +67,7 @@ public class SendMessageRequest {
 	public void setId_chat(Integer id_ambito) {
 		this.id_chat = id_ambito;
 	}
-
+	
 	@XmlElement(name = "id_member")
 	public Integer getId_member() {
 		return id_member;
@@ -79,15 +75,6 @@ public class SendMessageRequest {
 
 	public void setId_member(Integer id_member) {
 		this.id_member = id_member;
-	}
-
-	@XmlElement(name = "message")
-	public String getMessage() {
-		return message;
-	}
-
-	public void setMessage(String message) {
-		this.message = message;
 	}
     
 }

@@ -27,7 +27,8 @@ public class CreateChatRequest {
         String p = propSeparator;
 
         result += "id_ambito" + k + id_ambito + p;
-
+        result += "username" + k + username + p;
+        
         return result;
     }
 
@@ -44,7 +45,8 @@ public class CreateChatRequest {
         Form dataAsForm = new Form();
 
         dataAsForm.param("id_ambito", Integer.toString(id_ambito));
-
+        dataAsForm.param("username", username);
+        
         return dataAsForm;
     }
 
@@ -52,7 +54,8 @@ public class CreateChatRequest {
         Map<String, String> dataAsMap = new HashMap<String, String>();
 
         dataAsMap.put("id_ambito", Integer.toString(id_ambito));
-
+        dataAsMap.put("username", username);
+        
         return dataAsMap;
     }
 
@@ -70,7 +73,8 @@ public class CreateChatRequest {
 	public void setId_ambito(Integer id_ambito) {
 		this.id_ambito = id_ambito;
 	}
-
+	
+	@XmlElement(name = "username")
 	public String getUsername() {
 		return username;
 	}
