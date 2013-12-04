@@ -11,7 +11,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 public class SendMessageRequest {
 
 	private Integer id_chat;
-	private Integer id_member;
+	private String member;
 	private String message;
 	
     public SendMessageRequest(){}
@@ -28,7 +28,7 @@ public class SendMessageRequest {
         String p = propSeparator;
 
         result += "id_chat" + k + id_chat + p;
-        result += "id_member" + k + id_member + p;
+        result += "member" + k + member + p;
         result += "message" + k + message + p;
         
         return result;
@@ -47,7 +47,7 @@ public class SendMessageRequest {
         Form dataAsForm = new Form();
 
         dataAsForm.param("id_chat", Integer.toString(id_chat));
-        dataAsForm.param("id_member", Integer.toString(id_member));
+        dataAsForm.param("member", member);
         dataAsForm.param("message", message);
         
         return dataAsForm;
@@ -57,7 +57,7 @@ public class SendMessageRequest {
         Map<String, String> dataAsMap = new HashMap<String, String>();
 
         dataAsMap.put("id_chat", Integer.toString(id_chat));
-        dataAsMap.put("id_member", Integer.toString(id_member));
+        dataAsMap.put("member", member);
         dataAsMap.put("message", message);
 
         return dataAsMap;
@@ -72,22 +72,35 @@ public class SendMessageRequest {
 		this.id_chat = id_ambito;
 	}
 
-	@XmlElement(name = "id_member")
-	public Integer getId_member() {
-		return id_member;
+	/**
+	 * @return the member
+	 */
+	@XmlElement(name = "member")
+	public String getMember() {
+		return member;
 	}
 
-	public void setId_member(Integer id_member) {
-		this.id_member = id_member;
+	/**
+	 * @param member the member to set
+	 */
+	public void setMember(String member) {
+		this.member = member;
 	}
 
+	/**
+	 * @return the message
+	 */
 	@XmlElement(name = "message")
 	public String getMessage() {
 		return message;
 	}
 
+	/**
+	 * @param message the message to set
+	 */
 	public void setMessage(String message) {
 		this.message = message;
 	}
+
     
 }

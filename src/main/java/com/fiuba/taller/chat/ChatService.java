@@ -126,9 +126,25 @@ public class ChatService {
 	@Path("getmembers")
 	@Consumes(MediaType.APPLICATION_JSON)
 	public Response getMembers(@CookieParam("authToken") String authToken, ChatRequest request) throws ParserConfigurationException, SAXException, IOException {
-		GetMembersResponse response = new GetMembersResponse();
+		CreateChatResponse response = new CreateChatResponse();
+		
+		MessagerStub api = new MessagerStub();
+		MessagerStub.GetMembers chatRequest = new MessagerStub.GetMembers();
+		MessagerStub.GetMembersResponse wsResponse = new MessagerStub.GetMembersResponse();
+		
+		// Armo la WSRequest
+		chatRequest.setChatId(request.getId_chat());
+		
+		// Hacer el request
+        try {
+		    wsResponse = api.getMembers(chatRequest);
+        } catch (AxisFault error) {
+            System.out.println(error.getReason());
+            return buildError("getMembers");
+        }
+		
 		response.setSuccess(true);
-		response.setReason("ImplementaciÃ³n de prueba, esto se debe implementar");
+		response.setReason("Implementación de prueba, esto se debe implementar");
 		return Response.ok().entity(response).build();
 	}
 	
@@ -136,9 +152,27 @@ public class ChatService {
 	@Path("sendmessage")
 	@Consumes(MediaType.APPLICATION_JSON)
 	public Response sendMessage(@CookieParam("authToken") String authToken, SendMessageRequest request) throws ParserConfigurationException, SAXException, IOException {
-		SendMessageResponse response = new SendMessageResponse();
+		CreateChatResponse response = new CreateChatResponse();
+		
+		MessagerStub api = new MessagerStub();
+		MessagerStub.SendMessage chatRequest = new MessagerStub.SendMessage();
+		MessagerStub.SendMessageResponse wsResponse = new MessagerStub.SendMessageResponse();
+		
+		// Armo la WSRequest
+		chatRequest.setChatId(request.getId_chat());
+		chatRequest.setMember(request.getMember());
+		chatRequest.setMessage(request.getMessage());
+		
+		// Hacer el request
+        try {
+		    wsResponse = api.sendMessage(chatRequest);
+        } catch (AxisFault error) {
+            System.out.println(error.getReason());
+            return buildError("sendMessage");
+        }
+		
 		response.setSuccess(true);
-		response.setReason("ImplementaciÃ³n de prueba, esto se debe implementar");
+		response.setReason("Implementación de prueba, esto se debe implementar");
 		return Response.ok().entity(response).build();
 	}
 	
@@ -146,9 +180,26 @@ public class ChatService {
 	@Path("logout")
 	@Consumes(MediaType.APPLICATION_JSON)
 	public Response logOut(@CookieParam("authToken") String authToken, HistoryMessageRequest request) throws ParserConfigurationException, SAXException, IOException {
-		SendMessageResponse response = new SendMessageResponse();
+		CreateChatResponse response = new CreateChatResponse();
+		
+		MessagerStub api = new MessagerStub();
+		MessagerStub.Logout chatRequest = new MessagerStub.Logout();
+		MessagerStub.LogoutResponse wsResponse = new MessagerStub.LogoutResponse();
+		
+		// Armo la WSRequest
+		chatRequest.setChatId(request.getId_chat());
+		chatRequest.setIdMiembro(request.getId_member());
+		
+		// Hacer el request
+        try {
+		    wsResponse = api.logout(chatRequest);
+        } catch (AxisFault error) {
+            System.out.println(error.getReason());
+            return buildError("logOut");
+        }
+		
 		response.setSuccess(true);
-		response.setReason("ImplementaciÃ³n de prueba, esto se debe implementar");
+		response.setReason("Implementación de prueba, esto se debe implementar");
 		return Response.ok().entity(response).build();
 	}
 	
