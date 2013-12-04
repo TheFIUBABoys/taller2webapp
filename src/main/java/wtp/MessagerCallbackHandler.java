@@ -77,6 +77,22 @@
             }
                 
            /**
+            * auto generated Axis2 call back method for logout method
+            * override this method for handling normal response from logout operation
+            */
+           public void receiveResultlogout(
+                    wtp.MessagerStub.LogoutResponse result
+                        ) {
+           }
+
+          /**
+           * auto generated Axis2 Error handler
+           * override this method for handling error response from logout operation
+           */
+            public void receiveErrorlogout(java.lang.Exception e) {
+            }
+                
+           /**
             * auto generated Axis2 call back method for getHistoryChat method
             * override this method for handling normal response from getHistoryChat operation
             */
