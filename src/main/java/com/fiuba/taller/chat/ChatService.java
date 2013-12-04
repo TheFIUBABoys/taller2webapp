@@ -105,9 +105,27 @@ public class ChatService {
 	@Path("updatechat")
 	@Consumes(MediaType.APPLICATION_JSON)
 	public Response updateChat(@CookieParam("authToken") String authToken, UpdateChatRequest request) throws ParserConfigurationException, SAXException, IOException {
-		UpdateChatResponse response = new UpdateChatResponse();
+		CreateChatResponse response = new CreateChatResponse();
+		
+		MessagerStub api = new MessagerStub();
+		MessagerStub.UpdateChat chatRequest = new MessagerStub.UpdateChat();
+		MessagerStub.UpdateChatResponse wsResponse = new MessagerStub.UpdateChatResponse();
+		
+		// Armo la WSRequest
+		chatRequest.setChatId(request.getId_chat());
+		chatRequest.setIdMiembro(request.getId_miembro());
+		chatRequest.setLastCallTimestamp(request.getLastCallTimestamp());
+		
+		// Hacer el request
+        try {
+		    wsResponse = api.updateChat(chatRequest);
+        } catch (AxisFault error) {
+            System.out.println(error.getReason());
+            return buildError("updateChat");
+        }
+		
 		response.setSuccess(true);
-		response.setReason("ImplementaciÃ³n de prueba, esto se debe implementar");
+		response.setReason("Implementación de prueba, esto se debe implementar");
 		return Response.ok().entity(response).build();
 	}
 	
@@ -115,9 +133,26 @@ public class ChatService {
 	@Path("gethistorychat")
 	@Consumes(MediaType.APPLICATION_JSON)
 	public Response getHistoryChat(@CookieParam("authToken") String authToken, HistoryMessageRequest request) throws ParserConfigurationException, SAXException, IOException {
-		GetHistoryResponse response = new GetHistoryResponse();
+		CreateChatResponse response = new CreateChatResponse();
+		
+		MessagerStub api = new MessagerStub();
+		MessagerStub.GetHistoryChat chatRequest = new MessagerStub.GetHistoryChat();
+		MessagerStub.GetHistoryChatResponse wsResponse = new MessagerStub.GetHistoryChatResponse();
+		
+		// Armo la WSRequest
+		chatRequest.setChatId(request.getId_chat());
+		chatRequest.setIdMiembro(request.getId_member());
+		
+		// Hacer el request
+        try {
+		    wsResponse = api.getHistoryChat(chatRequest);
+        } catch (AxisFault error) {
+            System.out.println(error.getReason());
+            return buildError("getHistoryChat");
+        }
+		
 		response.setSuccess(true);
-		response.setReason("ImplementaciÃ³n de prueba, esto se debe implementar");
+		response.setReason("Implementación de prueba, esto se debe implementar");
 		return Response.ok().entity(response).build();
 	}
 	

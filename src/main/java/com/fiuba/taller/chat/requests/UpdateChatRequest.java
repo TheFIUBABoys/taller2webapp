@@ -11,6 +11,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 public class UpdateChatRequest {
 
 	private Integer id_chat;
+	private Integer id_miembro;
 	private Integer lastCallTimestamp;
 	
     public UpdateChatRequest(){}
@@ -27,6 +28,7 @@ public class UpdateChatRequest {
         String p = propSeparator;
 
         result += "id_chat" + k + id_chat + p;
+        result += "id_miembro" + k + id_miembro + p;
         result += "lastCallTimestamp" + k + lastCallTimestamp + p;
         
         return result;
@@ -45,6 +47,7 @@ public class UpdateChatRequest {
         Form dataAsForm = new Form();
 
         dataAsForm.param("id_chat", Integer.toString(id_chat));
+        dataAsForm.param("id_miembro", Integer.toString(id_miembro));
         dataAsForm.param("lastCallTimestamp", Integer.toString(lastCallTimestamp));
 
         return dataAsForm;
@@ -54,6 +57,7 @@ public class UpdateChatRequest {
         Map<String, String> dataAsMap = new HashMap<String, String>();
 
         dataAsMap.put("id_chat", Integer.toString(id_chat));
+        dataAsMap.put("id_miembro", Integer.toString(id_miembro));
         dataAsMap.put("lastCallTimestamp", Integer.toString(lastCallTimestamp));
 
         return dataAsMap;
@@ -76,5 +80,21 @@ public class UpdateChatRequest {
 	public void setLastCallTimestamp(Integer lastCallTimestamp) {
 		this.lastCallTimestamp = lastCallTimestamp;
 	}
+
+	/**
+	 * @return the id_miembro
+	 */
+	@XmlElement(name = "id_miembro")
+	public Integer getId_miembro() {
+		return id_miembro;
+	}
+
+	/**
+	 * @param id_miembro the id_miembro to set
+	 */
+	public void setId_miembro(Integer id_miembro) {
+		this.id_miembro = id_miembro;
+	}
     
+	
 }
