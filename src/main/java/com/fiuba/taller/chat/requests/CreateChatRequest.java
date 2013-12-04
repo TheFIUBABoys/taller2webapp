@@ -11,6 +11,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 public class CreateChatRequest {
 
 	private Integer id_ambito;
+	private String username;
 	
     public CreateChatRequest(){}
 	
@@ -68,6 +69,14 @@ public class CreateChatRequest {
 	 */
 	public void setId_ambito(Integer id_ambito) {
 		this.id_ambito = id_ambito;
+	}
+
+	public String getUsername() {
+		return username;
+	}
+
+	public void setUsername(String username) {
+		this.username = username;
 	}
     
 }

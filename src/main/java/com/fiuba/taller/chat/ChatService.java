@@ -83,7 +83,7 @@ public class ChatService {
 		
 		// Armo la WSRequest
 		chatRequest.setScopeId(request.getId_ambito());
-		chatRequest.setIdMiembro(0); // TODO: CHANGE ME!! DEFINIR SI VA INT O USERNAME(STRING)
+		//chatRequest.(request.getUsername()); // TODO: CHANGE ME!! DEFINIR SI VA INT O USERNAME(STRING)
 		
 		// Hacer el request
         try {
