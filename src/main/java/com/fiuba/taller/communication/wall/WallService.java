@@ -29,8 +29,10 @@ import com.fiuba.taller.communication.wall.requests.EventDelete;
 import com.fiuba.taller.communication.wall.requests.EventEdit;
 import com.fiuba.taller.communication.wall.requests.EventsSearchByWords;
 import com.fiuba.taller.communication.wall.requests.WallShow;
+import com.fiuba.taller.security.SecurityResponse;
 
 import wtp.LoginAPIHelperStub;
+import wtp.ServiceStub;
 
 @Path("/")
 @Produces(MediaType.APPLICATION_JSON)
@@ -58,16 +60,43 @@ public class WallService {
 		return elem.getElementsByTagName("success").item(0).getTextContent();
 	}
 	
+	private Response buildError(String service) {
+        SecurityResponse response = new SecurityResponse();
+
+        response.setSuccess(false);
+        response.setReason("El servicio de " + service + " no está disponible.");
+
+        return Response.status(509).entity(response).build();
+	}
+	
 	
 	@GET
 	@Path("searcheventsbywords")
 	@Consumes(MediaType.APPLICATION_JSON)
 	public Response searchEventsByWords(@CookieParam("authToken") String authToken, EventsSearchByWords request) throws ParserConfigurationException, SAXException, IOException {
 		CommunicationResponse response = new CommunicationResponse();
+		
+		ServiceStub api = new ServiceStub();
+		ServiceStub.BusquedaEventosPorPalabras communicationRequst = new ServiceStub.BusquedaEventosPorPalabras();
+		ServiceStub.BusquedaEventosPorPalabrasResponse wsResponse = new ServiceStub.BusquedaEventosPorPalabrasResponse();
+		
+		// Armo la WSRequest
+		communicationRequst.setId_ambito(request.getId_ambito());
+		communicationRequst.setId_muro(request.getId_muro());
+		communicationRequst.setId_usuario(request.getUsername());
+		communicationRequst.setPalabras(request.getWords());
+		
+		// Hacer el request
+        try {
+		    wsResponse = api.busquedaEventosPorPalabras(communicationRequst);
+        } catch (AxisFault error) {
+            System.out.println(error.getReason());
+            return buildError("Busqueda eventos por palabras");
+        }
+		
 		response.setSuccess(true);
 		response.setReason("Implementación de prueba, esto se debe implementar");
 		return Response.ok().entity(response).build();
-		
 	}	
 	
 	@GET
@@ -75,6 +104,25 @@ public class WallService {
 	@Consumes(MediaType.APPLICATION_JSON)
 	public Response getWall(@CookieParam("authToken") String authToken, WallShow request) throws ParserConfigurationException, SAXException, IOException {
 		CommunicationResponse response = new CommunicationResponse();
+		
+		ServiceStub api = new ServiceStub();
+		ServiceStub.MostrarMuro communicationRequst = new ServiceStub.MostrarMuro();
+		ServiceStub.MostrarMuroResponse wsResponse = new ServiceStub.MostrarMuroResponse();
+		
+		// Armo la WSRequest
+		communicationRequst.setId_ambito(request.getId_ambito());
+		communicationRequst.setId_muro(request.getId_muro());
+		communicationRequst.setId_usuario(request.getUsername());
+		communicationRequst.setPagina(request.getPagina());
+		
+		// Hacer el request
+        try {
+		    wsResponse = api.mostrarMuro(communicationRequst);
+        } catch (AxisFault error) {
+            System.out.println(error.getReason());
+            return buildError("Mostrar muro");
+        }
+		
 		response.setSuccess(true);
 		response.setReason("Implementación de prueba, esto se debe implementar");
 		return Response.ok().entity(response).build();
@@ -85,6 +133,26 @@ public class WallService {
 	@Consumes(MediaType.APPLICATION_JSON)
 	public Response createEvent(@CookieParam("authToken") String authToken, EventCreate request) throws ParserConfigurationException, SAXException, IOException {
 		CommunicationResponse response = new CommunicationResponse();
+		
+		ServiceStub api = new ServiceStub();
+		ServiceStub.CrearEvento communicationRequst = new ServiceStub.CrearEvento();
+		ServiceStub.CrearEventoResponse wsResponse = new ServiceStub.CrearEventoResponse();
+		
+		// Armo la WSRequest
+		communicationRequst.setContenido(request.getContent());
+		communicationRequst.setId_ambito(request.getId_ambito());
+		communicationRequst.setId_muro(request.getId_muro());
+		communicationRequst.setId_usuario(request.getUsername());
+		communicationRequst.setTitulo(request.getTitle());
+		
+		// Hacer el request
+        try {
+		    wsResponse = api.crearEvento(communicationRequst);
+        } catch (AxisFault error) {
+            System.out.println(error.getReason());
+            return buildError("crear evento");
+        }
+		
 		response.setSuccess(true);
 		response.setReason("Implementación de prueba, esto se debe implementar");
 		return Response.ok().entity(response).build();
@@ -95,6 +163,9 @@ public class WallService {
 	@Consumes(MediaType.APPLICATION_JSON)
 	public Response editEvent(@CookieParam("authToken") String authToken, EventEdit request) throws ParserConfigurationException, SAXException, IOException {
 		CommunicationResponse response = new CommunicationResponse();
+		
+		// NO EXISTE ESTE SERVICIO
+		
 		response.setSuccess(true);
 		response.setReason("Implementación de prueba, esto se debe implementar");
 		return Response.ok().entity(response).build();
@@ -105,6 +176,25 @@ public class WallService {
 	@Consumes(MediaType.APPLICATION_JSON)
 	public Response deleteEvent(@CookieParam("authToken") String authToken, EventDelete request) throws ParserConfigurationException, SAXException, IOException {
 		CommunicationResponse response = new CommunicationResponse();
+		
+		ServiceStub api = new ServiceStub();
+		ServiceStub.EliminarEvento communicationRequst = new ServiceStub.EliminarEvento();
+		ServiceStub.EliminarEventoResponse wsResponse = new ServiceStub.EliminarEventoResponse();
+		
+		// Armo la WSRequest
+		communicationRequst.setId_ambito(request.getId_ambito());
+		communicationRequst.setId_muro(request.getId_muro());
+		communicationRequst.setId_usuario(request.getUsername());
+		communicationRequst.setId_evento(request.getId_evento());
+
+		// Hacer el request
+        try {
+		    wsResponse = api.eliminarEvento(communicationRequst);
+        } catch (AxisFault error) {
+            System.out.println(error.getReason());
+            return buildError("eliminar evento");
+        }
+		
 		response.setSuccess(true);
 		response.setReason("Implementación de prueba, esto se debe implementar");
 		return Response.ok().entity(response).build();
@@ -115,6 +205,25 @@ public class WallService {
 	@Consumes(MediaType.APPLICATION_JSON)
 	public Response hideEvent(@CookieParam("authToken") String authToken, EventDelete request) throws ParserConfigurationException, SAXException, IOException {
 		CommunicationResponse response = new CommunicationResponse();
+		
+		ServiceStub api = new ServiceStub();
+		ServiceStub.OcultarEvento communicationRequst = new ServiceStub.OcultarEvento();
+		ServiceStub.OcultarEventoResponse wsResponse = new ServiceStub.OcultarEventoResponse();
+		
+		// Armo la WSRequest
+		communicationRequst.setId_ambito(request.getId_ambito());
+		communicationRequst.setId_muro(request.getId_muro());
+		communicationRequst.setId_usuario(request.getUsername());
+		communicationRequst.setId_evento(request.getId_evento());
+
+		// Hacer el request
+        try {
+		    wsResponse = api.ocultarEvento(communicationRequst);
+        } catch (AxisFault error) {
+            System.out.println(error.getReason());
+            return buildError("ocultar evento");
+        }
+		
 		response.setSuccess(true);
 		response.setReason("Implementación de prueba, esto se debe implementar");
 		return Response.ok().entity(response).build();
@@ -125,6 +234,25 @@ public class WallService {
 	@Consumes(MediaType.APPLICATION_JSON)
 	public Response showEvent(@CookieParam("authToken") String authToken, EventDelete request) throws ParserConfigurationException, SAXException, IOException {
 		CommunicationResponse response = new CommunicationResponse();
+		
+		ServiceStub api = new ServiceStub();
+		ServiceStub.MostrarEvento communicationRequst = new ServiceStub.MostrarEvento();
+		ServiceStub.MostrarEventoResponse wsResponse = new ServiceStub.MostrarEventoResponse();
+		
+		// Armo la WSRequest
+		communicationRequst.setId_ambito(request.getId_ambito());
+		communicationRequst.setId_muro(request.getId_muro());
+		communicationRequst.setId_usuario(request.getUsername());
+		communicationRequst.setId_evento(request.getId_evento());
+
+		// Hacer el request
+        try {
+		    wsResponse = api.mostrarEvento(communicationRequst);
+        } catch (AxisFault error) {
+            System.out.println(error.getReason());
+            return buildError("mostrar evento");
+        }
+		
 		response.setSuccess(true);
 		response.setReason("Implementación de prueba, esto se debe implementar");
 		return Response.ok().entity(response).build();

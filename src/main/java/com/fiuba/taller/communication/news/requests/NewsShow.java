@@ -12,10 +12,9 @@ import javax.xml.bind.annotation.XmlRootElement;
 public class NewsShow {
 
 	private String username;
-	private String title;
-	private String content;
 	private Integer id_ambito;
 	private Integer id_cartelera;
+	private Integer id_noticia;
 	
     public NewsShow(){}
 	
@@ -32,10 +31,9 @@ public class NewsShow {
         String p = propSeparator;
 
         result += "username" + k + username + p;
-        result += "title" + k + title + p;
-        result += "content" + k + content + p;
         result += "id_ambito" + k + id_ambito + p;
         result += "id_cartelera" + k + id_cartelera + p;
+        result += "id_noticia" + k + id_noticia + p;
 
         return result;
     }
@@ -53,10 +51,9 @@ public class NewsShow {
         Form dataAsForm = new Form();
 
         dataAsForm.param("username", username);
-        dataAsForm.param("title", title);
-        dataAsForm.param("content", content);
         dataAsForm.param("id_ambito", Integer.toString(id_ambito));
         dataAsForm.param("id_cartelera", Integer.toString(id_cartelera));
+        dataAsForm.param("id_noticia", Integer.toString(id_noticia));
         
         return dataAsForm;
     }
@@ -67,6 +64,7 @@ public class NewsShow {
         dataAsMap.put("username", username);
         dataAsMap.put("id_ambito", Integer.toString(id_ambito));
         dataAsMap.put("id_cartelera", Integer.toString(id_cartelera));
+        dataAsMap.put("id_noticia", Integer.toString(id_noticia));
         
         return dataAsMap;
     }
@@ -117,35 +115,19 @@ public class NewsShow {
 	}
 
 	/**
-	 * @return the title
+	 * @return the id_noticia
 	 */
-	@XmlElement(name = "title")
-	public String getTitle() {
-		return title;
+	@XmlElement(name = "id_noticia")
+	public Integer getId_noticia() {
+		return id_noticia;
 	}
 
 	/**
-	 * @param title the title to set
+	 * @param id_noticia the id_noticia to set
 	 */
-	public void setTitle(String title) {
-		this.title = title;
+	public void setId_noticia(Integer id_noticia) {
+		this.id_noticia = id_noticia;
 	}
-
-	/**
-	 * @return the content
-	 */
-	@XmlElement(name = "content")
-	public String getContent() {
-		return content;
-	}
-
-	/**
-	 * @param content the content to set
-	 */
-	public void setContent(String content) {
-		this.content = content;
-	}
-	
 	
 	
 }

@@ -14,7 +14,7 @@ public class EventsSearchByWords {
 	private String username;
 	private Integer id_ambito;
 	private Integer id_muro;
-	private String words;
+	private String[] words;
 	
     public EventsSearchByWords(){}
 	
@@ -118,16 +118,17 @@ public class EventsSearchByWords {
 	 * @return the words
 	 */
 	@XmlElement(name = "words")
-	public String getWords() {
+	public String[] getWords() {
 		return words;
 	}
 
 	/**
 	 * @param words the words to set
 	 */
-	public void setWords(String words) {
+	public void setWords(String[] words) {
 		this.words = words;
 	}
+
 
 	
 }

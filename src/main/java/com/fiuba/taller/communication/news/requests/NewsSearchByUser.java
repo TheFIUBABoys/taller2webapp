@@ -14,6 +14,7 @@ public class NewsSearchByUser {
 	private String username;
 	private Integer id_ambito;
 	private Integer id_cartelera;
+	private String author;
 	
     public NewsSearchByUser(){}
 	
@@ -32,6 +33,7 @@ public class NewsSearchByUser {
         result += "username" + k + username + p;
         result += "id_ambito" + k + id_ambito + p;
         result += "id_cartelera" + k + id_cartelera + p;
+        result += "author" + k + author + p;
 
         return result;
     }
@@ -51,6 +53,7 @@ public class NewsSearchByUser {
         dataAsForm.param("username", username);
         dataAsForm.param("id_ambito", Integer.toString(id_ambito));
         dataAsForm.param("id_cartelera", Integer.toString(id_cartelera));
+        dataAsForm.param("author", author);
         
         return dataAsForm;
     }
@@ -61,6 +64,7 @@ public class NewsSearchByUser {
         dataAsMap.put("username", username);
         dataAsMap.put("id_ambito", Integer.toString(id_ambito));
         dataAsMap.put("id_cartelera", Integer.toString(id_cartelera));
+        dataAsMap.put("author", author);
         
         return dataAsMap;
     }
@@ -109,5 +113,21 @@ public class NewsSearchByUser {
 	public void setId_cartelera(Integer id_cartelera) {
 		this.id_cartelera = id_cartelera;
 	}
+
+	/**
+	 * @return the author
+	 */
+	@XmlElement(name = "author")
+	public String getAuthor() {
+		return author;
+	}
+
+	/**
+	 * @param author the author to set
+	 */
+	public void setAuthor(String author) {
+		this.author = author;
+	}
+	
 	
 }

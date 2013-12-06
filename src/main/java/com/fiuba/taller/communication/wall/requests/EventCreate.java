@@ -13,6 +13,7 @@ public class EventCreate {
 
 	private String username;
 	private String content;
+	private String title;
 	private Integer id_ambito;
 	private Integer id_muro;
 	
@@ -32,6 +33,7 @@ public class EventCreate {
 
         result += "username" + k + username + p;
         result += "content" + k + content + p;
+        result += "title" + k + title + p;
         result += "id_ambito" + k + id_ambito + p;
         result += "id_muro" + k + id_muro + p;
 
@@ -52,6 +54,7 @@ public class EventCreate {
 
         dataAsForm.param("username", username);
         dataAsForm.param("content", content);
+        dataAsForm.param("title", title);
         dataAsForm.param("id_ambito", Integer.toString(id_ambito));
         dataAsForm.param("id_muro", Integer.toString(id_muro));
         
@@ -63,6 +66,7 @@ public class EventCreate {
 
         dataAsMap.put("username", username);
         dataAsMap.put("content", content);
+        dataAsMap.put("title", title);
         dataAsMap.put("id_ambito", Integer.toString(id_ambito));
         dataAsMap.put("id_muro", Integer.toString(id_muro));
         
@@ -127,6 +131,21 @@ public class EventCreate {
 	 */
 	public void setContent(String content) {
 		this.content = content;
+	}
+
+	/**
+	 * @return the title
+	 */
+	@XmlElement(name = "title")
+	public String getTitle() {
+		return title;
+	}
+
+	/**
+	 * @param title the title to set
+	 */
+	public void setTitle(String title) {
+		this.title = title;
 	}
 
 	
