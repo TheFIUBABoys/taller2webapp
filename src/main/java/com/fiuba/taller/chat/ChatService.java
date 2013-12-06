@@ -33,7 +33,10 @@ import com.fiuba.taller.security.SecurityResponse;
 
 import wtp.LoginAPIHelperStub;
 import wtp.MessagerStub;
+import wtp.MessagerStub.Chat;
 import wtp.MessagerStub.GetHistoryChatResponse;
+import wtp.MessagerStub.MensajeChat;
+import wtp.MessagerStub.Miembros;
 
 
 @Path("/")
@@ -93,9 +96,20 @@ public class ChatService {
             System.out.println(error.getReason());
             return buildError("crear chat");
         }
-		
-		response.setSuccess(true);
-		response.setReason("Implementación de prueba, esto se debe implementar");
+        
+        // Generate response
+		Chat responseData = wsResponse.get_return();
+		if (responseData == null || responseData.getData() == null || responseData.getMeessage() == null) {
+			response.setSuccess(false);
+			response.setReason("Respuesta malformada");
+		} else if (responseData.getData().getIdChat() == -1) {
+			response.setSuccess(false);
+			response.setReason(responseData.getMeessage().getCode() + ": " + responseData.getMeessage().getDescription());
+		} else {
+			response.setSuccess(true);
+			response.setReason(responseData.getMeessage().getCode() + ": " + responseData.getMeessage().getDescription());
+			response.setId_chat((int) responseData.getData().getIdChat());
+		}
 		return Response.ok().entity(response).build();
 		
 	}
@@ -105,7 +119,7 @@ public class ChatService {
 	@Path("updatechat")
 	@Consumes(MediaType.APPLICATION_JSON)
 	public Response updateChat(@CookieParam("authToken") String authToken, UpdateChatRequest request) throws ParserConfigurationException, SAXException, IOException {
-		CreateChatResponse response = new CreateChatResponse();
+		UpdateChatResponse response = new UpdateChatResponse();
 		
 		MessagerStub api = new MessagerStub();
 		MessagerStub.UpdateChat chatRequest = new MessagerStub.UpdateChat();
@@ -124,8 +138,26 @@ public class ChatService {
             return buildError("updateChat");
         }
 		
-		response.setSuccess(true);
-		response.setReason("Implementación de prueba, esto se debe implementar");
+        // Generate response
+ 		Chat responseData = wsResponse.get_return();
+ 		if (responseData == null || responseData.getData() == null || responseData.getMeessage() == null) {
+ 			response.setSuccess(false);
+ 			response.setReason("Respuesta malformada");
+ 		} else {
+ 			response.setSuccess(true);
+			response.setReason(responseData.getMeessage().getCode() + ": " + responseData.getMeessage().getDescription());
+			// Create messages array
+			MensajeChat[] messagesResponse = responseData.getData().getMessages();
+			Mensaje[] messages = new Mensaje[messagesResponse.length];
+			for (int i = 0; i < messagesResponse.length; i++) {
+				messages[i] = new Mensaje();
+				messages[i].content = messagesResponse[i].getContenidoMensaje();
+				messages[i].date = (int) messagesResponse[i].getFechaMensaje();
+				messages[i].id_member = (int) messagesResponse[i].getMiembro().getIdMiembro();
+				messages[i].name_member = messagesResponse[i].getMiembro().getNombre();
+			}
+			response.setMessages(messages);
+ 		}
 		return Response.ok().entity(response).build();
 	}
 	
@@ -133,7 +165,7 @@ public class ChatService {
 	@Path("gethistorychat")
 	@Consumes(MediaType.APPLICATION_JSON)
 	public Response getHistoryChat(@CookieParam("authToken") String authToken, HistoryMessageRequest request) throws ParserConfigurationException, SAXException, IOException {
-		CreateChatResponse response = new CreateChatResponse();
+		GetHistoryResponse response = new GetHistoryResponse();
 		
 		MessagerStub api = new MessagerStub();
 		MessagerStub.GetHistoryChat chatRequest = new MessagerStub.GetHistoryChat();
@@ -150,9 +182,30 @@ public class ChatService {
             System.out.println(error.getReason());
             return buildError("getHistoryChat");
         }
+        
+        // Generate response
+  		Chat responseData = wsResponse.get_return();
+  		if (responseData == null || responseData.getData() == null || responseData.getMeessage() == null) {
+  			response.setSuccess(false);
+  			response.setReason("Respuesta malformada");
+  		} else {	
+  			response.setSuccess(true);
+ 			response.setReason(responseData.getMeessage().getCode() + ": " + responseData.getMeessage().getDescription());
+ 			response.setId_chat((int) responseData.getData().getIdChat());
+ 			response.setLastCallTimestamp((int) responseData.getLastCallTimestamp());
+ 			// Create messages array
+ 			MensajeChat[] messagesResponse = responseData.getData().getMessages();
+ 			Mensaje[] messages = new Mensaje[messagesResponse.length];
+ 			for (int i = 0; i < messagesResponse.length; i++) {
+ 				messages[i] = new Mensaje();
+ 				messages[i].content = messagesResponse[i].getContenidoMensaje();
+ 				messages[i].date = (int) messagesResponse[i].getFechaMensaje();
+ 				messages[i].id_member = (int) messagesResponse[i].getMiembro().getIdMiembro();
+ 				messages[i].name_member = messagesResponse[i].getMiembro().getNombre();
+ 			}
+ 			response.setMessages(messages);
+  		}
 		
-		response.setSuccess(true);
-		response.setReason("Implementación de prueba, esto se debe implementar");
 		return Response.ok().entity(response).build();
 	}
 	
@@ -161,7 +214,7 @@ public class ChatService {
 	@Path("getmembers")
 	@Consumes(MediaType.APPLICATION_JSON)
 	public Response getMembers(@CookieParam("authToken") String authToken, ChatRequest request) throws ParserConfigurationException, SAXException, IOException {
-		CreateChatResponse response = new CreateChatResponse();
+		GetMembersResponse response = new GetMembersResponse();
 		
 		MessagerStub api = new MessagerStub();
 		MessagerStub.GetMembers chatRequest = new MessagerStub.GetMembers();
@@ -177,9 +230,25 @@ public class ChatService {
             System.out.println(error.getReason());
             return buildError("getMembers");
         }
+        
+        // Generate response
+  		Miembros membersData = wsResponse.get_return();
+  		if (membersData == null || membersData.getMessages() == null) {
+  			response.setSuccess(false);
+  			response.setReason("Respuesta malformada");
+  		} else {
+  			response.setSuccess(true);
+ 			response.setReason("Operacion exitosa");
+ 			// Create members array
+ 			Miembro[] members = new Miembro[membersData.getMessages().length];
+ 			for (int i = 0; i < membersData.getMessages().length; i++) {
+ 				members[i] = new Miembro();
+ 				members[i].setId((int) membersData.getMessages()[i].getIdMiembro());
+ 				members[i].setName(membersData.getMessages()[i].getNombre());
+ 			}
+ 			response.setMembers(members);
+  		}
 		
-		response.setSuccess(true);
-		response.setReason("Implementación de prueba, esto se debe implementar");
 		return Response.ok().entity(response).build();
 	}
 	
@@ -187,7 +256,7 @@ public class ChatService {
 	@Path("sendmessage")
 	@Consumes(MediaType.APPLICATION_JSON)
 	public Response sendMessage(@CookieParam("authToken") String authToken, SendMessageRequest request) throws ParserConfigurationException, SAXException, IOException {
-		CreateChatResponse response = new CreateChatResponse();
+		SendMessageResponse response = new SendMessageResponse();
 		
 		MessagerStub api = new MessagerStub();
 		MessagerStub.SendMessage chatRequest = new MessagerStub.SendMessage();
@@ -205,9 +274,17 @@ public class ChatService {
             System.out.println(error.getReason());
             return buildError("sendMessage");
         }
+        
+        // Generate response
+ 		Chat responseData = wsResponse.get_return();
+ 		if (responseData == null || responseData.getData() == null || responseData.getMeessage() == null) {
+ 			response.setSuccess(false);
+ 			response.setReason("Respuesta malformada");
+ 		} else {
+ 			response.setSuccess(true);
+ 			response.setReason(responseData.getMeessage().getCode() + ": " + responseData.getMeessage().getDescription());
+ 		}
 		
-		response.setSuccess(true);
-		response.setReason("Implementación de prueba, esto se debe implementar");
 		return Response.ok().entity(response).build();
 	}
 	
@@ -215,7 +292,7 @@ public class ChatService {
 	@Path("logout")
 	@Consumes(MediaType.APPLICATION_JSON)
 	public Response logOut(@CookieParam("authToken") String authToken, HistoryMessageRequest request) throws ParserConfigurationException, SAXException, IOException {
-		CreateChatResponse response = new CreateChatResponse();
+		LogoutResponse response = new LogoutResponse();
 		
 		MessagerStub api = new MessagerStub();
 		MessagerStub.Logout chatRequest = new MessagerStub.Logout();
@@ -233,8 +310,16 @@ public class ChatService {
             return buildError("logOut");
         }
 		
-		response.setSuccess(true);
-		response.setReason("Implementación de prueba, esto se debe implementar");
+        // Generate response
+ 		boolean responseData = wsResponse.get_return();
+ 		if (!responseData) {
+ 			response.setSuccess(false);
+ 			response.setReason("Error al desloguear");
+ 		} else {
+ 			response.setSuccess(true);
+ 			response.setReason("Deslogueo exitoso");
+ 		}        
+   
 		return Response.ok().entity(response).build();
 	}
 	

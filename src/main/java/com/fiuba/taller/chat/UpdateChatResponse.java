@@ -11,8 +11,8 @@ public class UpdateChatResponse {
     private boolean success;
     private String reason;
     private String authToken;
-    private List<Mensaje> messages;
-    private List<Integer> members;
+    private Mensaje[] messages;
+    private Integer[] members;
 
     public UpdateChatResponse(){}
     
@@ -60,20 +60,20 @@ public class UpdateChatResponse {
         this.authToken = authToken;
     }
 
-	public List<Mensaje> getMessages() {
+	public Mensaje[] getMessages() {
 		return messages;
 	}
 
-	public void setMessages(List<Mensaje> messages) {
+	public void setMessages(Mensaje[] messages) {
 		this.messages = messages;
 	}
 
     
-    public List<Integer> getMembers() {
+    public Integer[] getMembers() {
 		return members;
 	}
 
-	public void setMembers(List<Integer> members) {
+	public void setMembers(Integer[] members) {
 		this.members = members;
 	}
 

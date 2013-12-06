@@ -13,7 +13,7 @@ public class GetHistoryResponse {
     private String authToken;
     private int lastCallTimestamp;
 	private int id_chat;
-    private List<Mensaje> messages;
+    private Mensaje[] messages;
 
     public GetHistoryResponse(){}
     
@@ -77,11 +77,11 @@ public class GetHistoryResponse {
 		this.id_chat = id_chat;
 	}
 
-	public List<Mensaje> getMessages() {
+	public Mensaje[] getMessages() {
 		return messages;
 	}
 
-	public void setMessages(List<Mensaje> messages) {
+	public void setMessages(Mensaje[] messages) {
 		this.messages = messages;
 	}
 

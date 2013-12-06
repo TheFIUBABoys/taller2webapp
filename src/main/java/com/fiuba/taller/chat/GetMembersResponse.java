@@ -11,7 +11,7 @@ public class GetMembersResponse {
     private boolean success;
     private String reason;
     private String authToken;
-    private List<Integer> members;
+    private Miembro[] members;
 
     public GetMembersResponse(){}
     
@@ -59,11 +59,11 @@ public class GetMembersResponse {
         this.authToken = authToken;
     }
     
-    public List<Integer> getMembers() {
+    public Miembro[] getMembers() {
 		return members;
 	}
 
-	public void setMembers(List<Integer> members) {
+	public void setMembers(Miembro[] members) {
 		this.members = members;
 	}
 
