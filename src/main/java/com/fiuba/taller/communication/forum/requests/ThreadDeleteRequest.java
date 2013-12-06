@@ -13,6 +13,7 @@ public class ThreadDeleteRequest {
 	private String username;
 	private Integer id_ambito;
 	private Integer id_foro;
+	private Integer id_subforo;
 	private Integer id_tema;
 	
     public ThreadDeleteRequest(){}
@@ -34,6 +35,7 @@ public class ThreadDeleteRequest {
         result += "username" + k + username + p;
         result += "id_ambito" + k + id_ambito + p;
         result += "id_foro" + k + id_foro + p;
+        result += "id_subforo" + k + id_subforo + p;
         result += "id_tema" + k + id_tema + p;
 
         return result;
@@ -54,6 +56,7 @@ public class ThreadDeleteRequest {
         dataAsForm.param("username", username);
         dataAsForm.param("id_ambito", Integer.toString(id_ambito));
         dataAsForm.param("id_foro", Integer.toString(id_foro));
+        dataAsForm.param("id_subforo", Integer.toString(id_subforo));
         dataAsForm.param("id_tema", Integer.toString(id_tema));
 
         return dataAsForm;
@@ -65,6 +68,7 @@ public class ThreadDeleteRequest {
         dataAsMap.put("username", username);
         dataAsMap.put("id_ambito", Integer.toString(id_ambito));
         dataAsMap.put("id_foro", Integer.toString(id_foro));
+        dataAsMap.put("id_subforo", Integer.toString(id_subforo));
         dataAsMap.put("id_tema", Integer.toString(id_tema));
 
         return dataAsMap;
@@ -113,6 +117,21 @@ public class ThreadDeleteRequest {
 	 */
 	public void setId_foro(Integer id_foro) {
 		this.id_foro = id_foro;
+	}
+
+	/**
+	 * @return the id_subforo
+	 */
+	@XmlElement(name = "id_subforo")
+	public Integer getId_subforo() {
+		return id_subforo;
+	}
+
+	/**
+	 * @param id_subforo the id_subforo to set
+	 */
+	public void setId_subforo(Integer id_subforo) {
+		this.id_subforo = id_subforo;
 	}
 
 	/**

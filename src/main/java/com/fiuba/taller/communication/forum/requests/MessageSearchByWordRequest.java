@@ -14,8 +14,8 @@ public class MessageSearchByWordRequest {
 	private String username;
 	private Integer id_ambito;
 	private Integer id_foro;
-	private List<Integer> subforos;
-	private List<String> words;
+	private int[] subforos;
+	private String words;
 	
     public MessageSearchByWordRequest(){}
 	
@@ -121,14 +121,14 @@ public class MessageSearchByWordRequest {
 	 * @return the subforos
 	 */
 	@XmlElement(name = "subforos")
-	public List<Integer> getSubforos() {
+	public int[] getSubforos() {
 		return subforos;
 	}
 
 	/**
 	 * @param subforos the subforos to set
 	 */
-	public void setSubforos(List<Integer> subforos) {
+	public void setSubforos(int[] subforos) {
 		this.subforos = subforos;
 	}
 
@@ -136,16 +136,16 @@ public class MessageSearchByWordRequest {
 	 * @return the words
 	 */
 	@XmlElement(name = "words")
-	public List<String> getWords() {
+	public String getWords() {
 		return words;
 	}
 
 	/**
 	 * @param words the words to set
 	 */
-	public void setWords(List<String> words) {
+	public void setWords(String words) {
 		this.words = words;
 	}
 
-	
+
 }

@@ -1,0 +1,1891 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:ns1="http://org.apache.axis2/xsd" xmlns:ns="http://src" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://src">
+    <wsdl:documentation>
+		Please Type your service description here
+	</wsdl:documentation>
+    <wsdl:types>
+        <xs:schema attributeFormDefault="qualified" elementFormDefault="qualified" targetNamespace="http://src">
+            <xs:element name="editarSeccion">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="id_usuario" nillable="true" type="xs:string"/>
+                        <xs:element minOccurs="0" name="id_ambito" type="xs:int"/>
+                        <xs:element minOccurs="0" name="id_foro" type="xs:int"/>
+                        <xs:element minOccurs="0" name="id_seccion" type="xs:int"/>
+                        <xs:element minOccurs="0" name="nombre_seccion" nillable="true" type="xs:string"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="editarSeccionResponse">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="return" type="xs:int"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="eliminarSeccion">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="id_usuario" nillable="true" type="xs:string"/>
+                        <xs:element minOccurs="0" name="id_ambito" type="xs:int"/>
+                        <xs:element minOccurs="0" name="id_foro" type="xs:int"/>
+                        <xs:element minOccurs="0" name="id_seccion" type="xs:int"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="eliminarSeccionResponse">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="return" type="xs:int"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="crearSubforo">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="id_usuario" nillable="true" type="xs:string"/>
+                        <xs:element minOccurs="0" name="id_ambito" type="xs:int"/>
+                        <xs:element minOccurs="0" name="id_foro" type="xs:int"/>
+                        <xs:element minOccurs="0" name="id_padre" type="xs:int"/>
+                        <xs:element minOccurs="0" name="id_seccion" type="xs:int"/>
+                        <xs:element minOccurs="0" name="nombre_subforo" nillable="true" type="xs:string"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="crearSubforoResponse">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="return" type="xs:int"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="editarSubforo">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="id_usuario" nillable="true" type="xs:string"/>
+                        <xs:element minOccurs="0" name="id_ambito" type="xs:int"/>
+                        <xs:element minOccurs="0" name="id_foro" type="xs:int"/>
+                        <xs:element minOccurs="0" name="id_subforo" type="xs:int"/>
+                        <xs:element minOccurs="0" name="nombre_subforo" nillable="true" type="xs:string"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="editarSubforoResponse">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="return" type="xs:int"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="moverSubforo">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="id_usuario" nillable="true" type="xs:string"/>
+                        <xs:element minOccurs="0" name="id_ambito" type="xs:int"/>
+                        <xs:element minOccurs="0" name="id_foro" type="xs:int"/>
+                        <xs:element minOccurs="0" name="id_subforo" type="xs:int"/>
+                        <xs:element minOccurs="0" name="id_contenedor_viejo" type="xs:int"/>
+                        <xs:element minOccurs="0" name="id_contenedor_nuevo" type="xs:int"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="moverSubforoResponse">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="return" type="xs:int"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="eliminarSubforo">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="id_usuario" nillable="true" type="xs:string"/>
+                        <xs:element minOccurs="0" name="id_ambito" type="xs:int"/>
+                        <xs:element minOccurs="0" name="id_foro" type="xs:int"/>
+                        <xs:element minOccurs="0" name="id_subforo" type="xs:int"/>
+                        <xs:element minOccurs="0" name="id_contenedor" type="xs:int"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="eliminarSubforoResponse">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="return" type="xs:int"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="crearTema">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="id_usuario" nillable="true" type="xs:string"/>
+                        <xs:element minOccurs="0" name="id_ambito" type="xs:int"/>
+                        <xs:element minOccurs="0" name="id_foro" type="xs:int"/>
+                        <xs:element minOccurs="0" name="id_subforo" type="xs:int"/>
+                        <xs:element minOccurs="0" name="titulo" nillable="true" type="xs:string"/>
+                        <xs:element minOccurs="0" name="contenido" nillable="true" type="xs:string"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="crearTemaResponse">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="return" type="xs:int"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="editarTema">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="id_usuario" nillable="true" type="xs:string"/>
+                        <xs:element minOccurs="0" name="id_ambito" type="xs:int"/>
+                        <xs:element minOccurs="0" name="id_foro" type="xs:int"/>
+                        <xs:element minOccurs="0" name="id_tema" type="xs:int"/>
+                        <xs:element minOccurs="0" name="titulo" nillable="true" type="xs:string"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="editarTemaResponse">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="return" type="xs:int"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="eliminarTema">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="id_usuario" nillable="true" type="xs:string"/>
+                        <xs:element minOccurs="0" name="id_ambito" type="xs:int"/>
+                        <xs:element minOccurs="0" name="id_foro" type="xs:int"/>
+                        <xs:element minOccurs="0" name="id_subforo" type="xs:int"/>
+                        <xs:element minOccurs="0" name="id_tema" type="xs:int"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="eliminarTemaResponse">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="return" type="xs:int"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="DestacarTema">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="id_usuario" nillable="true" type="xs:string"/>
+                        <xs:element minOccurs="0" name="id_ambito" type="xs:int"/>
+                        <xs:element minOccurs="0" name="id_foro" type="xs:int"/>
+                        <xs:element minOccurs="0" name="id_tema" type="xs:int"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="DestacarTemaResponse">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="return" type="xs:int"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="CancelarDestacarTema">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="id_usuario" nillable="true" type="xs:string"/>
+                        <xs:element minOccurs="0" name="id_ambito" type="xs:int"/>
+                        <xs:element minOccurs="0" name="id_foro" type="xs:int"/>
+                        <xs:element minOccurs="0" name="id_tema" type="xs:int"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="CancelarDestacarTemaResponse">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="return" type="xs:int"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="CrearMensaje">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="id_usuario" nillable="true" type="xs:string"/>
+                        <xs:element minOccurs="0" name="id_ambito" type="xs:int"/>
+                        <xs:element minOccurs="0" name="id_foro" type="xs:int"/>
+                        <xs:element minOccurs="0" name="id_tema" type="xs:int"/>
+                        <xs:element minOccurs="0" name="contenido" nillable="true" type="xs:string"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="CrearMensajeResponse">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="return" type="xs:int"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="EditarMensaje">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="id_usuario" nillable="true" type="xs:string"/>
+                        <xs:element minOccurs="0" name="id_ambito" type="xs:int"/>
+                        <xs:element minOccurs="0" name="id_foro" type="xs:int"/>
+                        <xs:element minOccurs="0" name="id_tema" type="xs:int"/>
+                        <xs:element minOccurs="0" name="id_mensaje" type="xs:int"/>
+                        <xs:element minOccurs="0" name="contenido" nillable="true" type="xs:string"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="EditarMensajeResponse">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="return" type="xs:int"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="EliminarMensaje">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="id_usuario" nillable="true" type="xs:string"/>
+                        <xs:element minOccurs="0" name="id_ambito" type="xs:int"/>
+                        <xs:element minOccurs="0" name="id_foro" type="xs:int"/>
+                        <xs:element minOccurs="0" name="id_tema" type="xs:int"/>
+                        <xs:element minOccurs="0" name="id_mensaje" type="xs:int"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="EliminarMensajeResponse">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="return" type="xs:int"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="MostrarIndice">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="id_usuario" nillable="true" type="xs:string"/>
+                        <xs:element minOccurs="0" name="id_ambito" type="xs:int"/>
+                        <xs:element minOccurs="0" name="id_foro" type="xs:int"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="MostrarIndiceResponse">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="return" nillable="true" type="xs:string"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="MostrarSubForo">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="id_usuario" nillable="true" type="xs:string"/>
+                        <xs:element minOccurs="0" name="id_ambito" type="xs:int"/>
+                        <xs:element minOccurs="0" name="id_foro" type="xs:int"/>
+                        <xs:element minOccurs="0" name="id_subforo" type="xs:int"/>
+                        <xs:element minOccurs="0" name="pagina" type="xs:int"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="MostrarSubForoResponse">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="return" nillable="true" type="xs:string"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="MostrarTema">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="id_usuario" nillable="true" type="xs:string"/>
+                        <xs:element minOccurs="0" name="id_ambito" type="xs:int"/>
+                        <xs:element minOccurs="0" name="id_foro" type="xs:int"/>
+                        <xs:element minOccurs="0" name="id_tema" type="xs:int"/>
+                        <xs:element minOccurs="0" name="pagina" type="xs:int"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="MostrarTemaResponse">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="return" nillable="true" type="xs:string"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="MostrarMensaje">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="id_usuario" nillable="true" type="xs:string"/>
+                        <xs:element minOccurs="0" name="id_ambito" type="xs:int"/>
+                        <xs:element minOccurs="0" name="id_foro" type="xs:int"/>
+                        <xs:element minOccurs="0" name="id_tema" type="xs:int"/>
+                        <xs:element minOccurs="0" name="id_mensaje" type="xs:int"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="MostrarMensajeResponse">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="return" nillable="true" type="xs:string"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="BusquedaMensajesPorPalabra">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="id_usuario" nillable="true" type="xs:string"/>
+                        <xs:element minOccurs="0" name="id_ambito" type="xs:int"/>
+                        <xs:element minOccurs="0" name="id_foro" type="xs:int"/>
+                        <xs:element maxOccurs="unbounded" minOccurs="0" name="id_subforo" type="xs:int"/>
+                        <xs:element minOccurs="0" name="palabra" nillable="true" type="xs:string"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="BusquedaMensajesPorPalabraResponse">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element maxOccurs="unbounded" minOccurs="0" name="return" type="xs:int"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="BusquedaMensajesPorAutor">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="id_usuario" nillable="true" type="xs:string"/>
+                        <xs:element minOccurs="0" name="id_ambito" type="xs:int"/>
+                        <xs:element minOccurs="0" name="id_foro" type="xs:int"/>
+                        <xs:element maxOccurs="unbounded" minOccurs="0" name="id_subforo" type="xs:int"/>
+                        <xs:element minOccurs="0" name="id_usuario_autor" nillable="true" type="xs:string"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="BusquedaMensajesPorAutorResponse">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element maxOccurs="unbounded" minOccurs="0" name="return" type="xs:int"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="PublicarNoticia">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="id_usuario" nillable="true" type="xs:string"/>
+                        <xs:element minOccurs="0" name="id_ambito" type="xs:int"/>
+                        <xs:element minOccurs="0" name="id_cartelera" type="xs:int"/>
+                        <xs:element minOccurs="0" name="titulo" nillable="true" type="xs:string"/>
+                        <xs:element minOccurs="0" name="contenido" nillable="true" type="xs:string"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="PublicarNoticiaResponse">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="return" type="xs:int"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="EditarNoticia">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="id_usuario" nillable="true" type="xs:string"/>
+                        <xs:element minOccurs="0" name="id_ambito" type="xs:int"/>
+                        <xs:element minOccurs="0" name="id_cartelera" type="xs:int"/>
+                        <xs:element minOccurs="0" name="id_noticia" type="xs:int"/>
+                        <xs:element minOccurs="0" name="titulo" nillable="true" type="xs:string"/>
+                        <xs:element minOccurs="0" name="contenido" nillable="true" type="xs:string"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="EditarNoticiaResponse">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="return" type="xs:int"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="EliminarNoticia">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="id_usuario" nillable="true" type="xs:string"/>
+                        <xs:element minOccurs="0" name="id_ambito" type="xs:int"/>
+                        <xs:element minOccurs="0" name="id_cartelera" type="xs:int"/>
+                        <xs:element minOccurs="0" name="id_noticia" type="xs:int"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="EliminarNoticiaResponse">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="return" type="xs:int"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="MostrarCartelera">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="id_usuario" nillable="true" type="xs:string"/>
+                        <xs:element minOccurs="0" name="id_ambito" type="xs:int"/>
+                        <xs:element minOccurs="0" name="id_cartelera" type="xs:int"/>
+                        <xs:element minOccurs="0" name="pagina" type="xs:int"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="MostrarCarteleraResponse">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="return" nillable="true" type="xs:string"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="MostrarNoticia">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="id_usuario" nillable="true" type="xs:string"/>
+                        <xs:element minOccurs="0" name="id_ambito" type="xs:int"/>
+                        <xs:element minOccurs="0" name="id_cartelera" type="xs:int"/>
+                        <xs:element minOccurs="0" name="id_noticia" type="xs:int"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="MostrarNoticiaResponse">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="return" nillable="true" type="xs:string"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="BusquedaNoticiasPorPalabras">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="id_usuario" nillable="true" type="xs:string"/>
+                        <xs:element minOccurs="0" name="id_ambito" type="xs:int"/>
+                        <xs:element minOccurs="0" name="id_cartelera" type="xs:int"/>
+                        <xs:element maxOccurs="unbounded" minOccurs="0" name="palabras" nillable="true" type="xs:string"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="BusquedaNoticiasPorPalabrasResponse">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element maxOccurs="unbounded" minOccurs="0" name="return" type="xs:int"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="BusquedaNoticiasPorAutor">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="id_usuario" nillable="true" type="xs:string"/>
+                        <xs:element minOccurs="0" name="id_ambito" type="xs:int"/>
+                        <xs:element minOccurs="0" name="id_cartelera" type="xs:int"/>
+                        <xs:element minOccurs="0" name="id_usuario_autor" nillable="true" type="xs:string"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="BusquedaNoticiasPorAutorResponse">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element maxOccurs="unbounded" minOccurs="0" name="return" type="xs:int"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="mostrarMuro">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="id_usuario" nillable="true" type="xs:string"/>
+                        <xs:element minOccurs="0" name="id_ambito" type="xs:int"/>
+                        <xs:element minOccurs="0" name="id_muro" type="xs:int"/>
+                        <xs:element minOccurs="0" name="pagina" type="xs:int"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="mostrarMuroResponse">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="return" nillable="true" type="xs:string"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="crearEvento">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="id_usuario" nillable="true" type="xs:string"/>
+                        <xs:element minOccurs="0" name="id_ambito" type="xs:int"/>
+                        <xs:element minOccurs="0" name="id_muro" type="xs:int"/>
+                        <xs:element minOccurs="0" name="titulo" nillable="true" type="xs:string"/>
+                        <xs:element minOccurs="0" name="contenido" nillable="true" type="xs:string"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="crearEventoResponse">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="return" type="xs:int"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="eliminarEvento">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="id_usuario" nillable="true" type="xs:string"/>
+                        <xs:element minOccurs="0" name="id_ambito" type="xs:int"/>
+                        <xs:element minOccurs="0" name="id_muro" type="xs:int"/>
+                        <xs:element minOccurs="0" name="id_evento" type="xs:int"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="eliminarEventoResponse">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="return" type="xs:int"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="ocultarEvento">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="id_usuario" nillable="true" type="xs:string"/>
+                        <xs:element minOccurs="0" name="id_ambito" type="xs:int"/>
+                        <xs:element minOccurs="0" name="id_muro" type="xs:int"/>
+                        <xs:element minOccurs="0" name="id_evento" type="xs:int"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="ocultarEventoResponse">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="return" type="xs:int"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="mostrarEvento">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="id_usuario" nillable="true" type="xs:string"/>
+                        <xs:element minOccurs="0" name="id_ambito" type="xs:int"/>
+                        <xs:element minOccurs="0" name="id_muro" type="xs:int"/>
+                        <xs:element minOccurs="0" name="id_evento" type="xs:int"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="mostrarEventoResponse">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="return" nillable="true" type="xs:string"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="BusquedaEventosPorPalabras">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="id_usuario" nillable="true" type="xs:string"/>
+                        <xs:element minOccurs="0" name="id_ambito" type="xs:int"/>
+                        <xs:element minOccurs="0" name="id_muro" type="xs:int"/>
+                        <xs:element maxOccurs="unbounded" minOccurs="0" name="palabras" nillable="true" type="xs:string"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="BusquedaEventosPorPalabrasResponse">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element maxOccurs="unbounded" minOccurs="0" name="return" type="xs:int"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="crearSeccion">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="id_usuario" nillable="true" type="xs:string"/>
+                        <xs:element minOccurs="0" name="id_ambito" type="xs:int"/>
+                        <xs:element minOccurs="0" name="id_foro" type="xs:int"/>
+                        <xs:element minOccurs="0" name="nombre_seccion" nillable="true" type="xs:string"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="crearSeccionResponse">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="return" type="xs:int"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+        </xs:schema>
+    </wsdl:types>
+    <wsdl:message name="MostrarIndiceRequest">
+        <wsdl:part name="parameters" element="ns:MostrarIndice"/>
+    </wsdl:message>
+    <wsdl:message name="MostrarIndiceResponse">
+        <wsdl:part name="parameters" element="ns:MostrarIndiceResponse"/>
+    </wsdl:message>
+    <wsdl:message name="eliminarSubforoRequest">
+        <wsdl:part name="parameters" element="ns:eliminarSubforo"/>
+    </wsdl:message>
+    <wsdl:message name="eliminarSubforoResponse">
+        <wsdl:part name="parameters" element="ns:eliminarSubforoResponse"/>
+    </wsdl:message>
+    <wsdl:message name="ocultarEventoRequest">
+        <wsdl:part name="parameters" element="ns:ocultarEvento"/>
+    </wsdl:message>
+    <wsdl:message name="ocultarEventoResponse">
+        <wsdl:part name="parameters" element="ns:ocultarEventoResponse"/>
+    </wsdl:message>
+    <wsdl:message name="BusquedaNoticiasPorPalabrasRequest">
+        <wsdl:part name="parameters" element="ns:BusquedaNoticiasPorPalabras"/>
+    </wsdl:message>
+    <wsdl:message name="BusquedaNoticiasPorPalabrasResponse">
+        <wsdl:part name="parameters" element="ns:BusquedaNoticiasPorPalabrasResponse"/>
+    </wsdl:message>
+    <wsdl:message name="mostrarMuroRequest">
+        <wsdl:part name="parameters" element="ns:mostrarMuro"/>
+    </wsdl:message>
+    <wsdl:message name="mostrarMuroResponse">
+        <wsdl:part name="parameters" element="ns:mostrarMuroResponse"/>
+    </wsdl:message>
+    <wsdl:message name="EditarMensajeRequest">
+        <wsdl:part name="parameters" element="ns:EditarMensaje"/>
+    </wsdl:message>
+    <wsdl:message name="EditarMensajeResponse">
+        <wsdl:part name="parameters" element="ns:EditarMensajeResponse"/>
+    </wsdl:message>
+    <wsdl:message name="MostrarSubForoRequest">
+        <wsdl:part name="parameters" element="ns:MostrarSubForo"/>
+    </wsdl:message>
+    <wsdl:message name="MostrarSubForoResponse">
+        <wsdl:part name="parameters" element="ns:MostrarSubForoResponse"/>
+    </wsdl:message>
+    <wsdl:message name="crearEventoRequest">
+        <wsdl:part name="parameters" element="ns:crearEvento"/>
+    </wsdl:message>
+    <wsdl:message name="crearEventoResponse">
+        <wsdl:part name="parameters" element="ns:crearEventoResponse"/>
+    </wsdl:message>
+    <wsdl:message name="eliminarSeccionRequest">
+        <wsdl:part name="parameters" element="ns:eliminarSeccion"/>
+    </wsdl:message>
+    <wsdl:message name="eliminarSeccionResponse">
+        <wsdl:part name="parameters" element="ns:eliminarSeccionResponse"/>
+    </wsdl:message>
+    <wsdl:message name="CancelarDestacarTemaRequest">
+        <wsdl:part name="parameters" element="ns:CancelarDestacarTema"/>
+    </wsdl:message>
+    <wsdl:message name="CancelarDestacarTemaResponse">
+        <wsdl:part name="parameters" element="ns:CancelarDestacarTemaResponse"/>
+    </wsdl:message>
+    <wsdl:message name="MostrarMensajeRequest">
+        <wsdl:part name="parameters" element="ns:MostrarMensaje"/>
+    </wsdl:message>
+    <wsdl:message name="MostrarMensajeResponse">
+        <wsdl:part name="parameters" element="ns:MostrarMensajeResponse"/>
+    </wsdl:message>
+    <wsdl:message name="DestacarTemaRequest">
+        <wsdl:part name="parameters" element="ns:DestacarTema"/>
+    </wsdl:message>
+    <wsdl:message name="DestacarTemaResponse">
+        <wsdl:part name="parameters" element="ns:DestacarTemaResponse"/>
+    </wsdl:message>
+    <wsdl:message name="editarTemaRequest">
+        <wsdl:part name="parameters" element="ns:editarTema"/>
+    </wsdl:message>
+    <wsdl:message name="editarTemaResponse">
+        <wsdl:part name="parameters" element="ns:editarTemaResponse"/>
+    </wsdl:message>
+    <wsdl:message name="BusquedaMensajesPorAutorRequest">
+        <wsdl:part name="parameters" element="ns:BusquedaMensajesPorAutor"/>
+    </wsdl:message>
+    <wsdl:message name="BusquedaMensajesPorAutorResponse">
+        <wsdl:part name="parameters" element="ns:BusquedaMensajesPorAutorResponse"/>
+    </wsdl:message>
+    <wsdl:message name="crearSubforoRequest">
+        <wsdl:part name="parameters" element="ns:crearSubforo"/>
+    </wsdl:message>
+    <wsdl:message name="crearSubforoResponse">
+        <wsdl:part name="parameters" element="ns:crearSubforoResponse"/>
+    </wsdl:message>
+    <wsdl:message name="eliminarEventoRequest">
+        <wsdl:part name="parameters" element="ns:eliminarEvento"/>
+    </wsdl:message>
+    <wsdl:message name="eliminarEventoResponse">
+        <wsdl:part name="parameters" element="ns:eliminarEventoResponse"/>
+    </wsdl:message>
+    <wsdl:message name="eliminarTemaRequest">
+        <wsdl:part name="parameters" element="ns:eliminarTema"/>
+    </wsdl:message>
+    <wsdl:message name="eliminarTemaResponse">
+        <wsdl:part name="parameters" element="ns:eliminarTemaResponse"/>
+    </wsdl:message>
+    <wsdl:message name="BusquedaMensajesPorPalabraRequest">
+        <wsdl:part name="parameters" element="ns:BusquedaMensajesPorPalabra"/>
+    </wsdl:message>
+    <wsdl:message name="BusquedaMensajesPorPalabraResponse">
+        <wsdl:part name="parameters" element="ns:BusquedaMensajesPorPalabraResponse"/>
+    </wsdl:message>
+    <wsdl:message name="MostrarCarteleraRequest">
+        <wsdl:part name="parameters" element="ns:MostrarCartelera"/>
+    </wsdl:message>
+    <wsdl:message name="MostrarCarteleraResponse">
+        <wsdl:part name="parameters" element="ns:MostrarCarteleraResponse"/>
+    </wsdl:message>
+    <wsdl:message name="PublicarNoticiaRequest">
+        <wsdl:part name="parameters" element="ns:PublicarNoticia"/>
+    </wsdl:message>
+    <wsdl:message name="PublicarNoticiaResponse">
+        <wsdl:part name="parameters" element="ns:PublicarNoticiaResponse"/>
+    </wsdl:message>
+    <wsdl:message name="BusquedaEventosPorPalabrasRequest">
+        <wsdl:part name="parameters" element="ns:BusquedaEventosPorPalabras"/>
+    </wsdl:message>
+    <wsdl:message name="BusquedaEventosPorPalabrasResponse">
+        <wsdl:part name="parameters" element="ns:BusquedaEventosPorPalabrasResponse"/>
+    </wsdl:message>
+    <wsdl:message name="editarSubforoRequest">
+        <wsdl:part name="parameters" element="ns:editarSubforo"/>
+    </wsdl:message>
+    <wsdl:message name="editarSubforoResponse">
+        <wsdl:part name="parameters" element="ns:editarSubforoResponse"/>
+    </wsdl:message>
+    <wsdl:message name="EliminarMensajeRequest">
+        <wsdl:part name="parameters" element="ns:EliminarMensaje"/>
+    </wsdl:message>
+    <wsdl:message name="EliminarMensajeResponse">
+        <wsdl:part name="parameters" element="ns:EliminarMensajeResponse"/>
+    </wsdl:message>
+    <wsdl:message name="BusquedaNoticiasPorAutorRequest">
+        <wsdl:part name="parameters" element="ns:BusquedaNoticiasPorAutor"/>
+    </wsdl:message>
+    <wsdl:message name="BusquedaNoticiasPorAutorResponse">
+        <wsdl:part name="parameters" element="ns:BusquedaNoticiasPorAutorResponse"/>
+    </wsdl:message>
+    <wsdl:message name="CrearMensajeRequest">
+        <wsdl:part name="parameters" element="ns:CrearMensaje"/>
+    </wsdl:message>
+    <wsdl:message name="CrearMensajeResponse">
+        <wsdl:part name="parameters" element="ns:CrearMensajeResponse"/>
+    </wsdl:message>
+    <wsdl:message name="crearSeccionRequest">
+        <wsdl:part name="parameters" element="ns:crearSeccion"/>
+    </wsdl:message>
+    <wsdl:message name="crearSeccionResponse">
+        <wsdl:part name="parameters" element="ns:crearSeccionResponse"/>
+    </wsdl:message>
+    <wsdl:message name="editarSeccionRequest">
+        <wsdl:part name="parameters" element="ns:editarSeccion"/>
+    </wsdl:message>
+    <wsdl:message name="editarSeccionResponse">
+        <wsdl:part name="parameters" element="ns:editarSeccionResponse"/>
+    </wsdl:message>
+    <wsdl:message name="moverSubforoRequest">
+        <wsdl:part name="parameters" element="ns:moverSubforo"/>
+    </wsdl:message>
+    <wsdl:message name="moverSubforoResponse">
+        <wsdl:part name="parameters" element="ns:moverSubforoResponse"/>
+    </wsdl:message>
+    <wsdl:message name="EliminarNoticiaRequest">
+        <wsdl:part name="parameters" element="ns:EliminarNoticia"/>
+    </wsdl:message>
+    <wsdl:message name="EliminarNoticiaResponse">
+        <wsdl:part name="parameters" element="ns:EliminarNoticiaResponse"/>
+    </wsdl:message>
+    <wsdl:message name="MostrarNoticiaRequest">
+        <wsdl:part name="parameters" element="ns:MostrarNoticia"/>
+    </wsdl:message>
+    <wsdl:message name="MostrarNoticiaResponse">
+        <wsdl:part name="parameters" element="ns:MostrarNoticiaResponse"/>
+    </wsdl:message>
+    <wsdl:message name="crearTemaRequest">
+        <wsdl:part name="parameters" element="ns:crearTema"/>
+    </wsdl:message>
+    <wsdl:message name="crearTemaResponse">
+        <wsdl:part name="parameters" element="ns:crearTemaResponse"/>
+    </wsdl:message>
+    <wsdl:message name="mostrarEventoRequest">
+        <wsdl:part name="parameters" element="ns:mostrarEvento"/>
+    </wsdl:message>
+    <wsdl:message name="mostrarEventoResponse">
+        <wsdl:part name="parameters" element="ns:mostrarEventoResponse"/>
+    </wsdl:message>
+    <wsdl:message name="EditarNoticiaRequest">
+        <wsdl:part name="parameters" element="ns:EditarNoticia"/>
+    </wsdl:message>
+    <wsdl:message name="EditarNoticiaResponse">
+        <wsdl:part name="parameters" element="ns:EditarNoticiaResponse"/>
+    </wsdl:message>
+    <wsdl:message name="MostrarTemaRequest">
+        <wsdl:part name="parameters" element="ns:MostrarTema"/>
+    </wsdl:message>
+    <wsdl:message name="MostrarTemaResponse">
+        <wsdl:part name="parameters" element="ns:MostrarTemaResponse"/>
+    </wsdl:message>
+    <wsdl:portType name="ServicePortType">
+        <wsdl:operation name="MostrarIndice">
+            <wsdl:input message="ns:MostrarIndiceRequest" wsaw:Action="urn:MostrarIndice"/>
+            <wsdl:output message="ns:MostrarIndiceResponse" wsaw:Action="urn:MostrarIndiceResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="eliminarSubforo">
+            <wsdl:input message="ns:eliminarSubforoRequest" wsaw:Action="urn:eliminarSubforo"/>
+            <wsdl:output message="ns:eliminarSubforoResponse" wsaw:Action="urn:eliminarSubforoResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="ocultarEvento">
+            <wsdl:input message="ns:ocultarEventoRequest" wsaw:Action="urn:ocultarEvento"/>
+            <wsdl:output message="ns:ocultarEventoResponse" wsaw:Action="urn:ocultarEventoResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="BusquedaNoticiasPorPalabras">
+            <wsdl:input message="ns:BusquedaNoticiasPorPalabrasRequest" wsaw:Action="urn:BusquedaNoticiasPorPalabras"/>
+            <wsdl:output message="ns:BusquedaNoticiasPorPalabrasResponse" wsaw:Action="urn:BusquedaNoticiasPorPalabrasResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="mostrarMuro">
+            <wsdl:input message="ns:mostrarMuroRequest" wsaw:Action="urn:mostrarMuro"/>
+            <wsdl:output message="ns:mostrarMuroResponse" wsaw:Action="urn:mostrarMuroResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="EditarMensaje">
+            <wsdl:input message="ns:EditarMensajeRequest" wsaw:Action="urn:EditarMensaje"/>
+            <wsdl:output message="ns:EditarMensajeResponse" wsaw:Action="urn:EditarMensajeResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="MostrarSubForo">
+            <wsdl:input message="ns:MostrarSubForoRequest" wsaw:Action="urn:MostrarSubForo"/>
+            <wsdl:output message="ns:MostrarSubForoResponse" wsaw:Action="urn:MostrarSubForoResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="crearEvento">
+            <wsdl:input message="ns:crearEventoRequest" wsaw:Action="urn:crearEvento"/>
+            <wsdl:output message="ns:crearEventoResponse" wsaw:Action="urn:crearEventoResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="eliminarSeccion">
+            <wsdl:input message="ns:eliminarSeccionRequest" wsaw:Action="urn:eliminarSeccion"/>
+            <wsdl:output message="ns:eliminarSeccionResponse" wsaw:Action="urn:eliminarSeccionResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="CancelarDestacarTema">
+            <wsdl:input message="ns:CancelarDestacarTemaRequest" wsaw:Action="urn:CancelarDestacarTema"/>
+            <wsdl:output message="ns:CancelarDestacarTemaResponse" wsaw:Action="urn:CancelarDestacarTemaResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="MostrarMensaje">
+            <wsdl:input message="ns:MostrarMensajeRequest" wsaw:Action="urn:MostrarMensaje"/>
+            <wsdl:output message="ns:MostrarMensajeResponse" wsaw:Action="urn:MostrarMensajeResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="DestacarTema">
+            <wsdl:input message="ns:DestacarTemaRequest" wsaw:Action="urn:DestacarTema"/>
+            <wsdl:output message="ns:DestacarTemaResponse" wsaw:Action="urn:DestacarTemaResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="editarTema">
+            <wsdl:input message="ns:editarTemaRequest" wsaw:Action="urn:editarTema"/>
+            <wsdl:output message="ns:editarTemaResponse" wsaw:Action="urn:editarTemaResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="BusquedaMensajesPorAutor">
+            <wsdl:input message="ns:BusquedaMensajesPorAutorRequest" wsaw:Action="urn:BusquedaMensajesPorAutor"/>
+            <wsdl:output message="ns:BusquedaMensajesPorAutorResponse" wsaw:Action="urn:BusquedaMensajesPorAutorResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="crearSubforo">
+            <wsdl:input message="ns:crearSubforoRequest" wsaw:Action="urn:crearSubforo"/>
+            <wsdl:output message="ns:crearSubforoResponse" wsaw:Action="urn:crearSubforoResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="eliminarEvento">
+            <wsdl:input message="ns:eliminarEventoRequest" wsaw:Action="urn:eliminarEvento"/>
+            <wsdl:output message="ns:eliminarEventoResponse" wsaw:Action="urn:eliminarEventoResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="eliminarTema">
+            <wsdl:input message="ns:eliminarTemaRequest" wsaw:Action="urn:eliminarTema"/>
+            <wsdl:output message="ns:eliminarTemaResponse" wsaw:Action="urn:eliminarTemaResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="BusquedaMensajesPorPalabra">
+            <wsdl:input message="ns:BusquedaMensajesPorPalabraRequest" wsaw:Action="urn:BusquedaMensajesPorPalabra"/>
+            <wsdl:output message="ns:BusquedaMensajesPorPalabraResponse" wsaw:Action="urn:BusquedaMensajesPorPalabraResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="MostrarCartelera">
+            <wsdl:input message="ns:MostrarCarteleraRequest" wsaw:Action="urn:MostrarCartelera"/>
+            <wsdl:output message="ns:MostrarCarteleraResponse" wsaw:Action="urn:MostrarCarteleraResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="PublicarNoticia">
+            <wsdl:input message="ns:PublicarNoticiaRequest" wsaw:Action="urn:PublicarNoticia"/>
+            <wsdl:output message="ns:PublicarNoticiaResponse" wsaw:Action="urn:PublicarNoticiaResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="BusquedaEventosPorPalabras">
+            <wsdl:input message="ns:BusquedaEventosPorPalabrasRequest" wsaw:Action="urn:BusquedaEventosPorPalabras"/>
+            <wsdl:output message="ns:BusquedaEventosPorPalabrasResponse" wsaw:Action="urn:BusquedaEventosPorPalabrasResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="editarSubforo">
+            <wsdl:input message="ns:editarSubforoRequest" wsaw:Action="urn:editarSubforo"/>
+            <wsdl:output message="ns:editarSubforoResponse" wsaw:Action="urn:editarSubforoResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="EliminarMensaje">
+            <wsdl:input message="ns:EliminarMensajeRequest" wsaw:Action="urn:EliminarMensaje"/>
+            <wsdl:output message="ns:EliminarMensajeResponse" wsaw:Action="urn:EliminarMensajeResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="BusquedaNoticiasPorAutor">
+            <wsdl:input message="ns:BusquedaNoticiasPorAutorRequest" wsaw:Action="urn:BusquedaNoticiasPorAutor"/>
+            <wsdl:output message="ns:BusquedaNoticiasPorAutorResponse" wsaw:Action="urn:BusquedaNoticiasPorAutorResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="CrearMensaje">
+            <wsdl:input message="ns:CrearMensajeRequest" wsaw:Action="urn:CrearMensaje"/>
+            <wsdl:output message="ns:CrearMensajeResponse" wsaw:Action="urn:CrearMensajeResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="crearSeccion">
+            <wsdl:input message="ns:crearSeccionRequest" wsaw:Action="urn:crearSeccion"/>
+            <wsdl:output message="ns:crearSeccionResponse" wsaw:Action="urn:crearSeccionResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="editarSeccion">
+            <wsdl:input message="ns:editarSeccionRequest" wsaw:Action="urn:editarSeccion"/>
+            <wsdl:output message="ns:editarSeccionResponse" wsaw:Action="urn:editarSeccionResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="moverSubforo">
+            <wsdl:input message="ns:moverSubforoRequest" wsaw:Action="urn:moverSubforo"/>
+            <wsdl:output message="ns:moverSubforoResponse" wsaw:Action="urn:moverSubforoResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="EliminarNoticia">
+            <wsdl:input message="ns:EliminarNoticiaRequest" wsaw:Action="urn:EliminarNoticia"/>
+            <wsdl:output message="ns:EliminarNoticiaResponse" wsaw:Action="urn:EliminarNoticiaResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="MostrarNoticia">
+            <wsdl:input message="ns:MostrarNoticiaRequest" wsaw:Action="urn:MostrarNoticia"/>
+            <wsdl:output message="ns:MostrarNoticiaResponse" wsaw:Action="urn:MostrarNoticiaResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="crearTema">
+            <wsdl:input message="ns:crearTemaRequest" wsaw:Action="urn:crearTema"/>
+            <wsdl:output message="ns:crearTemaResponse" wsaw:Action="urn:crearTemaResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="mostrarEvento">
+            <wsdl:input message="ns:mostrarEventoRequest" wsaw:Action="urn:mostrarEvento"/>
+            <wsdl:output message="ns:mostrarEventoResponse" wsaw:Action="urn:mostrarEventoResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="EditarNoticia">
+            <wsdl:input message="ns:EditarNoticiaRequest" wsaw:Action="urn:EditarNoticia"/>
+            <wsdl:output message="ns:EditarNoticiaResponse" wsaw:Action="urn:EditarNoticiaResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="MostrarTema">
+            <wsdl:input message="ns:MostrarTemaRequest" wsaw:Action="urn:MostrarTema"/>
+            <wsdl:output message="ns:MostrarTemaResponse" wsaw:Action="urn:MostrarTemaResponse"/>
+        </wsdl:operation>
+    </wsdl:portType>
+    <wsdl:binding name="ServiceSoap11Binding" type="ns:ServicePortType">
+        <soap:binding transport="http://schemas.xmlsoap.org/soap/http" style="document"/>
+        <wsdl:operation name="MostrarIndice">
+            <soap:operation soapAction="urn:MostrarIndice" style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="eliminarSubforo">
+            <soap:operation soapAction="urn:eliminarSubforo" style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="ocultarEvento">
+            <soap:operation soapAction="urn:ocultarEvento" style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="BusquedaNoticiasPorPalabras">
+            <soap:operation soapAction="urn:BusquedaNoticiasPorPalabras" style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="mostrarMuro">
+            <soap:operation soapAction="urn:mostrarMuro" style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="EditarMensaje">
+            <soap:operation soapAction="urn:EditarMensaje" style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="MostrarSubForo">
+            <soap:operation soapAction="urn:MostrarSubForo" style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="eliminarSeccion">
+            <soap:operation soapAction="urn:eliminarSeccion" style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="crearEvento">
+            <soap:operation soapAction="urn:crearEvento" style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="CancelarDestacarTema">
+            <soap:operation soapAction="urn:CancelarDestacarTema" style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="MostrarMensaje">
+            <soap:operation soapAction="urn:MostrarMensaje" style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="DestacarTema">
+            <soap:operation soapAction="urn:DestacarTema" style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="editarTema">
+            <soap:operation soapAction="urn:editarTema" style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="BusquedaMensajesPorAutor">
+            <soap:operation soapAction="urn:BusquedaMensajesPorAutor" style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="crearSubforo">
+            <soap:operation soapAction="urn:crearSubforo" style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="eliminarEvento">
+            <soap:operation soapAction="urn:eliminarEvento" style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="eliminarTema">
+            <soap:operation soapAction="urn:eliminarTema" style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="BusquedaMensajesPorPalabra">
+            <soap:operation soapAction="urn:BusquedaMensajesPorPalabra" style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="MostrarCartelera">
+            <soap:operation soapAction="urn:MostrarCartelera" style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="PublicarNoticia">
+            <soap:operation soapAction="urn:PublicarNoticia" style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="BusquedaEventosPorPalabras">
+            <soap:operation soapAction="urn:BusquedaEventosPorPalabras" style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="editarSubforo">
+            <soap:operation soapAction="urn:editarSubforo" style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="EliminarMensaje">
+            <soap:operation soapAction="urn:EliminarMensaje" style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="BusquedaNoticiasPorAutor">
+            <soap:operation soapAction="urn:BusquedaNoticiasPorAutor" style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="CrearMensaje">
+            <soap:operation soapAction="urn:CrearMensaje" style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="crearSeccion">
+            <soap:operation soapAction="urn:crearSeccion" style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="editarSeccion">
+            <soap:operation soapAction="urn:editarSeccion" style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="moverSubforo">
+            <soap:operation soapAction="urn:moverSubforo" style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="EliminarNoticia">
+            <soap:operation soapAction="urn:EliminarNoticia" style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="crearTema">
+            <soap:operation soapAction="urn:crearTema" style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="MostrarNoticia">
+            <soap:operation soapAction="urn:MostrarNoticia" style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="mostrarEvento">
+            <soap:operation soapAction="urn:mostrarEvento" style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="EditarNoticia">
+            <soap:operation soapAction="urn:EditarNoticia" style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="MostrarTema">
+            <soap:operation soapAction="urn:MostrarTema" style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+    </wsdl:binding>
+    <wsdl:binding name="ServiceSoap12Binding" type="ns:ServicePortType">
+        <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" style="document"/>
+        <wsdl:operation name="MostrarIndice">
+            <soap12:operation soapAction="urn:MostrarIndice" style="document"/>
+            <wsdl:input>
+                <soap12:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap12:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="eliminarSubforo">
+            <soap12:operation soapAction="urn:eliminarSubforo" style="document"/>
+            <wsdl:input>
+                <soap12:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap12:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="ocultarEvento">
+            <soap12:operation soapAction="urn:ocultarEvento" style="document"/>
+            <wsdl:input>
+                <soap12:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap12:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="BusquedaNoticiasPorPalabras">
+            <soap12:operation soapAction="urn:BusquedaNoticiasPorPalabras" style="document"/>
+            <wsdl:input>
+                <soap12:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap12:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="mostrarMuro">
+            <soap12:operation soapAction="urn:mostrarMuro" style="document"/>
+            <wsdl:input>
+                <soap12:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap12:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="EditarMensaje">
+            <soap12:operation soapAction="urn:EditarMensaje" style="document"/>
+            <wsdl:input>
+                <soap12:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap12:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="MostrarSubForo">
+            <soap12:operation soapAction="urn:MostrarSubForo" style="document"/>
+            <wsdl:input>
+                <soap12:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap12:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="eliminarSeccion">
+            <soap12:operation soapAction="urn:eliminarSeccion" style="document"/>
+            <wsdl:input>
+                <soap12:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap12:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="crearEvento">
+            <soap12:operation soapAction="urn:crearEvento" style="document"/>
+            <wsdl:input>
+                <soap12:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap12:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="CancelarDestacarTema">
+            <soap12:operation soapAction="urn:CancelarDestacarTema" style="document"/>
+            <wsdl:input>
+                <soap12:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap12:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="MostrarMensaje">
+            <soap12:operation soapAction="urn:MostrarMensaje" style="document"/>
+            <wsdl:input>
+                <soap12:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap12:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="DestacarTema">
+            <soap12:operation soapAction="urn:DestacarTema" style="document"/>
+            <wsdl:input>
+                <soap12:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap12:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="editarTema">
+            <soap12:operation soapAction="urn:editarTema" style="document"/>
+            <wsdl:input>
+                <soap12:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap12:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="BusquedaMensajesPorAutor">
+            <soap12:operation soapAction="urn:BusquedaMensajesPorAutor" style="document"/>
+            <wsdl:input>
+                <soap12:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap12:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="crearSubforo">
+            <soap12:operation soapAction="urn:crearSubforo" style="document"/>
+            <wsdl:input>
+                <soap12:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap12:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="eliminarEvento">
+            <soap12:operation soapAction="urn:eliminarEvento" style="document"/>
+            <wsdl:input>
+                <soap12:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap12:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="eliminarTema">
+            <soap12:operation soapAction="urn:eliminarTema" style="document"/>
+            <wsdl:input>
+                <soap12:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap12:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="BusquedaMensajesPorPalabra">
+            <soap12:operation soapAction="urn:BusquedaMensajesPorPalabra" style="document"/>
+            <wsdl:input>
+                <soap12:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap12:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="MostrarCartelera">
+            <soap12:operation soapAction="urn:MostrarCartelera" style="document"/>
+            <wsdl:input>
+                <soap12:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap12:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="PublicarNoticia">
+            <soap12:operation soapAction="urn:PublicarNoticia" style="document"/>
+            <wsdl:input>
+                <soap12:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap12:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="BusquedaEventosPorPalabras">
+            <soap12:operation soapAction="urn:BusquedaEventosPorPalabras" style="document"/>
+            <wsdl:input>
+                <soap12:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap12:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="editarSubforo">
+            <soap12:operation soapAction="urn:editarSubforo" style="document"/>
+            <wsdl:input>
+                <soap12:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap12:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="EliminarMensaje">
+            <soap12:operation soapAction="urn:EliminarMensaje" style="document"/>
+            <wsdl:input>
+                <soap12:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap12:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="BusquedaNoticiasPorAutor">
+            <soap12:operation soapAction="urn:BusquedaNoticiasPorAutor" style="document"/>
+            <wsdl:input>
+                <soap12:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap12:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="CrearMensaje">
+            <soap12:operation soapAction="urn:CrearMensaje" style="document"/>
+            <wsdl:input>
+                <soap12:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap12:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="crearSeccion">
+            <soap12:operation soapAction="urn:crearSeccion" style="document"/>
+            <wsdl:input>
+                <soap12:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap12:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="editarSeccion">
+            <soap12:operation soapAction="urn:editarSeccion" style="document"/>
+            <wsdl:input>
+                <soap12:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap12:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="moverSubforo">
+            <soap12:operation soapAction="urn:moverSubforo" style="document"/>
+            <wsdl:input>
+                <soap12:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap12:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="EliminarNoticia">
+            <soap12:operation soapAction="urn:EliminarNoticia" style="document"/>
+            <wsdl:input>
+                <soap12:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap12:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="crearTema">
+            <soap12:operation soapAction="urn:crearTema" style="document"/>
+            <wsdl:input>
+                <soap12:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap12:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="MostrarNoticia">
+            <soap12:operation soapAction="urn:MostrarNoticia" style="document"/>
+            <wsdl:input>
+                <soap12:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap12:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="mostrarEvento">
+            <soap12:operation soapAction="urn:mostrarEvento" style="document"/>
+            <wsdl:input>
+                <soap12:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap12:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="EditarNoticia">
+            <soap12:operation soapAction="urn:EditarNoticia" style="document"/>
+            <wsdl:input>
+                <soap12:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap12:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="MostrarTema">
+            <soap12:operation soapAction="urn:MostrarTema" style="document"/>
+            <wsdl:input>
+                <soap12:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap12:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+    </wsdl:binding>
+    <wsdl:binding name="ServiceHttpBinding" type="ns:ServicePortType">
+        <http:binding verb="POST"/>
+        <wsdl:operation name="MostrarIndice">
+            <http:operation location="MostrarIndice"/>
+            <wsdl:input>
+                <mime:content type="application/xml" part="parameters"/>
+            </wsdl:input>
+            <wsdl:output>
+                <mime:content type="application/xml" part="parameters"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="eliminarSubforo">
+            <http:operation location="eliminarSubforo"/>
+            <wsdl:input>
+                <mime:content type="application/xml" part="parameters"/>
+            </wsdl:input>
+            <wsdl:output>
+                <mime:content type="application/xml" part="parameters"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="ocultarEvento">
+            <http:operation location="ocultarEvento"/>
+            <wsdl:input>
+                <mime:content type="application/xml" part="parameters"/>
+            </wsdl:input>
+            <wsdl:output>
+                <mime:content type="application/xml" part="parameters"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="BusquedaNoticiasPorPalabras">
+            <http:operation location="BusquedaNoticiasPorPalabras"/>
+            <wsdl:input>
+                <mime:content type="application/xml" part="parameters"/>
+            </wsdl:input>
+            <wsdl:output>
+                <mime:content type="application/xml" part="parameters"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="mostrarMuro">
+            <http:operation location="mostrarMuro"/>
+            <wsdl:input>
+                <mime:content type="application/xml" part="parameters"/>
+            </wsdl:input>
+            <wsdl:output>
+                <mime:content type="application/xml" part="parameters"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="EditarMensaje">
+            <http:operation location="EditarMensaje"/>
+            <wsdl:input>
+                <mime:content type="application/xml" part="parameters"/>
+            </wsdl:input>
+            <wsdl:output>
+                <mime:content type="application/xml" part="parameters"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="MostrarSubForo">
+            <http:operation location="MostrarSubForo"/>
+            <wsdl:input>
+                <mime:content type="application/xml" part="parameters"/>
+            </wsdl:input>
+            <wsdl:output>
+                <mime:content type="application/xml" part="parameters"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="eliminarSeccion">
+            <http:operation location="eliminarSeccion"/>
+            <wsdl:input>
+                <mime:content type="application/xml" part="parameters"/>
+            </wsdl:input>
+            <wsdl:output>
+                <mime:content type="application/xml" part="parameters"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="crearEvento">
+            <http:operation location="crearEvento"/>
+            <wsdl:input>
+                <mime:content type="application/xml" part="parameters"/>
+            </wsdl:input>
+            <wsdl:output>
+                <mime:content type="application/xml" part="parameters"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="CancelarDestacarTema">
+            <http:operation location="CancelarDestacarTema"/>
+            <wsdl:input>
+                <mime:content type="application/xml" part="parameters"/>
+            </wsdl:input>
+            <wsdl:output>
+                <mime:content type="application/xml" part="parameters"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="MostrarMensaje">
+            <http:operation location="MostrarMensaje"/>
+            <wsdl:input>
+                <mime:content type="application/xml" part="parameters"/>
+            </wsdl:input>
+            <wsdl:output>
+                <mime:content type="application/xml" part="parameters"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="DestacarTema">
+            <http:operation location="DestacarTema"/>
+            <wsdl:input>
+                <mime:content type="application/xml" part="parameters"/>
+            </wsdl:input>
+            <wsdl:output>
+                <mime:content type="application/xml" part="parameters"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="editarTema">
+            <http:operation location="editarTema"/>
+            <wsdl:input>
+                <mime:content type="application/xml" part="parameters"/>
+            </wsdl:input>
+            <wsdl:output>
+                <mime:content type="application/xml" part="parameters"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="BusquedaMensajesPorAutor">
+            <http:operation location="BusquedaMensajesPorAutor"/>
+            <wsdl:input>
+                <mime:content type="application/xml" part="parameters"/>
+            </wsdl:input>
+            <wsdl:output>
+                <mime:content type="application/xml" part="parameters"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="crearSubforo">
+            <http:operation location="crearSubforo"/>
+            <wsdl:input>
+                <mime:content type="application/xml" part="parameters"/>
+            </wsdl:input>
+            <wsdl:output>
+                <mime:content type="application/xml" part="parameters"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="eliminarEvento">
+            <http:operation location="eliminarEvento"/>
+            <wsdl:input>
+                <mime:content type="application/xml" part="parameters"/>
+            </wsdl:input>
+            <wsdl:output>
+                <mime:content type="application/xml" part="parameters"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="eliminarTema">
+            <http:operation location="eliminarTema"/>
+            <wsdl:input>
+                <mime:content type="application/xml" part="parameters"/>
+            </wsdl:input>
+            <wsdl:output>
+                <mime:content type="application/xml" part="parameters"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="BusquedaMensajesPorPalabra">
+            <http:operation location="BusquedaMensajesPorPalabra"/>
+            <wsdl:input>
+                <mime:content type="application/xml" part="parameters"/>
+            </wsdl:input>
+            <wsdl:output>
+                <mime:content type="application/xml" part="parameters"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="MostrarCartelera">
+            <http:operation location="MostrarCartelera"/>
+            <wsdl:input>
+                <mime:content type="application/xml" part="parameters"/>
+            </wsdl:input>
+            <wsdl:output>
+                <mime:content type="application/xml" part="parameters"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="PublicarNoticia">
+            <http:operation location="PublicarNoticia"/>
+            <wsdl:input>
+                <mime:content type="application/xml" part="parameters"/>
+            </wsdl:input>
+            <wsdl:output>
+                <mime:content type="application/xml" part="parameters"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="BusquedaEventosPorPalabras">
+            <http:operation location="BusquedaEventosPorPalabras"/>
+            <wsdl:input>
+                <mime:content type="application/xml" part="parameters"/>
+            </wsdl:input>
+            <wsdl:output>
+                <mime:content type="application/xml" part="parameters"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="editarSubforo">
+            <http:operation location="editarSubforo"/>
+            <wsdl:input>
+                <mime:content type="application/xml" part="parameters"/>
+            </wsdl:input>
+            <wsdl:output>
+                <mime:content type="application/xml" part="parameters"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="EliminarMensaje">
+            <http:operation location="EliminarMensaje"/>
+            <wsdl:input>
+                <mime:content type="application/xml" part="parameters"/>
+            </wsdl:input>
+            <wsdl:output>
+                <mime:content type="application/xml" part="parameters"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="BusquedaNoticiasPorAutor">
+            <http:operation location="BusquedaNoticiasPorAutor"/>
+            <wsdl:input>
+                <mime:content type="application/xml" part="parameters"/>
+            </wsdl:input>
+            <wsdl:output>
+                <mime:content type="application/xml" part="parameters"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="CrearMensaje">
+            <http:operation location="CrearMensaje"/>
+            <wsdl:input>
+                <mime:content type="application/xml" part="parameters"/>
+            </wsdl:input>
+            <wsdl:output>
+                <mime:content type="application/xml" part="parameters"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="crearSeccion">
+            <http:operation location="crearSeccion"/>
+            <wsdl:input>
+                <mime:content type="application/xml" part="parameters"/>
+            </wsdl:input>
+            <wsdl:output>
+                <mime:content type="application/xml" part="parameters"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="editarSeccion">
+            <http:operation location="editarSeccion"/>
+            <wsdl:input>
+                <mime:content type="application/xml" part="parameters"/>
+            </wsdl:input>
+            <wsdl:output>
+                <mime:content type="application/xml" part="parameters"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="moverSubforo">
+            <http:operation location="moverSubforo"/>
+            <wsdl:input>
+                <mime:content type="application/xml" part="parameters"/>
+            </wsdl:input>
+            <wsdl:output>
+                <mime:content type="application/xml" part="parameters"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="EliminarNoticia">
+            <http:operation location="EliminarNoticia"/>
+            <wsdl:input>
+                <mime:content type="application/xml" part="parameters"/>
+            </wsdl:input>
+            <wsdl:output>
+                <mime:content type="application/xml" part="parameters"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="crearTema">
+            <http:operation location="crearTema"/>
+            <wsdl:input>
+                <mime:content type="application/xml" part="parameters"/>
+            </wsdl:input>
+            <wsdl:output>
+                <mime:content type="application/xml" part="parameters"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="MostrarNoticia">
+            <http:operation location="MostrarNoticia"/>
+            <wsdl:input>
+                <mime:content type="application/xml" part="parameters"/>
+            </wsdl:input>
+            <wsdl:output>
+                <mime:content type="application/xml" part="parameters"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="mostrarEvento">
+            <http:operation location="mostrarEvento"/>
+            <wsdl:input>
+                <mime:content type="application/xml" part="parameters"/>
+            </wsdl:input>
+            <wsdl:output>
+                <mime:content type="application/xml" part="parameters"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="EditarNoticia">
+            <http:operation location="EditarNoticia"/>
+            <wsdl:input>
+                <mime:content type="application/xml" part="parameters"/>
+            </wsdl:input>
+            <wsdl:output>
+                <mime:content type="application/xml" part="parameters"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="MostrarTema">
+            <http:operation location="MostrarTema"/>
+            <wsdl:input>
+                <mime:content type="application/xml" part="parameters"/>
+            </wsdl:input>
+            <wsdl:output>
+                <mime:content type="application/xml" part="parameters"/>
+            </wsdl:output>
+        </wsdl:operation>
+    </wsdl:binding>
+    <wsdl:service name="Service">
+        <wsdl:port name="ServiceHttpSoap11Endpoint" binding="ns:ServiceSoap11Binding">
+            <soap:address location="http://localhost:8080/BobbyTables/services/Service.ServiceHttpSoap11Endpoint/"/>
+        </wsdl:port>
+        <wsdl:port name="ServiceHttpSoap12Endpoint" binding="ns:ServiceSoap12Binding">
+            <soap12:address location="http://localhost:8080/BobbyTables/services/Service.ServiceHttpSoap12Endpoint/"/>
+        </wsdl:port>
+        <wsdl:port name="ServiceHttpEndpoint" binding="ns:ServiceHttpBinding">
+            <http:address location="http://localhost:8080/BobbyTables/services/Service.ServiceHttpEndpoint/"/>
+        </wsdl:port>
+    </wsdl:service>
+</wsdl:definitions>

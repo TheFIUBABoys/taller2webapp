@@ -14,7 +14,8 @@ public class MessageSearchByUserRequest {
 	private String username;
 	private Integer id_ambito;
 	private Integer id_foro;
-	private List<Integer> subforos;
+	private int[] subforos;
+	private String autor;
 	
     public MessageSearchByUserRequest(){}
 	
@@ -35,6 +36,7 @@ public class MessageSearchByUserRequest {
         result += "id_ambito" + k + id_ambito + p;
         result += "id_foro" + k + id_foro + p;
         result += "subforos" + k + subforos + p;
+        result += "autor" + k + autor + p;
 
         return result;
     }
@@ -54,6 +56,7 @@ public class MessageSearchByUserRequest {
         dataAsForm.param("username", username);
         dataAsForm.param("id_ambito", Integer.toString(id_ambito));
         dataAsForm.param("id_foro", Integer.toString(id_foro));
+        dataAsForm.param("autor", autor);
         // FALTA HACER ESTO PARA LAS LISTAS
         
         return dataAsForm;
@@ -65,6 +68,7 @@ public class MessageSearchByUserRequest {
         dataAsMap.put("username", username);
         dataAsMap.put("id_ambito", Integer.toString(id_ambito));
         dataAsMap.put("id_foro", Integer.toString(id_foro));
+        dataAsMap.put("autor", autor);
         // FALTA HACER ESTO PARA LAS LISTAS
         
         return dataAsMap;
@@ -119,15 +123,30 @@ public class MessageSearchByUserRequest {
 	 * @return the subforos
 	 */
 	@XmlElement(name = "subforos")
-	public List<Integer> getSubforos() {
+	public int[] getSubforos() {
 		return subforos;
 	}
 
 	/**
 	 * @param subforos the subforos to set
 	 */
-	public void setSubforos(List<Integer> subforos) {
+	public void setSubforos(int[] subforos) {
 		this.subforos = subforos;
+	}
+
+	/**
+	 * @return the autor
+	 */
+	@XmlElement(name = "autor")
+	public String getAutor() {
+		return autor;
+	}
+
+	/**
+	 * @param autor the autor to set
+	 */
+	public void setAutor(String autor) {
+		this.autor = autor;
 	}
 
 
