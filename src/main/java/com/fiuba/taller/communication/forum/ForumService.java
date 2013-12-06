@@ -24,7 +24,6 @@ import org.w3c.dom.Node;
 import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 
-import com.fiuba.taller.communication.CommunicationResponse;
 import com.fiuba.taller.communication.forum.requests.ForumCreateRequest;
 import com.fiuba.taller.communication.forum.requests.ForumDeleteRequest;
 import com.fiuba.taller.communication.forum.requests.ForumEditRequest;
@@ -86,7 +85,7 @@ public class ForumService {
 	@Path("createsection")
 	@Consumes(MediaType.APPLICATION_JSON)
 	public Response createSection(@CookieParam("authToken") String authToken, ForumCreateRequest request) throws ParserConfigurationException, SAXException, IOException {
-		CommunicationResponse response = new CommunicationResponse();
+		CommForumResponse response = new CommForumResponse();
 		
 		ServiceStub api = new ServiceStub();
 		ServiceStub.CrearSeccion communicationRequst = new ServiceStub.CrearSeccion();
@@ -106,8 +105,17 @@ public class ForumService {
             return buildError("crear seccion");
         }
 		
-		response.setSuccess(true);
-		response.setReason("Implementación de prueba, esto se debe implementar");
+        // Generate response
+        int responseData = wsResponse.get_return();
+        if (responseData == -1) {
+        	response.setSuccess(false);
+        	response.setReason("Ha ocurrido un error");
+        } else {
+        	response.setSuccess(true);
+        	response.setReason("Operacion exitosa");
+        	response.setIdSection(responseData);
+        }
+        
 		return Response.ok().entity(response).build();
 	}
 	
@@ -116,7 +124,7 @@ public class ForumService {
 	@Path("editsection")
 	@Consumes(MediaType.APPLICATION_JSON)
 	public Response editSection(@CookieParam("authToken") String authToken, ForumEditRequest request) throws ParserConfigurationException, SAXException, IOException {
-		CommunicationResponse response = new CommunicationResponse();
+		CommForumResponse response = new CommForumResponse();
 		
 		ServiceStub api = new ServiceStub();
 		ServiceStub.EditarSeccion communicationRequst = new ServiceStub.EditarSeccion();
@@ -137,8 +145,16 @@ public class ForumService {
             return buildError("editar seccion");
         }
 		
-		response.setSuccess(true);
-		response.setReason("Implementación de prueba, esto se debe implementar");
+        // Generate response
+        int responseData = wsResponse.get_return();
+        if (responseData == -1) {
+        	response.setSuccess(false);
+        	response.setReason("Ha ocurrido un error");
+        } else {
+        	response.setSuccess(true);
+        	response.setReason("Operacion exitosa");
+        }
+		
 		return Response.ok().entity(response).build();
 	}
 	
@@ -146,7 +162,7 @@ public class ForumService {
 	@Path("deletesection")
 	@Consumes(MediaType.APPLICATION_JSON)
 	public Response deleteSection(@CookieParam("authToken") String authToken, ForumDeleteRequest request) throws ParserConfigurationException, SAXException, IOException {
-		CommunicationResponse response = new CommunicationResponse();
+		CommForumResponse response = new CommForumResponse();
 		
 		ServiceStub api = new ServiceStub();
 		ServiceStub.EliminarSeccion communicationRequst = new ServiceStub.EliminarSeccion();
@@ -165,9 +181,17 @@ public class ForumService {
             System.out.println(error.getReason());
             return buildError("eliminar seccion");
         }
-		
-		response.setSuccess(true);
-		response.setReason("Implementación de prueba, esto se debe implementar");
+        
+        // Generate response
+        int responseData = wsResponse.get_return();
+        if (responseData == -1) {
+        	response.setSuccess(false);
+        	response.setReason("Ha ocurrido un error");
+        } else {
+        	response.setSuccess(true);
+        	response.setReason("Operacion exitosa");
+        }
+
 		return Response.ok().entity(response).build();
 	}
 	
@@ -176,7 +200,7 @@ public class ForumService {
 	@Path("createsubforum")
 	@Consumes(MediaType.APPLICATION_JSON)
 	public Response createSubforum(@CookieParam("authToken") String authToken, SubForumCreateRequest request) throws ParserConfigurationException, SAXException, IOException {
-		CommunicationResponse response = new CommunicationResponse();
+		CommForumResponse response = new CommForumResponse();
 		
 		ServiceStub api = new ServiceStub();
 		ServiceStub.CrearSubforo communicationRequst = new ServiceStub.CrearSubforo();
@@ -197,8 +221,17 @@ public class ForumService {
             return buildError("create subforo");
         }
 		
-		response.setSuccess(true);
-		response.setReason("Implementación de prueba, esto se debe implementar");
+        // Generate response
+        int responseData = wsResponse.get_return();
+        if (responseData == -1) {
+        	response.setSuccess(false);
+        	response.setReason("Ha ocurrido un error");
+        } else {
+        	response.setSuccess(true);
+        	response.setReason("Operacion exitosa");
+        	response.setIdSubForum(responseData);
+        }
+        
 		return Response.ok().entity(response).build();
 	}
 	
@@ -206,7 +239,7 @@ public class ForumService {
 	@Path("editsubforum")
 	@Consumes(MediaType.APPLICATION_JSON)
 	public Response editSubforum(@CookieParam("authToken") String authToken, SubForumEditRequest request) throws ParserConfigurationException, SAXException, IOException {
-		CommunicationResponse response = new CommunicationResponse();
+		CommForumResponse response = new CommForumResponse();
 		
 		ServiceStub api = new ServiceStub();
 		ServiceStub.EditarSubforo communicationRequst = new ServiceStub.EditarSubforo();
@@ -227,9 +260,16 @@ public class ForumService {
             return buildError("editar subforo");
         }
 		
-		
-		response.setSuccess(true);
-		response.setReason("Implementación de prueba, esto se debe implementar");
+        // Generate response
+        int responseData = wsResponse.get_return();
+        if (responseData == -1) {
+        	response.setSuccess(false);
+        	response.setReason("Ha ocurrido un error");
+        } else {
+        	response.setSuccess(true);
+        	response.setReason("Operacion exitosa");
+        }
+        
 		return Response.ok().entity(response).build();
 	}
 	
@@ -237,7 +277,7 @@ public class ForumService {
 	@Path("movesubforum")
 	@Consumes(MediaType.APPLICATION_JSON)
 	public Response moveSubforum(@CookieParam("authToken") String authToken, SubForumMoveRequest request) throws ParserConfigurationException, SAXException, IOException {
-		CommunicationResponse response = new CommunicationResponse();
+		CommForumResponse response = new CommForumResponse();
 		
 		ServiceStub api = new ServiceStub();
 		ServiceStub.MoverSubforo communicationRequst = new ServiceStub.MoverSubforo();
@@ -259,9 +299,16 @@ public class ForumService {
             return buildError("mover subforo");
         }
 		
+        // Generate response
+        int responseData = wsResponse.get_return();
+        if (responseData == -1) {
+        	response.setSuccess(false);
+        	response.setReason("Ha ocurrido un error");
+        } else {
+        	response.setSuccess(true);
+        	response.setReason("Operacion exitosa");
+        }
         
-		response.setSuccess(true);
-		response.setReason("Implementación de prueba, esto se debe implementar");
 		return Response.ok().entity(response).build();
 	}
 	
@@ -269,7 +316,7 @@ public class ForumService {
 	@Path("deletesubforum")
 	@Consumes(MediaType.APPLICATION_JSON)
 	public Response deleteSubforum(@CookieParam("authToken") String authToken, SubForumDeleteRequest request) throws ParserConfigurationException, SAXException, IOException {
-		CommunicationResponse response = new CommunicationResponse();
+		CommForumResponse response = new CommForumResponse();
 		
 		ServiceStub api = new ServiceStub();
 		ServiceStub.EliminarSubforo communicationRequst = new ServiceStub.EliminarSubforo();
@@ -290,8 +337,16 @@ public class ForumService {
             return buildError("eliminar subforo");
         }
 		
-		response.setSuccess(true);
-		response.setReason("Implementación de prueba, esto se debe implementar");
+        // Generate response
+        int responseData = wsResponse.get_return();
+        if (responseData == -1) {
+        	response.setSuccess(false);
+        	response.setReason("Ha ocurrido un error");
+        } else {
+        	response.setSuccess(true);
+        	response.setReason("Operacion exitosa");
+        }
+        
 		return Response.ok().entity(response).build();
 	}
 	
@@ -299,7 +354,7 @@ public class ForumService {
 	@Path("createthread")
 	@Consumes(MediaType.APPLICATION_JSON)
 	public Response createThread(@CookieParam("authToken") String authToken, ThreadCreateRequest request) throws ParserConfigurationException, SAXException, IOException {
-		CommunicationResponse response = new CommunicationResponse();
+		CommForumResponse response = new CommForumResponse();
 		
 		ServiceStub api = new ServiceStub();
 		ServiceStub.CrearTema communicationRequst = new ServiceStub.CrearTema();
@@ -321,8 +376,17 @@ public class ForumService {
             return buildError("creat tema");
         }
 		
-		response.setSuccess(true);
-		response.setReason("Implementación de prueba, esto se debe implementar");
+        // Generate response
+        int responseData = wsResponse.get_return();
+        if (responseData == -1) {
+        	response.setSuccess(false);
+        	response.setReason("Ha ocurrido un error");
+        } else {
+        	response.setSuccess(true);
+        	response.setReason("Operacion exitosa");
+        	response.setIdThread(responseData);
+        }
+        
 		return Response.ok().entity(response).build();
 	}
 	
@@ -330,7 +394,7 @@ public class ForumService {
 	@Path("editthread")
 	@Consumes(MediaType.APPLICATION_JSON)
 	public Response editThread(@CookieParam("authToken") String authToken,ThreadEditRequest request) throws ParserConfigurationException, SAXException, IOException {
-		CommunicationResponse response = new CommunicationResponse();
+		CommForumResponse response = new CommForumResponse();
 		
 		ServiceStub api = new ServiceStub();
 		ServiceStub.EditarTema communicationRequst = new ServiceStub.EditarTema();
@@ -351,8 +415,16 @@ public class ForumService {
             return buildError("editar tema");
         }
 		
-		response.setSuccess(true);
-		response.setReason("Implementación de prueba, esto se debe implementar");
+        // Generate response
+        int responseData = wsResponse.get_return();
+        if (responseData == -1) {
+        	response.setSuccess(false);
+        	response.setReason("Ha ocurrido un error");
+        } else {
+        	response.setSuccess(true);
+        	response.setReason("Operacion exitosa");
+        }
+        
 		return Response.ok().entity(response).build();
 	}
 	
@@ -360,7 +432,7 @@ public class ForumService {
 	@Path("deletethread")
 	@Consumes(MediaType.APPLICATION_JSON)
 	public Response deleteThread(@CookieParam("authToken") String authToken, ThreadDeleteRequest request) throws ParserConfigurationException, SAXException, IOException {
-		CommunicationResponse response = new CommunicationResponse();
+		CommForumResponse response = new CommForumResponse();
 		
 		ServiceStub api = new ServiceStub();
 		ServiceStub.EliminarTema communicationRequst = new ServiceStub.EliminarTema();
@@ -381,8 +453,16 @@ public class ForumService {
             return buildError("eliminar tema");
         }
 		
-		response.setSuccess(true);
-		response.setReason("Implementación de prueba, esto se debe implementar");
+        // Generate response
+        int responseData = wsResponse.get_return();
+        if (responseData == -1) {
+        	response.setSuccess(false);
+        	response.setReason("Ha ocurrido un error");
+        } else {
+        	response.setSuccess(true);
+        	response.setReason("Operacion exitosa");
+        }
+        
 		return Response.ok().entity(response).build();
 	}
 	
@@ -390,7 +470,7 @@ public class ForumService {
 	@Path("stickthread")
 	@Consumes(MediaType.APPLICATION_JSON)
 	public Response stickThread(@CookieParam("authToken") String authToken, ThreadDeleteRequest request) throws ParserConfigurationException, SAXException, IOException {
-		CommunicationResponse response = new CommunicationResponse();
+		CommForumResponse response = new CommForumResponse();
 		
 		ServiceStub api = new ServiceStub();
 		ServiceStub.DestacarTema communicationRequst = new ServiceStub.DestacarTema();
@@ -410,8 +490,16 @@ public class ForumService {
             return buildError("destacar tema");
         }
 		
-		response.setSuccess(true);
-		response.setReason("Implementación de prueba, esto se debe implementar");
+        // Generate response
+        int responseData = wsResponse.get_return();
+        if (responseData == -1) {
+        	response.setSuccess(false);
+        	response.setReason("Ha ocurrido un error");
+        } else {
+        	response.setSuccess(true);
+        	response.setReason("Operacion exitosa");
+        }
+        
 		return Response.ok().entity(response).build();
 	}
 	
@@ -419,7 +507,7 @@ public class ForumService {
 	@Path("unstickthread")
 	@Consumes(MediaType.APPLICATION_JSON)
 	public Response unstickThread(@CookieParam("authToken") String authToken, ThreadDeleteRequest request) throws ParserConfigurationException, SAXException, IOException {
-		CommunicationResponse response = new CommunicationResponse();
+		CommForumResponse response = new CommForumResponse();
 		
 		ServiceStub api = new ServiceStub();
 		ServiceStub.CancelarDestacarTema communicationRequst = new ServiceStub.CancelarDestacarTema();
@@ -439,8 +527,16 @@ public class ForumService {
             return buildError("cancelar destacar tema");
         }
 		
-		response.setSuccess(true);
-		response.setReason("Implementación de prueba, esto se debe implementar");
+        // Generate response
+        int responseData = wsResponse.get_return();
+        if (responseData == -1) {
+        	response.setSuccess(false);
+        	response.setReason("Ha ocurrido un error");
+        } else {
+        	response.setSuccess(true);
+        	response.setReason("Operacion exitosa");
+        }
+        
 		return Response.ok().entity(response).build();
 	}
 	
@@ -448,7 +544,7 @@ public class ForumService {
 	@Path("createmessage")
 	@Consumes(MediaType.APPLICATION_JSON)
 	public Response createMessage(@CookieParam("authToken") String authToken, MessageCreateRequest request) throws ParserConfigurationException, SAXException, IOException {
-		CommunicationResponse response = new CommunicationResponse();
+		CommForumResponse response = new CommForumResponse();
 		
 		ServiceStub api = new ServiceStub();
 		ServiceStub.CrearMensaje communicationRequst = new ServiceStub.CrearMensaje();
@@ -469,8 +565,17 @@ public class ForumService {
             return buildError("crear mensaje");
         }
 		
-		response.setSuccess(true);
-		response.setReason("Implementación de prueba, esto se debe implementar");
+        // Generate response
+        int responseData = wsResponse.get_return();
+        if (responseData == -1) {
+        	response.setSuccess(false);
+        	response.setReason("Ha ocurrido un error");
+        } else {
+        	response.setSuccess(true);
+        	response.setReason("Operacion exitosa");
+        	response.setIdMessage(responseData);
+        }
+        
 		return Response.ok().entity(response).build();
 	}
 	
@@ -478,7 +583,7 @@ public class ForumService {
 	@Path("editmessage")
 	@Consumes(MediaType.APPLICATION_JSON)
 	public Response editMessage(@CookieParam("authToken") String authToken, MessageEditRequest request) throws ParserConfigurationException, SAXException, IOException {
-		CommunicationResponse response = new CommunicationResponse();
+		CommForumResponse response = new CommForumResponse();
 		
 		ServiceStub api = new ServiceStub();
 		ServiceStub.EditarMensaje communicationRequst = new ServiceStub.EditarMensaje();
@@ -500,9 +605,16 @@ public class ForumService {
             return buildError("editar mensaje");
         }
 		
-		
-		response.setSuccess(true);
-		response.setReason("Implementación de prueba, esto se debe implementar");
+        // Generate response
+        int responseData = wsResponse.get_return();
+        if (responseData == -1) {
+        	response.setSuccess(false);
+        	response.setReason("Ha ocurrido un error");
+        } else {
+        	response.setSuccess(true);
+        	response.setReason("Operacion exitosa");
+        }
+        
 		return Response.ok().entity(response).build();
 	}
 	
@@ -510,7 +622,7 @@ public class ForumService {
 	@Path("deletemessage")
 	@Consumes(MediaType.APPLICATION_JSON)
 	public Response deleteMessage(@CookieParam("authToken") String authToken, MessageDeleteRequest request) throws ParserConfigurationException, SAXException, IOException {
-		CommunicationResponse response = new CommunicationResponse();
+		CommForumResponse response = new CommForumResponse();
 		
 		ServiceStub api = new ServiceStub();
 		ServiceStub.EliminarMensaje communicationRequst = new ServiceStub.EliminarMensaje();
@@ -531,8 +643,16 @@ public class ForumService {
             return buildError("eliminar mensaje");
         }
 		
-		response.setSuccess(true);
-		response.setReason("Implementación de prueba, esto se debe implementar");
+        // Generate response
+        int responseData = wsResponse.get_return();
+        if (responseData == -1) {
+        	response.setSuccess(false);
+        	response.setReason("Ha ocurrido un error");
+        } else {
+        	response.setSuccess(true);
+        	response.setReason("Operacion exitosa");
+        }
+        
 		return Response.ok().entity(response).build();
 	}
 	
@@ -540,7 +660,7 @@ public class ForumService {
 	@Path("forumindex")
 	@Consumes(MediaType.APPLICATION_JSON) 
 	public Response getForumIndex(@CookieParam("authToken") String authToken, @QueryParam("username") String username, @QueryParam("id_ambito") Integer id_ambito, @QueryParam("id_foro") Integer id_foro) throws ParserConfigurationException, SAXException, IOException {
-		CommunicationResponse response = new CommunicationResponse();
+		CommForumResponse response = new CommForumResponse();
 		
 		ServiceStub api = new ServiceStub();
 		ServiceStub.MostrarIndice communicationRequst = new ServiceStub.MostrarIndice();
@@ -559,8 +679,17 @@ public class ForumService {
             return buildError("mostrar indice");
         }
 		
-		response.setSuccess(true);
-		response.setReason("Implementación de prueba, esto se debe implementar");
+        // Generate response
+        String responseData = wsResponse.get_return();
+        if (responseData == null) {
+        	response.setSuccess(false);
+        	response.setReason("Ha ocurrido un error");
+        } else {
+        	response.setSuccess(true);
+        	response.setReason("Operacion exitosa");
+        	response.setIndex(responseData);
+        }
+        
 		return Response.ok().entity(response).build();
 	}
 	
@@ -568,7 +697,7 @@ public class ForumService {
 	@Path("subforumindex")
 	@Consumes(MediaType.APPLICATION_JSON)
 	public Response getSubforumIndex(@CookieParam("authToken") String authToken, @QueryParam("username") String username, @QueryParam("id_ambito") Integer id_ambito, @QueryParam("id_foro") Integer id_foro, @QueryParam("id_subforo") Integer id_subforo, @QueryParam("pagina") Integer pagina) throws ParserConfigurationException, SAXException, IOException {
-		CommunicationResponse response = new CommunicationResponse();
+		CommForumResponse response = new CommForumResponse();
 		
 		ServiceStub api = new ServiceStub();
 		ServiceStub.MostrarSubForo communicationRequst = new ServiceStub.MostrarSubForo();
@@ -589,8 +718,17 @@ public class ForumService {
             return buildError("mostrar subforo");
         }
 		
-		response.setSuccess(true);
-		response.setReason("Implementación de prueba, esto se debe implementar");
+        // Generate response
+        String responseData = wsResponse.get_return();
+        if (responseData == null) {
+        	response.setSuccess(false);
+        	response.setReason("Ha ocurrido un error");
+        } else {
+        	response.setSuccess(true);
+        	response.setReason("Operacion exitosa");
+        	response.setSubForum(responseData);
+        }
+        
 		return Response.ok().entity(response).build();
 	}
 	
@@ -598,7 +736,7 @@ public class ForumService {
 	@Path("threadindex")
 	@Consumes(MediaType.APPLICATION_JSON)
 	public Response getThreadIndex(@CookieParam("authToken") String authToken,  @QueryParam("username") String username, @QueryParam("id_ambito") Integer id_ambito, @QueryParam("id_foro") Integer id_foro, @QueryParam("id_tema") Integer id_tema, @QueryParam("pagina") Integer pagina) throws ParserConfigurationException, SAXException, IOException {
-		CommunicationResponse response = new CommunicationResponse();
+		CommForumResponse response = new CommForumResponse();
 		
 		ServiceStub api = new ServiceStub();
 		ServiceStub.MostrarTema communicationRequst = new ServiceStub.MostrarTema();
@@ -619,8 +757,17 @@ public class ForumService {
             return buildError("mostrar tema");
         }
 		
-		response.setSuccess(true);
-		response.setReason("Implementación de prueba, esto se debe implementar");
+        // Generate response
+        String responseData = wsResponse.get_return();
+        if (responseData == null) {
+        	response.setSuccess(false);
+        	response.setReason("Ha ocurrido un error");
+        } else {
+        	response.setSuccess(true);
+        	response.setReason("Operacion exitosa");
+        	response.setThread(responseData);
+        }
+        
 		return Response.ok().entity(response).build();
 	}
 	
@@ -628,7 +775,7 @@ public class ForumService {
 	@Path("message")
 	@Consumes(MediaType.APPLICATION_JSON)
 	public Response getMessage(@CookieParam("authToken") String authToken, @QueryParam("username") String username, @QueryParam("id_ambito") Integer id_ambito, @QueryParam("id_foro") Integer id_foro, @QueryParam("id_tema") Integer id_tema, @QueryParam("id_mensaje") Integer id_mensaje) throws ParserConfigurationException, SAXException, IOException {
-		CommunicationResponse response = new CommunicationResponse();
+		CommForumResponse response = new CommForumResponse();
 		
 		ServiceStub api = new ServiceStub();
 		ServiceStub.MostrarMensaje communicationRequst = new ServiceStub.MostrarMensaje();
@@ -649,8 +796,17 @@ public class ForumService {
             return buildError("mostrar mensaje");
         }
 		
-		response.setSuccess(true);
-		response.setReason("Implementación de prueba, esto se debe implementar");
+        // Generate response
+        String responseData = wsResponse.get_return();
+        if (responseData == null) {
+        	response.setSuccess(false);
+        	response.setReason("Ha ocurrido un error");
+        } else {
+        	response.setSuccess(true);
+        	response.setReason("Operacion exitosa");
+        	response.setMessage(responseData);
+        }
+        
 		return Response.ok().entity(response).build();
 	}
 	
@@ -658,7 +814,7 @@ public class ForumService {
 	@Path("searchmessagebyword")
 	@Consumes(MediaType.APPLICATION_JSON)
 	public Response searchMessageByWords(@CookieParam("authToken") String authToken, MessageSearchByWordRequest request) throws ParserConfigurationException, SAXException, IOException {
-		CommunicationResponse response = new CommunicationResponse();
+		CommForumResponse response = new CommForumResponse();
 		
 		ServiceStub api = new ServiceStub();
 		ServiceStub.BusquedaMensajesPorPalabra communicationRequst = new ServiceStub.BusquedaMensajesPorPalabra();
@@ -679,8 +835,17 @@ public class ForumService {
             return buildError("busqueda mensajes por palabra");
         }
 		
-		response.setSuccess(true);
-		response.setReason("Implementación de prueba, esto se debe implementar");
+        // Generate response
+        int[] responseData = wsResponse.get_return();
+        if (responseData.length == 1 && responseData[0] == -1) {
+        	response.setSuccess(false);
+        	response.setReason("Ha ocurrido un error.");
+        } else {
+        	response.setSuccess(true);
+        	response.setReason("Operación exitosa.");
+        	response.setMessages(responseData);
+        }
+        
 		return Response.ok().entity(response).build();
 	}
 	
@@ -688,7 +853,7 @@ public class ForumService {
 	@Path("searchmessagebyuser")
 	@Consumes(MediaType.APPLICATION_JSON)
 	public Response searchMessageByUser(@CookieParam("authToken") String authToken, MessageSearchByUserRequest request) throws ParserConfigurationException, SAXException, IOException {
-		CommunicationResponse response = new CommunicationResponse();
+		CommForumResponse response = new CommForumResponse();
 		
 		ServiceStub api = new ServiceStub();
 		ServiceStub.BusquedaMensajesPorAutor communicationRequst = new ServiceStub.BusquedaMensajesPorAutor();
@@ -709,8 +874,17 @@ public class ForumService {
             return buildError("busqueda mensajes por autor");
         }
 		
-		response.setSuccess(true);
-		response.setReason("Implementación de prueba, esto se debe implementar");
+        // Generate response
+        int[] responseData = wsResponse.get_return();
+        if (responseData.length == 1 && responseData[0] == -1) {
+        	response.setSuccess(false);
+        	response.setReason("Ha ocurrido un error.");
+        } else {
+        	response.setSuccess(true);
+        	response.setReason("Operación exitosa.");
+        	response.setMessages(responseData);
+        }
+        
 		return Response.ok().entity(response).build();
 	}
 	
