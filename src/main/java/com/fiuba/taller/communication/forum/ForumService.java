@@ -10,6 +10,7 @@ import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
+import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.xml.parsers.DocumentBuilder;
@@ -29,8 +30,6 @@ import com.fiuba.taller.communication.forum.requests.ForumDeleteRequest;
 import com.fiuba.taller.communication.forum.requests.ForumEditRequest;
 import com.fiuba.taller.communication.forum.requests.MessageSearchByWordRequest;
 import com.fiuba.taller.communication.forum.requests.MessageSearchByUserRequest;
-import com.fiuba.taller.communication.forum.requests.MessageShowRequest;
-import com.fiuba.taller.communication.forum.requests.SubForumShowIndexRequest;
 import com.fiuba.taller.communication.forum.requests.MessageCreateRequest;
 import com.fiuba.taller.communication.forum.requests.MessageDeleteRequest;
 import com.fiuba.taller.communication.forum.requests.MessageEditRequest;
@@ -38,11 +37,9 @@ import com.fiuba.taller.communication.forum.requests.SubForumCreateRequest;
 import com.fiuba.taller.communication.forum.requests.SubForumDeleteRequest;
 import com.fiuba.taller.communication.forum.requests.SubForumEditRequest;
 import com.fiuba.taller.communication.forum.requests.SubForumMoveRequest;
-import com.fiuba.taller.communication.forum.requests.ForumShowIndexRequest;
 import com.fiuba.taller.communication.forum.requests.ThreadCreateRequest;
 import com.fiuba.taller.communication.forum.requests.ThreadDeleteRequest;
 import com.fiuba.taller.communication.forum.requests.ThreadEditRequest;
-import com.fiuba.taller.communication.forum.requests.ThreadShowIndexRequest;
 import com.fiuba.taller.security.SecurityResponse;
 
 import wtp.LoginAPIHelperStub;
@@ -112,7 +109,6 @@ public class ForumService {
 		response.setSuccess(true);
 		response.setReason("Implementación de prueba, esto se debe implementar");
 		return Response.ok().entity(response).build();
-		
 	}
 	
 	
@@ -542,8 +538,8 @@ public class ForumService {
 	
 	@GET
 	@Path("forumindex")
-	@Consumes(MediaType.APPLICATION_JSON)
-	public Response getForumIndex(@CookieParam("authToken") String authToken, ForumShowIndexRequest request) throws ParserConfigurationException, SAXException, IOException {
+	@Consumes(MediaType.APPLICATION_JSON) 
+	public Response getForumIndex(@CookieParam("authToken") String authToken, @QueryParam("username") String username, @QueryParam("id_ambito") Integer id_ambito, @QueryParam("id_foro") Integer id_foro) throws ParserConfigurationException, SAXException, IOException {
 		CommunicationResponse response = new CommunicationResponse();
 		
 		ServiceStub api = new ServiceStub();
@@ -551,9 +547,9 @@ public class ForumService {
 		ServiceStub.MostrarIndiceResponse wsResponse = new ServiceStub.MostrarIndiceResponse();
 		
 		// Armo la WSRequest
-		communicationRequst.setId_ambito(request.getId_ambito());
-		communicationRequst.setId_foro(request.getId_foro());
-		communicationRequst.setId_usuario(request.getUsername());
+		communicationRequst.setId_ambito(id_ambito);
+		communicationRequst.setId_foro(id_foro);
+		communicationRequst.setId_usuario(username);
 		
 		// Hacer el request
         try {
@@ -571,7 +567,7 @@ public class ForumService {
 	@GET
 	@Path("subforumindex")
 	@Consumes(MediaType.APPLICATION_JSON)
-	public Response getSubforumIndex(@CookieParam("authToken") String authToken, SubForumShowIndexRequest request) throws ParserConfigurationException, SAXException, IOException {
+	public Response getSubforumIndex(@CookieParam("authToken") String authToken, @QueryParam("username") String username, @QueryParam("id_ambito") Integer id_ambito, @QueryParam("id_foro") Integer id_foro, @QueryParam("id_subforo") Integer id_subforo, @QueryParam("pagina") Integer pagina) throws ParserConfigurationException, SAXException, IOException {
 		CommunicationResponse response = new CommunicationResponse();
 		
 		ServiceStub api = new ServiceStub();
@@ -579,11 +575,11 @@ public class ForumService {
 		ServiceStub.MostrarSubForoResponse wsResponse = new ServiceStub.MostrarSubForoResponse();
 		
 		// Armo la WSRequest
-		communicationRequst.setId_ambito(request.getId_ambito());
-		communicationRequst.setId_foro(request.getId_foro());
-		communicationRequst.setId_subforo(request.getId_subforo());
-		communicationRequst.setId_usuario(request.getUsername());
-		communicationRequst.setPagina(request.getPagina());
+		communicationRequst.setId_ambito(id_ambito);
+		communicationRequst.setId_foro(id_foro);
+		communicationRequst.setId_subforo(id_subforo);
+		communicationRequst.setId_usuario(username);
+		communicationRequst.setPagina(pagina);
 		
 		// Hacer el request
         try {
@@ -601,7 +597,7 @@ public class ForumService {
 	@GET
 	@Path("threadindex")
 	@Consumes(MediaType.APPLICATION_JSON)
-	public Response getThreadIndex(@CookieParam("authToken") String authToken, ThreadShowIndexRequest request) throws ParserConfigurationException, SAXException, IOException {
+	public Response getThreadIndex(@CookieParam("authToken") String authToken,  @QueryParam("username") String username, @QueryParam("id_ambito") Integer id_ambito, @QueryParam("id_foro") Integer id_foro, @QueryParam("id_tema") Integer id_tema, @QueryParam("pagina") Integer pagina) throws ParserConfigurationException, SAXException, IOException {
 		CommunicationResponse response = new CommunicationResponse();
 		
 		ServiceStub api = new ServiceStub();
@@ -609,11 +605,11 @@ public class ForumService {
 		ServiceStub.MostrarTemaResponse wsResponse = new ServiceStub.MostrarTemaResponse();
 		
 		// Armo la WSRequest
-		communicationRequst.setId_ambito(request.getId_ambito());
-		communicationRequst.setId_foro(request.getId_foro());
-		communicationRequst.setId_tema(request.getId_tema());
-		communicationRequst.setId_usuario(request.getUsername());
-		communicationRequst.setPagina(request.getPagina());
+		communicationRequst.setId_ambito(id_ambito);
+		communicationRequst.setId_foro(id_foro);
+		communicationRequst.setId_tema(id_tema);
+		communicationRequst.setId_usuario(username);
+		communicationRequst.setPagina(pagina);
 
 		// Hacer el request
         try {
@@ -631,7 +627,7 @@ public class ForumService {
 	@GET
 	@Path("message")
 	@Consumes(MediaType.APPLICATION_JSON)
-	public Response getMessage(@CookieParam("authToken") String authToken, MessageShowRequest request) throws ParserConfigurationException, SAXException, IOException {
+	public Response getMessage(@CookieParam("authToken") String authToken, @QueryParam("username") String username, @QueryParam("id_ambito") Integer id_ambito, @QueryParam("id_foro") Integer id_foro, @QueryParam("id_tema") Integer id_tema, @QueryParam("id_mensaje") Integer id_mensaje) throws ParserConfigurationException, SAXException, IOException {
 		CommunicationResponse response = new CommunicationResponse();
 		
 		ServiceStub api = new ServiceStub();
@@ -639,11 +635,11 @@ public class ForumService {
 		ServiceStub.MostrarMensajeResponse wsResponse = new ServiceStub.MostrarMensajeResponse();
 		
 		// Armo la WSRequest
-		communicationRequst.setId_ambito(request.getId_ambito());
-		communicationRequst.setId_foro(request.getId_foro());
-		communicationRequst.setId_mensaje(request.getId_mensaje());
-		communicationRequst.setId_tema(request.getId_tema());
-		communicationRequst.setId_usuario(request.getUsername());
+		communicationRequst.setId_ambito(id_ambito);
+		communicationRequst.setId_foro(id_foro);
+		communicationRequst.setId_mensaje(id_mensaje);
+		communicationRequst.setId_tema(id_tema);
+		communicationRequst.setId_usuario(username);
 		
 		// Hacer el request
         try {
