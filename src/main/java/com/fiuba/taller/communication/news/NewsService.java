@@ -10,6 +10,7 @@ import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
+import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.xml.parsers.DocumentBuilder;
@@ -29,12 +30,12 @@ import com.fiuba.taller.communication.news.requests.NewsEdit;
 import com.fiuba.taller.communication.news.requests.NewsCreate;
 import com.fiuba.taller.communication.news.requests.NewsSearchByUser;
 import com.fiuba.taller.communication.news.requests.NewsSearchByWords;
-import com.fiuba.taller.communication.news.requests.NewsShow;
 import com.fiuba.taller.communication.wall.requests.EventsSearchByWords;
 import com.fiuba.taller.security.SecurityResponse;
 
 import wtp.LoginAPIHelperStub;
 import wtp.ServiceStub;
+import wtp.MessagerStub.Chat;
 
 @Path("/")
 @Produces(MediaType.APPLICATION_JSON)
@@ -76,7 +77,7 @@ public class NewsService {
 	@Path("searchnewsbywords")
 	@Consumes(MediaType.APPLICATION_JSON)
 	public Response searchNewsByWords(@CookieParam("authToken") String authToken, NewsSearchByWords request) throws ParserConfigurationException, SAXException, IOException {
-		CommunicationResponse response = new CommunicationResponse();
+		CommNewsResponse response = new CommNewsResponse();
 		
 		ServiceStub api = new ServiceStub();
 		ServiceStub.BusquedaNoticiasPorPalabras communicationRequst = new ServiceStub.BusquedaNoticiasPorPalabras();
@@ -96,8 +97,16 @@ public class NewsService {
             return buildError("Busqueda noticias por palabras");
         }
 		
-		response.setSuccess(true);
-		response.setReason("Implementación de prueba, esto se debe implementar");
+        // Generate response
+		int[] responseData = wsResponse.get_return();
+		if (responseData.length == 1 && responseData[0] == -1) {
+			response.setSuccess(false);
+			response.setReason("Ha ocurrido un error.");
+		} else {
+			response.setSuccess(true);
+			response.setReason("Operación exitosa.");
+			response.setNews(responseData);
+		}
 		return Response.ok().entity(response).build();
 	}
 	
@@ -106,7 +115,7 @@ public class NewsService {
 	@Path("searchnewsbyuser")
 	@Consumes(MediaType.APPLICATION_JSON)
 	public Response searchNewsByUser(@CookieParam("authToken") String authToken, NewsSearchByUser request) throws ParserConfigurationException, SAXException, IOException {
-		CommunicationResponse response = new CommunicationResponse();
+		CommNewsResponse response = new CommNewsResponse();
 		
 		ServiceStub api = new ServiceStub();
 		ServiceStub.BusquedaNoticiasPorAutor communicationRequst = new ServiceStub.BusquedaNoticiasPorAutor();
@@ -126,27 +135,34 @@ public class NewsService {
             return buildError("Busqueda noticias por autor");
         }
 		
-		response.setSuccess(true);
-		response.setReason("Implementación de prueba, esto se debe implementar");
+        // Generate response
+		int[] responseData = wsResponse.get_return();
+		if (responseData.length == 1 && responseData[0] == -1) {
+			response.setSuccess(false);
+			response.setReason("Ha ocurrido un error.");
+		} else {
+			response.setSuccess(true);
+			response.setReason("Operación exitosa.");
+			response.setNews(responseData);
+		}
 		return Response.ok().entity(response).build();
 	}
-	
 	
 	@GET
 	@Path("news")
 	@Consumes(MediaType.APPLICATION_JSON)
-	public Response getNews(@CookieParam("authToken") String authToken, NewsShow request) throws ParserConfigurationException, SAXException, IOException {
-		CommunicationResponse response = new CommunicationResponse();
+	public Response getNews(@CookieParam("authToken") String authToken, @QueryParam("username") String username, @QueryParam("id_ambito") Integer id_ambito, @QueryParam("id_cartelera") Integer id_cartelera, @QueryParam("id_noticia") Integer id_noticia) throws ParserConfigurationException, SAXException, IOException {
+		CommNewsResponse response = new CommNewsResponse();
 		
 		ServiceStub api = new ServiceStub();
 		ServiceStub.MostrarNoticia communicationRequst = new ServiceStub.MostrarNoticia();
 		ServiceStub.MostrarNoticiaResponse wsResponse = new ServiceStub.MostrarNoticiaResponse();
 		
 		// Armo la WSRequest
-		communicationRequst.setId_ambito(request.getId_ambito());
-		communicationRequst.setId_cartelera(request.getId_cartelera());
-		communicationRequst.setId_usuario(request.getUsername());
-		communicationRequst.setId_noticia(request.getId_noticia());
+		communicationRequst.setId_ambito(id_ambito);
+		communicationRequst.setId_cartelera(id_cartelera);
+		communicationRequst.setId_usuario(username);
+		communicationRequst.setId_noticia(id_noticia);
 
 		// Hacer el request
         try {
@@ -156,8 +172,16 @@ public class NewsService {
             return buildError("Mostrar noticia");
         }
 		
-		response.setSuccess(true);
-		response.setReason("Implementación de prueba, esto se debe implementar");
+        // Generate response
+		String responseData = wsResponse.get_return();
+		if (responseData == null) {
+			response.setSuccess(false);
+			response.setReason("Ha ocurrido un error.");
+		} else {
+			response.setSuccess(true);
+			response.setReason("Operación exitosa.");
+			response.setNewShow(responseData);
+		}
 		return Response.ok().entity(response).build();
 	}
 	
@@ -165,7 +189,7 @@ public class NewsService {
 	@Path("createnew")
 	@Consumes(MediaType.APPLICATION_JSON)
 	public Response createNew(@CookieParam("authToken") String authToken, NewsCreate request) throws ParserConfigurationException, SAXException, IOException {
-		CommunicationResponse response = new CommunicationResponse();
+		CommNewsResponse response = new CommNewsResponse();
 		
 		ServiceStub api = new ServiceStub();
 		ServiceStub.PublicarNoticia communicationRequst = new ServiceStub.PublicarNoticia();
@@ -186,8 +210,16 @@ public class NewsService {
             return buildError("Mostrar noticia");
         }
 		
-		response.setSuccess(true);
-		response.setReason("Implementación de prueba, esto se debe implementar");
+        // Generate response
+		int responseData = wsResponse.get_return();
+		if (responseData == -1) {
+			response.setSuccess(false);
+			response.setReason("Ha ocurrido un error.");
+		} else {
+			response.setSuccess(true);
+			response.setReason("Operación exitosa.");
+			response.setId_new(responseData);
+		}
 		return Response.ok().entity(response).build();
 	}
 	
@@ -195,7 +227,7 @@ public class NewsService {
 	@Path("editnew")
 	@Consumes(MediaType.APPLICATION_JSON)
 	public Response editNew(@CookieParam("authToken") String authToken, NewsEdit request) throws ParserConfigurationException, SAXException, IOException {
-		CommunicationResponse response = new CommunicationResponse();
+		CommNewsResponse response = new CommNewsResponse();
 		
 		ServiceStub api = new ServiceStub();
 		ServiceStub.EditarNoticia communicationRequst = new ServiceStub.EditarNoticia();
@@ -217,8 +249,15 @@ public class NewsService {
             return buildError("editar noticia");
         }
 		
-		response.setSuccess(true);
-		response.setReason("Implementación de prueba, esto se debe implementar");
+        // Generate response
+		int responseData = wsResponse.get_return();
+		if (responseData == -1) {
+			response.setSuccess(false);
+			response.setReason("Ha ocurrido un error.");
+		} else {
+			response.setSuccess(true);
+			response.setReason("Operación exitosa.");
+		}
 		return Response.ok().entity(response).build();
 	}
 	
@@ -226,7 +265,7 @@ public class NewsService {
 	@Path("deletenew")
 	@Consumes(MediaType.APPLICATION_JSON)
 	public Response deleteNew(@CookieParam("authToken") String authToken, NewsDelete request) throws ParserConfigurationException, SAXException, IOException {
-		CommunicationResponse response = new CommunicationResponse();
+		CommNewsResponse response = new CommNewsResponse();
 		
 		ServiceStub api = new ServiceStub();
 		ServiceStub.EliminarNoticia communicationRequst = new ServiceStub.EliminarNoticia();
@@ -246,8 +285,15 @@ public class NewsService {
             return buildError("eliminar noticia");
         }
 		
-		response.setSuccess(true);
-		response.setReason("Implementación de prueba, esto se debe implementar");
+        // Generate response
+		int responseData = wsResponse.get_return();
+		if (responseData == -1) {
+			response.setSuccess(false);
+			response.setReason("Ha ocurrido un error.");
+		} else {
+			response.setSuccess(true);
+			response.setReason("Operación exitosa.");
+		}
 		return Response.ok().entity(response).build();
 	}
 	

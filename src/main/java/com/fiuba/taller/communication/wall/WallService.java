@@ -10,6 +10,7 @@ import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
+import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.xml.parsers.DocumentBuilder;
@@ -28,7 +29,6 @@ import com.fiuba.taller.communication.wall.requests.EventCreate;
 import com.fiuba.taller.communication.wall.requests.EventDelete;
 import com.fiuba.taller.communication.wall.requests.EventEdit;
 import com.fiuba.taller.communication.wall.requests.EventsSearchByWords;
-import com.fiuba.taller.communication.wall.requests.WallShow;
 import com.fiuba.taller.security.SecurityResponse;
 
 import wtp.LoginAPIHelperStub;
@@ -74,7 +74,7 @@ public class WallService {
 	@Path("searcheventsbywords")
 	@Consumes(MediaType.APPLICATION_JSON)
 	public Response searchEventsByWords(@CookieParam("authToken") String authToken, EventsSearchByWords request) throws ParserConfigurationException, SAXException, IOException {
-		CommunicationResponse response = new CommunicationResponse();
+		CommWallResponse response = new CommWallResponse();
 		
 		ServiceStub api = new ServiceStub();
 		ServiceStub.BusquedaEventosPorPalabras communicationRequst = new ServiceStub.BusquedaEventosPorPalabras();
@@ -94,26 +94,34 @@ public class WallService {
             return buildError("Busqueda eventos por palabras");
         }
 		
-		response.setSuccess(true);
-		response.setReason("Implementación de prueba, esto se debe implementar");
+        // Generate response
+		int[] responseData = wsResponse.get_return();
+		if (responseData.length == 1 && responseData[0] == -1) {
+			response.setSuccess(false);
+			response.setReason("Ha ocurrido un error.");
+		} else {
+			response.setSuccess(true);
+			response.setReason("Operación exitosa.");
+			response.setEvents(responseData);
+		}
 		return Response.ok().entity(response).build();
 	}	
 	
 	@GET
 	@Path("showwall")
 	@Consumes(MediaType.APPLICATION_JSON)
-	public Response getWall(@CookieParam("authToken") String authToken, WallShow request) throws ParserConfigurationException, SAXException, IOException {
-		CommunicationResponse response = new CommunicationResponse();
+	public Response getWall(@CookieParam("authToken") String authToken, @QueryParam("username") String username, @QueryParam("id_ambito") Integer id_ambito,  @QueryParam("id_muro") Integer id_muro,  @QueryParam("pagina") Integer pagina) throws ParserConfigurationException, SAXException, IOException {
+		CommWallResponse response = new CommWallResponse();
 		
 		ServiceStub api = new ServiceStub();
 		ServiceStub.MostrarMuro communicationRequst = new ServiceStub.MostrarMuro();
 		ServiceStub.MostrarMuroResponse wsResponse = new ServiceStub.MostrarMuroResponse();
 		
 		// Armo la WSRequest
-		communicationRequst.setId_ambito(request.getId_ambito());
-		communicationRequst.setId_muro(request.getId_muro());
-		communicationRequst.setId_usuario(request.getUsername());
-		communicationRequst.setPagina(request.getPagina());
+		communicationRequst.setId_ambito(id_ambito);
+		communicationRequst.setId_muro(id_muro);
+		communicationRequst.setId_usuario(username);
+		communicationRequst.setPagina(pagina);
 		
 		// Hacer el request
         try {
@@ -123,8 +131,16 @@ public class WallService {
             return buildError("Mostrar muro");
         }
 		
-		response.setSuccess(true);
-		response.setReason("Implementación de prueba, esto se debe implementar");
+        // Generate response
+		String responseData = wsResponse.get_return();
+		if (responseData == null) {
+			response.setSuccess(false);
+			response.setReason("Ha ocurrido un error.");
+		} else {
+			response.setSuccess(true);
+			response.setReason("Operación exitosa.");
+			response.setWall(responseData);
+		}
 		return Response.ok().entity(response).build();
 	}
 	
@@ -132,7 +148,7 @@ public class WallService {
 	@Path("createevent")
 	@Consumes(MediaType.APPLICATION_JSON)
 	public Response createEvent(@CookieParam("authToken") String authToken, EventCreate request) throws ParserConfigurationException, SAXException, IOException {
-		CommunicationResponse response = new CommunicationResponse();
+		CommWallResponse response = new CommWallResponse();
 		
 		ServiceStub api = new ServiceStub();
 		ServiceStub.CrearEvento communicationRequst = new ServiceStub.CrearEvento();
@@ -153,8 +169,16 @@ public class WallService {
             return buildError("crear evento");
         }
 		
-		response.setSuccess(true);
-		response.setReason("Implementación de prueba, esto se debe implementar");
+        // Generate response
+		int responseData = wsResponse.get_return();
+		if (responseData == -1) {
+			response.setSuccess(false);
+			response.setReason("Ha ocurrido un error.");
+		} else {
+			response.setSuccess(true);
+			response.setReason("Operación exitosa.");
+			response.setId_event(responseData);
+		}
 		return Response.ok().entity(response).build();
 	}
 	
@@ -162,7 +186,7 @@ public class WallService {
 	@Path("editevent")
 	@Consumes(MediaType.APPLICATION_JSON)
 	public Response editEvent(@CookieParam("authToken") String authToken, EventEdit request) throws ParserConfigurationException, SAXException, IOException {
-		CommunicationResponse response = new CommunicationResponse();
+		CommWallResponse response = new CommWallResponse();
 		
 		// NO EXISTE ESTE SERVICIO
 		
@@ -175,7 +199,7 @@ public class WallService {
 	@Path("deleteevent")
 	@Consumes(MediaType.APPLICATION_JSON)
 	public Response deleteEvent(@CookieParam("authToken") String authToken, EventDelete request) throws ParserConfigurationException, SAXException, IOException {
-		CommunicationResponse response = new CommunicationResponse();
+		CommWallResponse response = new CommWallResponse();
 		
 		ServiceStub api = new ServiceStub();
 		ServiceStub.EliminarEvento communicationRequst = new ServiceStub.EliminarEvento();
@@ -195,8 +219,15 @@ public class WallService {
             return buildError("eliminar evento");
         }
 		
-		response.setSuccess(true);
-		response.setReason("Implementación de prueba, esto se debe implementar");
+        // Generate response
+		int responseData = wsResponse.get_return();
+		if (responseData == -1) {
+			response.setSuccess(false);
+			response.setReason("Ha ocurrido un error.");
+		} else {
+			response.setSuccess(true);
+			response.setReason("Operación exitosa.");
+		}
 		return Response.ok().entity(response).build();
 	}
 	
@@ -204,7 +235,7 @@ public class WallService {
 	@Path("hideevent")
 	@Consumes(MediaType.APPLICATION_JSON)
 	public Response hideEvent(@CookieParam("authToken") String authToken, EventDelete request) throws ParserConfigurationException, SAXException, IOException {
-		CommunicationResponse response = new CommunicationResponse();
+		CommWallResponse response = new CommWallResponse();
 		
 		ServiceStub api = new ServiceStub();
 		ServiceStub.OcultarEvento communicationRequst = new ServiceStub.OcultarEvento();
@@ -224,8 +255,15 @@ public class WallService {
             return buildError("ocultar evento");
         }
 		
-		response.setSuccess(true);
-		response.setReason("Implementación de prueba, esto se debe implementar");
+        // Generate response
+		int responseData = wsResponse.get_return();
+		if (responseData == -1) {
+			response.setSuccess(false);
+			response.setReason("Ha ocurrido un error.");
+		} else {
+			response.setSuccess(true);
+			response.setReason("Operación exitosa.");
+		}
 		return Response.ok().entity(response).build();
 	}
 	
@@ -233,7 +271,7 @@ public class WallService {
 	@Path("showevent")
 	@Consumes(MediaType.APPLICATION_JSON)
 	public Response showEvent(@CookieParam("authToken") String authToken, EventDelete request) throws ParserConfigurationException, SAXException, IOException {
-		CommunicationResponse response = new CommunicationResponse();
+		CommWallResponse response = new CommWallResponse();
 		
 		ServiceStub api = new ServiceStub();
 		ServiceStub.MostrarEvento communicationRequst = new ServiceStub.MostrarEvento();
@@ -253,8 +291,16 @@ public class WallService {
             return buildError("mostrar evento");
         }
 		
-		response.setSuccess(true);
-		response.setReason("Implementación de prueba, esto se debe implementar");
+        // Generate response
+		String responseData = wsResponse.get_return();
+		if (responseData == null) {
+			response.setSuccess(false);
+			response.setReason("Ha ocurrido un error.");
+		} else {
+			response.setSuccess(true);
+			response.setReason("Operación exitosa.");
+			response.setEvent(responseData);
+		}
 		return Response.ok().entity(response).build();
 	}
 	
