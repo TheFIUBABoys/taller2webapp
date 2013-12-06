@@ -10,6 +10,7 @@ import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
+import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.xml.parsers.DocumentBuilder;
@@ -23,11 +24,9 @@ import org.w3c.dom.Node;
 import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 
-import com.fiuba.taller.chat.requests.ChatRequest;
 import com.fiuba.taller.chat.requests.CreateChatRequest;
 import com.fiuba.taller.chat.requests.HistoryMessageRequest;
 import com.fiuba.taller.chat.requests.SendMessageRequest;
-import com.fiuba.taller.chat.requests.UpdateChatRequest;
 import com.fiuba.taller.communication.CommunicationResponse;
 import com.fiuba.taller.security.SecurityResponse;
 
@@ -114,11 +113,10 @@ public class ChatService {
 		
 	}
 	
-	
 	@GET
 	@Path("updatechat")
 	@Consumes(MediaType.APPLICATION_JSON)
-	public Response updateChat(@CookieParam("authToken") String authToken, UpdateChatRequest request) throws ParserConfigurationException, SAXException, IOException {
+	public Response updateChat(@CookieParam("authToken") String authToken, @QueryParam("id_chat") Integer id_chat, @QueryParam("id_miembro") Integer id_miembro, @QueryParam("lastCallTimestamp") Integer lastCallTimestamp) throws ParserConfigurationException, SAXException, IOException {
 		UpdateChatResponse response = new UpdateChatResponse();
 		
 		MessagerStub api = new MessagerStub();
@@ -126,9 +124,9 @@ public class ChatService {
 		MessagerStub.UpdateChatResponse wsResponse = new MessagerStub.UpdateChatResponse();
 		
 		// Armo la WSRequest
-		chatRequest.setChatId(request.getId_chat());
-		chatRequest.setIdMiembro(request.getId_miembro());
-		chatRequest.setLastCallTimestamp(request.getLastCallTimestamp());
+		chatRequest.setChatId(id_chat);
+		chatRequest.setIdMiembro(id_miembro);
+		chatRequest.setLastCallTimestamp(lastCallTimestamp);
 		
 		// Hacer el request
         try {
@@ -164,7 +162,7 @@ public class ChatService {
 	@GET
 	@Path("gethistorychat")
 	@Consumes(MediaType.APPLICATION_JSON)
-	public Response getHistoryChat(@CookieParam("authToken") String authToken, HistoryMessageRequest request) throws ParserConfigurationException, SAXException, IOException {
+	public Response getHistoryChat(@CookieParam("authToken") String authToken, @QueryParam("id_chat") Integer id_chat, @QueryParam("id_member") Integer id_member) throws ParserConfigurationException, SAXException, IOException {
 		GetHistoryResponse response = new GetHistoryResponse();
 		
 		MessagerStub api = new MessagerStub();
@@ -172,8 +170,8 @@ public class ChatService {
 		MessagerStub.GetHistoryChatResponse wsResponse = new MessagerStub.GetHistoryChatResponse();
 		
 		// Armo la WSRequest
-		chatRequest.setChatId(request.getId_chat());
-		chatRequest.setIdMiembro(request.getId_member());
+		chatRequest.setChatId(id_chat);
+		chatRequest.setIdMiembro(id_member);
 		
 		// Hacer el request
         try {
@@ -209,11 +207,10 @@ public class ChatService {
 		return Response.ok().entity(response).build();
 	}
 	
-	
 	@GET
 	@Path("getmembers")
 	@Consumes(MediaType.APPLICATION_JSON)
-	public Response getMembers(@CookieParam("authToken") String authToken, ChatRequest request) throws ParserConfigurationException, SAXException, IOException {
+	public Response getMembers(@CookieParam("authToken") String authToken, @QueryParam("getmembers") Integer getmembers) throws ParserConfigurationException, SAXException, IOException {
 		GetMembersResponse response = new GetMembersResponse();
 		
 		MessagerStub api = new MessagerStub();
@@ -221,7 +218,7 @@ public class ChatService {
 		MessagerStub.GetMembersResponse wsResponse = new MessagerStub.GetMembersResponse();
 		
 		// Armo la WSRequest
-		chatRequest.setChatId(request.getId_chat());
+		chatRequest.setChatId(getmembers);
 		
 		// Hacer el request
         try {
