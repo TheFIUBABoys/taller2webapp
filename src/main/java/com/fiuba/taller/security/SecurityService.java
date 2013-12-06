@@ -5,15 +5,12 @@ import java.io.StringReader;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
-import javax.ws.rs.core.MediaType;
-import javax.ws.rs.core.NewCookie;
-import javax.ws.rs.core.Response;
+import javax.ws.rs.core.*;
 
-import com.fiuba.taller.security.requests.ChangePasswordRequest;
 import com.fiuba.taller.security.requests.EnableAccountRequest;
 import com.fiuba.taller.security.requests.LoginRequest;
+import com.fiuba.taller.security.requests.ChangePasswordRequest;
 import com.fiuba.taller.security.requests.RegisterUserRequest;
-
 import javax.ws.rs.*;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.DocumentBuilder;
@@ -61,8 +58,13 @@ public class SecurityService {
         response.setSuccess(false);
         response.setReason("El servicio de " + service + " no está disponible.");
 
-        return Response.status(509).entity(response).build();
+        return Response.status(502).entity(response).build();
     }
+    
+    // El valor verdadero en String debería estar definido en algún archivo de cosas comunes, y en ese caso
+    // no nos hubiera afectado el cambio de "1" como valor verdadero a "true"
+    private static String TRUE_STRING = "true";
+
 
 	@POST
 	@Path("registeruser")
@@ -81,14 +83,14 @@ public class SecurityService {
 		LoginAPIHelperStub.RegisterUserResponse wsResponse = new LoginAPIHelperStub.RegisterUserResponse();
 
 		// Armar el request
-		securityRequest.setArgs0(request.getUsername());
-		securityRequest.setArgs1(request.getPassword());
-		securityRequest.setArgs2(request.getNombre());
-		securityRequest.setArgs3(request.getApellido());
-		securityRequest.setArgs4(Integer.toString(request.getPadron()));
-		securityRequest.setArgs5(request.getFechaNac());
-		securityRequest.setArgs6(request.getEmail());
-		securityRequest.setArgs7(request.getRol());
+		securityRequest.setUsername(request.getUsername());
+		securityRequest.setPassword(request.getPassword());
+		securityRequest.setNombres(request.getNombre());
+		securityRequest.setApellido(request.getApellido());
+		securityRequest.setPadron(Integer.toString(request.getPadron()));
+		securityRequest.setFecha(request.getFechaNac());
+		securityRequest.setEmail(request.getEmail());
+		securityRequest.setRol(request.getRol());
 
 		// Hacer el request
         try {
@@ -102,20 +104,18 @@ public class SecurityService {
 		Document doc = getDoc(wsResponse.get_return());
 		Node node = getNode(doc, "response");
 
-		String success = getFirstElementValue( node, "success");
+        String successString = getFirstElementValue( node, "success");
+        boolean success = successString.equals(TRUE_STRING);
+        response.setSuccess(success);
 
-		if (success.equals("1")){
-			response.setSuccess(true);
+		if (success){
 			response.setReason("Usuario creado exitosamente");
-
 		}else{
-			response.setSuccess(false);
-			response.setReason(getFirstElementValue(node, "reason"));
+    		response.setReason(getFirstElementValue(node, "reason"));
 		}
 
 		return Response.ok().entity(response).build();
 	}
-	
 
 	@POST
 	@Path("login")
@@ -148,9 +148,10 @@ public class SecurityService {
 		Document doc = getDoc(wsResponse.get_return());
 		Node node = getNode(doc, "response");
 
-		String success = getFirstElementValue( node, "success");
+		String successString = getFirstElementValue( node, "success");
+        boolean success = successString.equals(TRUE_STRING);
 
-		if (success.equals("1")){
+		if (success){
 
 			return Response.ok()
 					.cookie(new NewCookie("authToken",
@@ -158,7 +159,7 @@ public class SecurityService {
 					.build();
 
 		}else{
-			response.setSuccess(false);
+			response.setSuccess(success);
 			response.setReason(getFirstElementValue(node, "reason"));
 			
 			return Response.ok()
@@ -196,9 +197,10 @@ public class SecurityService {
 		Document doc = getDoc(wsResponse.get_return());
 		Node node = getNode(doc, "response");
 
-		String success = getFirstElementValue( node, "success");
+        String successString = getFirstElementValue( node, "success");
+        boolean success = successString.equals(TRUE_STRING);
 
-		if (success.equals("1")){
+        if (success){
 
 			return Response.ok()
 					.header("Set-Cookie",
@@ -206,7 +208,7 @@ public class SecurityService {
 					.build();
 
 		}else{
-			response.setSuccess(false);
+			response.setSuccess(success);
 			response.setReason(getFirstElementValue(node, "reason"));
 			
 			return Response.ok()
@@ -245,15 +247,16 @@ public class SecurityService {
 		Document doc = getDoc(wsResponse.get_return());
 		Node node = getNode(doc, "response");
 
-		String success = getFirstElementValue( node, "success");
+        String successString = getFirstElementValue( node, "success");
+        boolean success = successString.equals(TRUE_STRING);
 
-		if (success.equals("1")){
+        if (success){
 
 			return Response.ok()
 					.build();
 
 		}else{
-			response.setSuccess(false);
+			response.setSuccess(success);
 			response.setReason(getFirstElementValue(node, "reason"));
 			
 			return Response.ok()
@@ -296,16 +299,15 @@ public class SecurityService {
 			Document doc = getDoc(wsResponse.get_return());
 			Node node = getNode(doc, "response");
 
-			String success = getFirstElementValue( node, "success");
+            String successString = getFirstElementValue( node, "success");
+            boolean success = successString.equals(TRUE_STRING);
 
-			if (success.equals("1")){
-				response.setSuccess(true);
+            response.setSuccess(success);
+
+            if (success){
 				response.setReason("Usuario activado exitosamente");
-				
 			}else{
-				response.setSuccess(false);
 				response.setReason(getFirstElementValue(node, "reason"));
-				
 			}
 			
 			return Response.ok()
@@ -352,16 +354,17 @@ public class SecurityService {
 			Document doc = getDoc(wsResponse.get_return());
 			Node node = getNode(doc, "response");
 
-			String success = getFirstElementValue( node, "success");
 
-			if (success.equals("1")){
-				response.setSuccess(true);
+            String successString = getFirstElementValue( node, "success");
+            boolean success = successString.equals(TRUE_STRING);
+
+            response.setSuccess(success);
+
+            if (success){
 				response.setReason("Contaseña actualizada");
 				
 			}else{
-				response.setSuccess(false);
 				response.setReason(getFirstElementValue(node, "reason"));
-				
 			}
 			
 			return Response.ok()
@@ -406,16 +409,14 @@ public class SecurityService {
 			Document doc = getDoc(wsResponse.get_return());
 			Node node = getNode(doc, "response");
 
-			String success = getFirstElementValue( node, "success");
+            String successString = getFirstElementValue( node, "success");
+            boolean success = successString.equals(TRUE_STRING);
 
-			if (success.equals("1")){
-				response.setSuccess(true);
+            response.setSuccess(success);
+            if (success){
 				response.setReason("Contraseña Reseteada");
-				
 			}else{
-				response.setSuccess(false);
 				response.setReason(getFirstElementValue(node, "reason"));
-				
 			}
 			
 			return Response.ok()
@@ -459,14 +460,14 @@ public class SecurityService {
 			Document doc = getDoc(wsResponse.get_return());
 			Node node = getNode(doc, "response");
 
-			String success = getFirstElementValue( node, "success");
+            String successString = getFirstElementValue( node, "success");
+            boolean success = successString.equals(TRUE_STRING);
 
-			if (success.equals("1")){
-				response.setSuccess(true);
+            response.setSuccess(success);
+            if (success){
 				response.setReason("Cuenta suspendida");
 				
 			}else{
-				response.setSuccess(false);
 				response.setReason(getFirstElementValue(node, "reason"));
 				
 			}
@@ -479,7 +480,7 @@ public class SecurityService {
 
 	@POST
 	@Path("enableaccount")
-	@Consumes(MediaType.APPLICATION_FORM_URLENCODED)
+	@Consumes(MediaType.APPLICATION_JSON)
 	public Response enableAccount(EnableAccountRequest request,@CookieParam("authToken") String authToken)
 			throws ParserConfigurationException, SAXException, IOException
 	{
@@ -513,16 +514,15 @@ public class SecurityService {
 			Document doc = getDoc(wsResponse.get_return());
 			Node node = getNode(doc, "response");
 
-			String success = getFirstElementValue( node, "success");
+            String successString = getFirstElementValue( node, "success");
+            boolean success = successString.equals(TRUE_STRING);
 
-			if (success.equals("1")){
-				response.setSuccess(true);
+            response.setSuccess(success);
+            if (success){
 				response.setReason("Cuenta habilitada");
 				
 			}else{
-				response.setSuccess(false);
 				response.setReason(getFirstElementValue(node, "reason"));
-				
 			}
 			
 			return Response.ok()
@@ -562,14 +562,14 @@ public class SecurityService {
 //			Document doc = getDoc(wsResponse.get_return());
 //			Node node = getNode(doc, "response");
 //
-//			String success = getFirstElementValue( node, "success");
+//          String successString = getFirstElementValue( node, "success");
+//          boolean success = successString.equals(TRUE_STRING);
 //
-//			if (success.equals("1")){
-//				response.setSuccess(true);
-//				response.setReason("Cuenta habilitada");
+//          response.setSuccess(success);
+//          if (success){
+//          	response.setReason("Cuenta habilitada");
 //				
 //			}else{
-//				response.setSuccess(false);
 //				response.setReason(getFirstElementValue(node, "reason"));
 //				
 //			}

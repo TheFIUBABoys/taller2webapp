@@ -86,4 +86,16 @@
     <servlet-name>AxisAdminServlet</servlet-name>
     <url-pattern>/axis2-admin/*</url-pattern>
   </servlet-mapping>
+  
+  <filter>
+        <!-- CORS filter -->
+        <filter-name>CORS</filter-name>
+        <filter-class>com.fiuba.taller.cors.CORSFilter</filter-class>
+    </filter>
+
+    <filter-mapping>
+        <!-- CORS filter mapping -->
+        <filter-name>CORS</filter-name>
+        <url-pattern>/api/*</url-pattern>
+    </filter-mapping>
 </web-app>
