@@ -7956,42 +7956,45 @@
                             
 
                         /**
-                        * field for Member
+                        * field for MemberId
                         */
 
                         
-                                    protected java.lang.String localMember ;
+                                    protected long localMemberId ;
                                 
                            /*  This tracker boolean wil be used to detect whether the user called the set method
                           *   for this attribute. It will be used to determine whether to include this field
                            *   in the serialized XML
                            */
-                           protected boolean localMemberTracker = false ;
+                           protected boolean localMemberIdTracker = false ;
 
-                           public boolean isMemberSpecified(){
-                               return localMemberTracker;
+                           public boolean isMemberIdSpecified(){
+                               return localMemberIdTracker;
                            }
 
                            
 
                            /**
                            * Auto generated getter method
-                           * @return java.lang.String
+                           * @return long
                            */
-                           public  java.lang.String getMember(){
-                               return localMember;
+                           public  long getMemberId(){
+                               return localMemberId;
                            }
 
                            
                         
                             /**
                                * Auto generated setter method
-                               * @param param Member
+                               * @param param MemberId
                                */
-                               public void setMember(java.lang.String param){
-                            localMemberTracker = true;
+                               public void setMemberId(long param){
+                            
+                                       // setting primitive attribute tracker to true
+                                       localMemberIdTracker =
+                                       param != java.lang.Long.MIN_VALUE;
                                    
-                                            this.localMember=param;
+                                            this.localMemberId=param;
                                     
 
                                }
@@ -8068,22 +8071,17 @@
                                                }
                                     
                                    xmlWriter.writeEndElement();
-                             } if (localMemberTracker){
+                             } if (localMemberIdTracker){
                                     namespace = "http://chat.team2.fiuba.com.ar";
-                                    writeStartElement(null, namespace, "member", xmlWriter);
+                                    writeStartElement(null, namespace, "memberId", xmlWriter);
                              
-
-                                          if (localMember==null){
-                                              // write the nil attribute
-                                              
-                                                     writeAttribute("xsi","http://www.w3.org/2001/XMLSchema-instance","nil","1",xmlWriter);
-                                                  
-                                          }else{
-
-                                        
-                                                   xmlWriter.writeCharacters(localMember);
-                                            
-                                          }
+                                               if (localMemberId==java.lang.Long.MIN_VALUE) {
+                                           
+                                                         throw new org.apache.axis2.databinding.ADBException("memberId cannot be null!!");
+                                                      
+                                               } else {
+                                                    xmlWriter.writeCharacters(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(localMemberId));
+                                               }
                                     
                                    xmlWriter.writeEndElement();
                              }
@@ -8277,13 +8275,13 @@
                                  
                                 elementList.add(
                                    org.apache.axis2.databinding.utils.ConverterUtil.convertToString(localScopeId));
-                            } if (localMemberTracker){
+                            } if (localMemberIdTracker){
                                       elementList.add(new javax.xml.namespace.QName("http://chat.team2.fiuba.com.ar",
-                                                                      "member"));
+                                                                      "memberId"));
                                  
-                                         elementList.add(localMember==null?null:
-                                         org.apache.axis2.databinding.utils.ConverterUtil.convertToString(localMember));
-                                    }
+                                elementList.add(
+                                   org.apache.axis2.databinding.utils.ConverterUtil.convertToString(localMemberId));
+                            }
 
                 return new org.apache.axis2.databinding.utils.reader.ADBXMLStreamReaderImpl(qName, elementList.toArray(), attribList.toArray());
             
@@ -8388,29 +8386,27 @@
                                     
                                     while (!reader.isStartElement() && !reader.isEndElement()) reader.next();
                                 
-                                    if (reader.isStartElement() && new javax.xml.namespace.QName("http://chat.team2.fiuba.com.ar","member").equals(reader.getName())){
+                                    if (reader.isStartElement() && new javax.xml.namespace.QName("http://chat.team2.fiuba.com.ar","memberId").equals(reader.getName())){
                                 
-                                       nillableValue = reader.getAttributeValue("http://www.w3.org/2001/XMLSchema-instance","nil");
-                                       if (!"true".equals(nillableValue) && !"1".equals(nillableValue)){
+                                    nillableValue = reader.getAttributeValue("http://www.w3.org/2001/XMLSchema-instance","nil");
+                                    if ("true".equals(nillableValue) || "1".equals(nillableValue)){
+                                        throw new org.apache.axis2.databinding.ADBException("The element: "+"memberId" +"  cannot be null");
+                                    }
                                     
 
                                     java.lang.String content = reader.getElementText();
                                     
-                                              object.setMember(
-                                                    org.apache.axis2.databinding.utils.ConverterUtil.convertToString(content));
-                                            
-                                       } else {
-                                           
-                                           
-                                           reader.getElementText(); // throw away text nodes if any.
-                                       }
-                                      
+                                              object.setMemberId(
+                                                    org.apache.axis2.databinding.utils.ConverterUtil.convertToLong(content));
+                                              
                                         reader.next();
                                     
                               }  // End of if for expected property start element
                                 
                                     else {
                                         
+                                               object.setMemberId(java.lang.Long.MIN_VALUE);
+                                           
                                     }
                                   
                             while (!reader.isStartElement() && !reader.isEndElement())
@@ -9108,42 +9104,45 @@
                             
 
                         /**
-                        * field for Member
+                        * field for MemberId
                         */
 
                         
-                                    protected java.lang.String localMember ;
+                                    protected long localMemberId ;
                                 
                            /*  This tracker boolean wil be used to detect whether the user called the set method
                           *   for this attribute. It will be used to determine whether to include this field
                            *   in the serialized XML
                            */
-                           protected boolean localMemberTracker = false ;
+                           protected boolean localMemberIdTracker = false ;
 
-                           public boolean isMemberSpecified(){
-                               return localMemberTracker;
+                           public boolean isMemberIdSpecified(){
+                               return localMemberIdTracker;
                            }
 
                            
 
                            /**
                            * Auto generated getter method
-                           * @return java.lang.String
+                           * @return long
                            */
-                           public  java.lang.String getMember(){
-                               return localMember;
+                           public  long getMemberId(){
+                               return localMemberId;
                            }
 
                            
                         
                             /**
                                * Auto generated setter method
-                               * @param param Member
+                               * @param param MemberId
                                */
-                               public void setMember(java.lang.String param){
-                            localMemberTracker = true;
+                               public void setMemberId(long param){
+                            
+                                       // setting primitive attribute tracker to true
+                                       localMemberIdTracker =
+                                       param != java.lang.Long.MIN_VALUE;
                                    
-                                            this.localMember=param;
+                                            this.localMemberId=param;
                                     
 
                                }
@@ -9262,22 +9261,17 @@
                                                }
                                     
                                    xmlWriter.writeEndElement();
-                             } if (localMemberTracker){
+                             } if (localMemberIdTracker){
                                     namespace = "http://chat.team2.fiuba.com.ar";
-                                    writeStartElement(null, namespace, "member", xmlWriter);
+                                    writeStartElement(null, namespace, "memberId", xmlWriter);
                              
-
-                                          if (localMember==null){
-                                              // write the nil attribute
-                                              
-                                                     writeAttribute("xsi","http://www.w3.org/2001/XMLSchema-instance","nil","1",xmlWriter);
-                                                  
-                                          }else{
-
-                                        
-                                                   xmlWriter.writeCharacters(localMember);
-                                            
-                                          }
+                                               if (localMemberId==java.lang.Long.MIN_VALUE) {
+                                           
+                                                         throw new org.apache.axis2.databinding.ADBException("memberId cannot be null!!");
+                                                      
+                                               } else {
+                                                    xmlWriter.writeCharacters(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(localMemberId));
+                                               }
                                     
                                    xmlWriter.writeEndElement();
                              } if (localMessageTracker){
@@ -9489,13 +9483,13 @@
                                  
                                 elementList.add(
                                    org.apache.axis2.databinding.utils.ConverterUtil.convertToString(localChatId));
-                            } if (localMemberTracker){
+                            } if (localMemberIdTracker){
                                       elementList.add(new javax.xml.namespace.QName("http://chat.team2.fiuba.com.ar",
-                                                                      "member"));
+                                                                      "memberId"));
                                  
-                                         elementList.add(localMember==null?null:
-                                         org.apache.axis2.databinding.utils.ConverterUtil.convertToString(localMember));
-                                    } if (localMessageTracker){
+                                elementList.add(
+                                   org.apache.axis2.databinding.utils.ConverterUtil.convertToString(localMemberId));
+                            } if (localMessageTracker){
                                       elementList.add(new javax.xml.namespace.QName("http://chat.team2.fiuba.com.ar",
                                                                       "message"));
                                  
@@ -9606,29 +9600,27 @@
                                     
                                     while (!reader.isStartElement() && !reader.isEndElement()) reader.next();
                                 
-                                    if (reader.isStartElement() && new javax.xml.namespace.QName("http://chat.team2.fiuba.com.ar","member").equals(reader.getName())){
+                                    if (reader.isStartElement() && new javax.xml.namespace.QName("http://chat.team2.fiuba.com.ar","memberId").equals(reader.getName())){
                                 
-                                       nillableValue = reader.getAttributeValue("http://www.w3.org/2001/XMLSchema-instance","nil");
-                                       if (!"true".equals(nillableValue) && !"1".equals(nillableValue)){
+                                    nillableValue = reader.getAttributeValue("http://www.w3.org/2001/XMLSchema-instance","nil");
+                                    if ("true".equals(nillableValue) || "1".equals(nillableValue)){
+                                        throw new org.apache.axis2.databinding.ADBException("The element: "+"memberId" +"  cannot be null");
+                                    }
                                     
 
                                     java.lang.String content = reader.getElementText();
                                     
-                                              object.setMember(
-                                                    org.apache.axis2.databinding.utils.ConverterUtil.convertToString(content));
-                                            
-                                       } else {
-                                           
-                                           
-                                           reader.getElementText(); // throw away text nodes if any.
-                                       }
-                                      
+                                              object.setMemberId(
+                                                    org.apache.axis2.databinding.utils.ConverterUtil.convertToLong(content));
+                                              
                                         reader.next();
                                     
                               }  // End of if for expected property start element
                                 
                                     else {
                                         
+                                               object.setMemberId(java.lang.Long.MIN_VALUE);
+                                           
                                     }
                                 
                                     

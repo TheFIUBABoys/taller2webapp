@@ -86,7 +86,7 @@ public class ChatService {
 		
 		// Armo la WSRequest
 		chatRequest.setScopeId(request.getId_ambito());
-		chatRequest.setMember(request.getUsername()); 
+		chatRequest.setMemberId(request.getId_member());
 		
 		// Hacer el request
         try {
@@ -261,8 +261,8 @@ public class ChatService {
 		
 		// Armo la WSRequest
 		chatRequest.setChatId(request.getId_chat());
-		chatRequest.setMember(request.getMember());
 		chatRequest.setMessage(request.getMessage());
+		chatRequest.setMemberId(request.getId_member());
 		
 		// Hacer el request
         try {

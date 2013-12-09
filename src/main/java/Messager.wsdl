@@ -66,7 +66,7 @@
                 <xs:complexType>
                     <xs:sequence>
                         <xs:element minOccurs="0" name="chatId" type="xs:long"/>
-                        <xs:element minOccurs="0" name="member" nillable="true" type="xs:string"/>
+                        <xs:element minOccurs="0" name="memberId" type="xs:long"/>
                         <xs:element minOccurs="0" name="message" nillable="true" type="xs:string"/>
                     </xs:sequence>
                 </xs:complexType>
@@ -126,7 +126,7 @@
                 <xs:complexType>
                     <xs:sequence>
                         <xs:element minOccurs="0" name="scopeId" type="xs:long"/>
-                        <xs:element minOccurs="0" name="member" nillable="true" type="xs:string"/>
+                        <xs:element minOccurs="0" name="memberId" type="xs:long"/>
                     </xs:sequence>
                 </xs:complexType>
             </xs:element>

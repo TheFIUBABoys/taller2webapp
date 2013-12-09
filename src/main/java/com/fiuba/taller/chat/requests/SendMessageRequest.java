@@ -11,7 +11,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 public class SendMessageRequest {
 
 	private Integer id_chat;
-	private String member;
+	private Integer id_member;
 	private String message;
 	
     public SendMessageRequest(){}
@@ -28,7 +28,7 @@ public class SendMessageRequest {
         String p = propSeparator;
 
         result += "id_chat" + k + id_chat + p;
-        result += "member" + k + member + p;
+        result += "id_member" + k + id_member + p;
         result += "message" + k + message + p;
         
         return result;
@@ -47,7 +47,7 @@ public class SendMessageRequest {
         Form dataAsForm = new Form();
 
         dataAsForm.param("id_chat", Integer.toString(id_chat));
-        dataAsForm.param("member", member);
+        dataAsForm.param("id_member",  Integer.toString(id_member));
         dataAsForm.param("message", message);
         
         return dataAsForm;
@@ -57,7 +57,7 @@ public class SendMessageRequest {
         Map<String, String> dataAsMap = new HashMap<String, String>();
 
         dataAsMap.put("id_chat", Integer.toString(id_chat));
-        dataAsMap.put("member", member);
+        dataAsMap.put("id_member",  Integer.toString(id_member));
         dataAsMap.put("message", message);
 
         return dataAsMap;
@@ -70,21 +70,6 @@ public class SendMessageRequest {
 
 	public void setId_chat(Integer id_ambito) {
 		this.id_chat = id_ambito;
-	}
-
-	/**
-	 * @return the member
-	 */
-	@XmlElement(name = "member")
-	public String getMember() {
-		return member;
-	}
-
-	/**
-	 * @param member the member to set
-	 */
-	public void setMember(String member) {
-		this.member = member;
 	}
 
 	/**
@@ -101,6 +86,22 @@ public class SendMessageRequest {
 	public void setMessage(String message) {
 		this.message = message;
 	}
+
+	/**
+	 * @return the id_member
+	 */
+	@XmlElement(name = "id_member")
+	public Integer getId_member() {
+		return id_member;
+	}
+
+	/**
+	 * @param id_member the id_member to set
+	 */
+	public void setId_member(Integer id_member) {
+		this.id_member = id_member;
+	}
+
 
     
 }
