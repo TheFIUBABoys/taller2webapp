@@ -24,12 +24,14 @@ import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 
 import wtp.ServicioTablaServiceStub;
+import wtp.MessagerStub.Chat;
 import wtp.ServicioTablaServiceStub.AgregarCampoResponse;
 import wtp.ServicioTablaServiceStub.CrearFilaResponse;
 import wtp.ServicioTablaServiceStub.CrearTablaResponse;
 import wtp.ServicioTablaServiceStub.EliminarCampoResponse;
 import wtp.ServicioTablaServiceStub.EliminarFilaResponse;
 import wtp.ServicioTablaServiceStub.EliminarTablaResponse;
+import wtp.ServicioTablaServiceStub.Fila;
 import wtp.ServicioTablaServiceStub.ModificarCampoResponse;
 import wtp.ServicioTablaServiceStub.ModificarFilaResponse;
 import wtp.ServicioTablaServiceStub.ObtenerFilasResponse;
@@ -86,7 +88,7 @@ public class ResourcesService {
 	@Path("obtenerTiposCampos")
 	@Consumes(MediaType.APPLICATION_JSON)
 	public Response obtenerTiposCampos(@CookieParam("authToken") String authToken) throws ParserConfigurationException, SAXException, IOException {
-		ObtenerTiposDeCamposResponse response = new ObtenerTiposDeCamposResponse();
+		//ObtenerTiposDeCamposResponse response = new ObtenerTiposDeCamposResponse();
 		
 		ServicioTablaServiceStub api = new ServicioTablaServiceStub();
 		ServicioTablaServiceStub.ObtenerTiposDeCampos resourcesRequest = new ServicioTablaServiceStub.ObtenerTiposDeCampos();
@@ -102,14 +104,24 @@ public class ResourcesService {
             return buildError("obtener tipos campos");
         }
         
+        TableResponse response = new TableResponse();
+        String[] types = wsResponse.getObtenerTiposDeCamposReturn();
+		if (types == null) {
+			response.setSuccess(false);
+			response.setReason("Respuesta malformada");
+		} else {
+			response.setSuccess(true);
+			response.setTypeFields(types);
+		}
+		
 		return Response.ok().entity(response).build();
 	}
 	
 	@POST
-	@Path("obtenerTiposCampos")
+	@Path("crearTabla")
 	@Consumes(MediaType.APPLICATION_JSON)
 	public Response crearTabla(@CookieParam("authToken") String authToken, CrearTablaRequest request) throws ParserConfigurationException, SAXException, IOException {
-		CrearTablaResponse response = new CrearTablaResponse();
+		//CrearTablaResponse response = new CrearTablaResponse();
 		
 		ServicioTablaServiceStub api = new ServicioTablaServiceStub();
 		ServicioTablaServiceStub.CrearTabla resourcesRequest = new ServicioTablaServiceStub.CrearTabla();
@@ -129,14 +141,24 @@ public class ResourcesService {
             return buildError("crear tabla");
         }
         
+        TableResponse response = new TableResponse();
+        int value = wsResponse.getCrearTablaReturn();
+		if (value < 0) {
+			response.setSuccess(false);
+			response.setReason("Error: " + value);
+		} else {
+			response.setSuccess(true);
+			response.setId(value);
+		}
+        
 		return Response.ok().entity(response).build();
 	}
 	
 	@GET
-	@Path("obtenerTiposCampos")
+	@Path("obtenerNombresColumnas")
 	@Consumes(MediaType.APPLICATION_JSON)
 	public Response obtenerNombresColumnas(@CookieParam("authToken") String authToken, @QueryParam("usuario") String usuario, @QueryParam("IdTabla") Integer IdTabla) throws ParserConfigurationException, SAXException, IOException {
-		ObtenerNombresColumnasResponse response = new ObtenerNombresColumnasResponse();
+		//ObtenerNombresColumnasResponse response = new ObtenerNombresColumnasResponse();
 		
 		ServicioTablaServiceStub api = new ServicioTablaServiceStub();
 		ServicioTablaServiceStub.ObtenerNombresColumnas resourcesRequest = new ServicioTablaServiceStub.ObtenerNombresColumnas();
@@ -154,14 +176,23 @@ public class ResourcesService {
             return buildError("obtener nombres columnas");
         }
         
+        TableResponse response = new TableResponse();
+        String[] names = wsResponse.getObtenerNombresColumnasReturn();
+		if (names == null) {
+			response.setSuccess(false);
+			response.setReason("Error: La tabla no existe");
+		} else {
+			response.setSuccess(true);
+			response.setNamesColumns(names);
+		}
 		return Response.ok().entity(response).build();
 	}
 	
 	@POST
-	@Path("obtenerTiposCampos")
+	@Path("crearFila")
 	@Consumes(MediaType.APPLICATION_JSON)
 	public Response crearFila(@CookieParam("authToken") String authToken, CrearFilaRequest request) throws ParserConfigurationException, SAXException, IOException {
-		CrearFilaResponse response = new CrearFilaResponse();
+		//CrearFilaResponse response = new CrearFilaResponse();
 		
 		ServicioTablaServiceStub api = new ServicioTablaServiceStub();
 		ServicioTablaServiceStub.CrearFila resourcesRequest = new ServicioTablaServiceStub.CrearFila();
@@ -180,14 +211,23 @@ public class ResourcesService {
             return buildError("crear fila");
         }
         
+        TableResponse response = new TableResponse();
+        int value = wsResponse.getCrearFilaReturn();
+		if (value < 0) {
+			response.setSuccess(false);
+			response.setReason("Error: " + value);
+		} else {
+			response.setSuccess(true);
+		}
+        
 		return Response.ok().entity(response).build();
 	}
 	
 	@POST
-	@Path("obtenerTiposCampos")
+	@Path("modificarFila")
 	@Consumes(MediaType.APPLICATION_JSON)
 	public Response modificarFila(@CookieParam("authToken") String authToken, ModificarFilaRequest request) throws ParserConfigurationException, SAXException, IOException {
-		ModificarFilaResponse response = new ModificarFilaResponse();
+		//ModificarFilaResponse response = new ModificarFilaResponse();
 		
 		ServicioTablaServiceStub api = new ServicioTablaServiceStub();
 		ServicioTablaServiceStub.ModificarFila resourcesRequest = new ServicioTablaServiceStub.ModificarFila();
@@ -207,14 +247,23 @@ public class ResourcesService {
             return buildError("modificar fila");
         }
         
+        TableResponse response = new TableResponse();
+        int value = wsResponse.getModificarFilaReturn();
+		if (value < 0) {
+			response.setSuccess(false);
+			response.setReason("Error: " + value);
+		} else {
+			response.setSuccess(true);
+		}
+        
 		return Response.ok().entity(response).build();
 	}
 	
 	@POST
-	@Path("obtenerTiposCampos")
+	@Path("eliminarFila")
 	@Consumes(MediaType.APPLICATION_JSON)
 	public Response eliminarFila(@CookieParam("authToken") String authToken, EliminarFilaRequest request) throws ParserConfigurationException, SAXException, IOException {
-		EliminarFilaResponse response = new EliminarFilaResponse();
+		//EliminarFilaResponse response = new EliminarFilaResponse();
 		
 		ServicioTablaServiceStub api = new ServicioTablaServiceStub();
 		ServicioTablaServiceStub.EliminarFila resourcesRequest = new ServicioTablaServiceStub.EliminarFila();
@@ -233,14 +282,23 @@ public class ResourcesService {
             return buildError("eliminar fila");
         }
         
+        TableResponse response = new TableResponse();
+        int value = wsResponse.getEliminarFilaReturn();
+		if (value < 0) {
+			response.setSuccess(false);
+			response.setReason("Error: " + value);
+		} else {
+			response.setSuccess(true);
+		}
+        
 		return Response.ok().entity(response).build();
 	}
 	
 	@GET
-	@Path("obtenerTiposCampos")
+	@Path("obtenerFilas")
 	@Consumes(MediaType.APPLICATION_JSON)
 	public Response obtenerFilas(@CookieParam("authToken") String authToken, @QueryParam("usuario") String usuario, @QueryParam("IdTabla") Integer IdTabla) throws ParserConfigurationException, SAXException, IOException {
-		ObtenerFilasResponse response = new ObtenerFilasResponse();
+		//ObtenerFilasResponse response = new ObtenerFilasResponse();
 		
 		ServicioTablaServiceStub api = new ServicioTablaServiceStub();
 		ServicioTablaServiceStub.ObtenerFilas resourcesRequest = new ServicioTablaServiceStub.ObtenerFilas();
@@ -258,14 +316,24 @@ public class ResourcesService {
             return buildError("obtener filas");
         }
         
+        TableResponse response = new TableResponse();
+        Fila[] filas = wsResponse.getObtenerFilasReturn();
+		if (filas == null) {
+			response.setSuccess(false);
+			response.setReason("Error");
+		} else {
+			response.setSuccess(true);
+			response.setFilas(filas);
+		}
+        
 		return Response.ok().entity(response).build();
 	}
 	
 	@POST
-	@Path("obtenerTiposCampos")
+	@Path("modificarCampo")
 	@Consumes(MediaType.APPLICATION_JSON)
 	public Response modificarCampo(@CookieParam("authToken") String authToken, ModificarCampoRequest request) throws ParserConfigurationException, SAXException, IOException {
-		ModificarCampoResponse response = new ModificarCampoResponse();
+		//ModificarCampoResponse response = new ModificarCampoResponse();
 		
 		ServicioTablaServiceStub api = new ServicioTablaServiceStub();
 		ServicioTablaServiceStub.ModificarCampo resourcesRequest = new ServicioTablaServiceStub.ModificarCampo();
@@ -287,14 +355,23 @@ public class ResourcesService {
             return buildError("modificar campo");
         }
         
+        TableResponse response = new TableResponse();
+        int value = wsResponse.getModificarCampoReturn();
+		if (value < 0) {
+			response.setSuccess(false);
+			response.setReason("Error: " + value);
+		} else {
+			response.setSuccess(true);
+		}
+        
 		return Response.ok().entity(response).build();
 	}
 	
 	@POST
-	@Path("obtenerTiposCampos")
+	@Path("agregarCampo")
 	@Consumes(MediaType.APPLICATION_JSON)
 	public Response agregarCampo(@CookieParam("authToken") String authToken, AgregarCampoRequest request) throws ParserConfigurationException, SAXException, IOException {
-		AgregarCampoResponse response = new AgregarCampoResponse();
+		//AgregarCampoResponse response = new AgregarCampoResponse();
 		
 		ServicioTablaServiceStub api = new ServicioTablaServiceStub();
 		ServicioTablaServiceStub.AgregarCampo resourcesRequest = new ServicioTablaServiceStub.AgregarCampo();
@@ -314,14 +391,23 @@ public class ResourcesService {
             return buildError("agregar campo");
         }
         
+        TableResponse response = new TableResponse();
+        int value = wsResponse.getAgregarCampoReturn();
+		if (value < 0) {
+			response.setSuccess(false);
+			response.setReason("Error: " + value);
+		} else {
+			response.setSuccess(true);
+		}
+        
 		return Response.ok().entity(response).build();
 	}
 	
 	@POST
-	@Path("obtenerTiposCampos")
+	@Path("eliminarCampo")
 	@Consumes(MediaType.APPLICATION_JSON)
 	public Response eliminarCampo(@CookieParam("authToken") String authToken, EliminarCampoRequest request) throws ParserConfigurationException, SAXException, IOException {
-		EliminarCampoResponse response = new EliminarCampoResponse();
+		//EliminarCampoResponse response = new EliminarCampoResponse();
 		
 		ServicioTablaServiceStub api = new ServicioTablaServiceStub();
 		ServicioTablaServiceStub.EliminarCampo resourcesRequest = new ServicioTablaServiceStub.EliminarCampo();
@@ -340,14 +426,23 @@ public class ResourcesService {
             return buildError("eliminar campo");
         }
         
+        TableResponse response = new TableResponse();
+        int value = wsResponse.getEliminarCampoReturn();
+		if (value < 0) {
+			response.setSuccess(false);
+			response.setReason("Error: " + value);
+		} else {
+			response.setSuccess(true);
+		}
+        
 		return Response.ok().entity(response).build();
 	}
 	
 	@POST
-	@Path("obtenerTiposCampos")
+	@Path("eliminarTabla")
 	@Consumes(MediaType.APPLICATION_JSON)
 	public Response eliminarTabla(@CookieParam("authToken") String authToken, EliminarTablaRequest request) throws ParserConfigurationException, SAXException, IOException {
-		EliminarTablaResponse response = new EliminarTablaResponse();
+		//EliminarTablaResponse response = new EliminarTablaResponse();
 		
 		ServicioTablaServiceStub api = new ServicioTablaServiceStub();
 		ServicioTablaServiceStub.EliminarTabla resourcesRequest = new ServicioTablaServiceStub.EliminarTabla();
@@ -364,6 +459,15 @@ public class ResourcesService {
             System.out.println(error.getReason());
             return buildError("eliminar tabla");
         }
+        
+        TableResponse response = new TableResponse();
+        int value = wsResponse.getEliminarTablaReturn();
+		if (value < 0) {
+			response.setSuccess(false);
+			response.setReason("Error: " + value);
+		} else {
+			response.setSuccess(true);
+		}
         
 		return Response.ok().entity(response).build();
 	}
