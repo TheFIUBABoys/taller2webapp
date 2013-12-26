@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- This web.xml file is not required when using Servlet 3.0 container,
      see implementation details http://jersey.java.net/nonav/documentation/latest/jax-rs.html -->
-<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xmlns:web="http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" version="2.5">
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" version="2.5">
   <servlet>
     <servlet-name>Security Services</servlet-name>
     <servlet-class>org.glassfish.jersey.servlet.ServletContainer</servlet-class>
@@ -86,16 +86,12 @@
     <servlet-name>AxisAdminServlet</servlet-name>
     <url-pattern>/axis2-admin/*</url-pattern>
   </servlet-mapping>
-  
   <filter>
-        <!-- CORS filter -->
-        <filter-name>CORS</filter-name>
-        <filter-class>com.fiuba.taller.cors.CORSFilter</filter-class>
-    </filter>
-
-    <filter-mapping>
-        <!-- CORS filter mapping -->
-        <filter-name>CORS</filter-name>
-        <url-pattern>/api/*</url-pattern>
-    </filter-mapping>
+    <filter-name>CORS</filter-name>
+    <filter-class>com.fiuba.taller.cors.CORSFilter</filter-class>
+  </filter>
+  <filter-mapping>
+    <filter-name>CORS</filter-name>
+    <url-pattern>/api/*</url-pattern>
+  </filter-mapping>
 </web-app>
