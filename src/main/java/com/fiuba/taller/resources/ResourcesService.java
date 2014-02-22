@@ -24,19 +24,7 @@ import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 
 import wtp.ServicioTablaServiceStub;
-import wtp.MessagerStub.Chat;
-import wtp.ServicioTablaServiceStub.AgregarCampoResponse;
-import wtp.ServicioTablaServiceStub.CrearFilaResponse;
-import wtp.ServicioTablaServiceStub.CrearTablaResponse;
-import wtp.ServicioTablaServiceStub.EliminarCampoResponse;
-import wtp.ServicioTablaServiceStub.EliminarFilaResponse;
-import wtp.ServicioTablaServiceStub.EliminarTablaResponse;
 import wtp.ServicioTablaServiceStub.Fila;
-import wtp.ServicioTablaServiceStub.ModificarCampoResponse;
-import wtp.ServicioTablaServiceStub.ModificarFilaResponse;
-import wtp.ServicioTablaServiceStub.ObtenerFilasResponse;
-import wtp.ServicioTablaServiceStub.ObtenerNombresColumnasResponse;
-import wtp.ServicioTablaServiceStub.ObtenerTiposDeCamposResponse;
 
 import com.fiuba.taller.resources.requests.AgregarCampoRequest;
 import com.fiuba.taller.resources.requests.CrearFilaRequest;
@@ -83,6 +71,14 @@ public class ResourcesService {
         return Response.status(509).entity(response).build();
 	}
 	
+	private Response buildParamError(String paramName) {
+        SecurityResponse response = new SecurityResponse();
+
+        response.setSuccess(false);
+        response.setReason("No se recibió el parametro: " + paramName);
+
+        return Response.status(509).entity(response).build();
+	}
 	
 	@GET
 	@Path("obtenerTiposCampos")
@@ -164,8 +160,12 @@ public class ResourcesService {
 		ServicioTablaServiceStub.ObtenerNombresColumnas resourcesRequest = new ServicioTablaServiceStub.ObtenerNombresColumnas();
 		ServicioTablaServiceStub.ObtenerNombresColumnasResponse wsResponse = new ServicioTablaServiceStub.ObtenerNombresColumnasResponse();
 		
+		if (IdTabla == null) {
+            return buildParamError("IdTabla");
+		}
+		
 		// Armo la WSRequest
-		resourcesRequest.setTabla(IdTabla);
+		resourcesRequest.setTabla(IdTabla.intValue());
 		resourcesRequest.setUsuario(usuario);
 		
 		// Hacer el request
@@ -304,8 +304,12 @@ public class ResourcesService {
 		ServicioTablaServiceStub.ObtenerFilas resourcesRequest = new ServicioTablaServiceStub.ObtenerFilas();
 		ServicioTablaServiceStub.ObtenerFilasResponse wsResponse = new ServicioTablaServiceStub.ObtenerFilasResponse();
 		
+		if (IdTabla == null) {
+            return buildParamError("IdTabla");
+		}
+		
 		// Armo la WSRequest
-		resourcesRequest.setTabla(IdTabla);
+		resourcesRequest.setTabla(IdTabla.intValue());
 		resourcesRequest.setUsuario(usuario);
 		
 		// Hacer el request
